@@ -94,7 +94,7 @@ Currently, most sensor fusion algorithms are either filter based or iterative. T
 While working well in practice, these algorithms need to be provided by an external initial state.
 
 The initialization of a filter based method is critical.
-Due to non-linearity of the system, a poor initialization can result into converging towards local minima and  providing faulty states with high confidence.
+Due to nonlinearities of the system, a poor initialization can result into converging towards local minima and  providing faulty states with high confidence.
 Indeed, another shortcoming of filters is that they can silently fail.
 
 In this work we demonstrate the efficiency of a recent closed-form solution introduced in \cite{Martinelli2012}\cite{Martinelli2014} that fuses visual and inertial data to obtain the structure of the environment at the global scale along with the attitude and the speed of the robot.
@@ -262,7 +262,7 @@ while we simulated the point feature observations.
 This separation allowed us to know the ground truth for the distance to the point features
 and also better understand the weaknesses of our method.
 
-We represent this setup in Figure \ref{fig:testsetup}.
+We represent this setup in Fig. \ref{fig:testsetup}.
 
 \begin{figure}[h!]
   \centering
@@ -293,7 +293,7 @@ Our goal is to identify its performance bottlenecks and introduce modifications 
 The original closed-form solution described in Equation \ref{eq:mat1} will be used as a basis for our work.
 Moreover, we can also use the knowledge of the gravity magnitude in order to refine our results with Equation \ref{eq:mat2}.
 In this case, we are minimizing a linear objective function with a quadratic constraint.
-in Figure \ref{fig:original}, we represent the quality of the evaluations with and without this additional constraint.
+in Fig. \ref{fig:original}, we represent the quality of the evaluations with and without this additional constraint.
 
 
 \begin{figure}[h!]
@@ -322,7 +322,7 @@ In the following sections, we will study the impact of biased inertial measureme
 
 \subsection{Impact of accelerometer bias on the performance}
 In order to visualize the impact of the accelerometer bias on the performance,
-we corrupt the accelerometer measurements provided by our terrain IMU by adding an artificial bias (Figure \ref{fig:biasAccCF}).
+we corrupt the accelerometer measurements provided by our terrain IMU by adding an artificial bias (Fig. \ref{fig:biasAccCF}).
 
 Despite a high accelerometer bias the closed-form solution still provides robust results.
 
@@ -351,7 +351,7 @@ Despite a high accelerometer bias the closed-form solution still provides robust
         \caption{Impact of the accelerometer bias on the performance of the closed-form solution. We are observing 7 features  over a variable duration of integration.\label{fig:biasAccCF}}
 \end{figure}
 
-As seen on the Figure \ref{fig:biasAccCF}, neither the gravity, the velocity or the lambdas are impacted by the accelerometer bias.
+As seen on the Fig. \ref{fig:biasAccCF}, neither the gravity, the velocity or the lambdas are impacted by the accelerometer bias.
 
 In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
 However, the estimation of the accelerometer bias with this method is not robust since our system is only slightly affected by it.
@@ -363,7 +363,7 @@ We would have expected the accelerometer bias to have a greater impact on the so
 
 \subsection{Impact of gyroscope bias on the performance}
 Again, in order to visualize the impact of the gyroscope bias on the performance,
-we corrupt the gyroscope measurements provided by our terrain IMU by adding an artificial bias (Figure \ref{fig:biasGyroCF}).
+we corrupt the gyroscope measurements provided by our terrain IMU by adding an artificial bias (Fig. \ref{fig:biasGyroCF}).
 
 Our experiments have shown that the presence of gyroscope bias significantly damages the results of the closed-form solution.
 
@@ -392,7 +392,7 @@ Our experiments have shown that the presence of gyroscope bias significantly dam
         \caption{Impact of the gyroscope bias on the performance of the closed-form solution. We are observing 7 features over a variable duration of integration. \label{fig:biasGyroCF}}
 \end{figure}
 
-As seen in Figure \ref{fig:biasGyroCF}, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise---and expensive---gyroscope.
+As seen in Fig. \ref{fig:biasGyroCF}, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise---and expensive---gyroscope.
 
 
 
@@ -405,7 +405,7 @@ However, we can not express the gyroscope bias linearly with this system.
 
 In this section, we propose a different approach to estimate the gyroscope bias using the closed-form solution.
 
-\subsection{Non-linear minimization of the residual}
+\subsection{Nonlinear minimization of the residual}
 
 Since our system of equations (\ref{eq:final1}) is overconstrained,
 inverting it is equivalent to finding the vector $X$ that minimizes the residual $||\Xi X - S||^2$.
@@ -428,7 +428,7 @@ We can initialize the optimization process with $B = 0_3$ since the bias is usua
 \begin{figure}[h!]
   \centering
   \resizebox{0.7\columnwidth}{!}{\input{graph/biasEstimation30Ft}}
-  \caption{Gyroscope bias estimation from non-linear minimization of the residual. We are observing 30 features  over a variable duration of integration. The true gyroscope bias is $[0.0276,   -0.0024,    0.0417]$. \label{fig:gBiasEstimate}}
+  \caption{Gyroscope bias estimation from nonlinear minimization of the residual. We are observing 30 features  over a variable duration of integration. The true gyroscope bias is $[0.0276,   -0.0024,    0.0417]$. \label{fig:gBiasEstimate}}
 \end{figure}
 
 \begin{figure}[h!]
@@ -464,7 +464,7 @@ We can initialize the optimization process with $B = 0_3$ since the bias is usua
 
 %% This technique is similar to the one used in \cite{Abbeel2005}, where the author minimizes the residual of a Kalman filter in order to recover the noise matrix for the sensors.
 
-The optimized closed-form solution provides better results than the standard closed-form solution. Figure \ref{fig:optEstimate} depicts an improvement in precision of around $5\%$ for the distance to the features, and around $13\%$ for the speed after 4 seconds of integration.
+The optimized closed-form solution provides better results than the standard closed-form solution. Fig. \ref{fig:optEstimate} depicts an improvement in precision of around $5\%$ for the distance to the features, and around $13\%$ for the speed after 4 seconds of integration.
 
 Moreover, the optimized closed-form solution requires a shorter integration duration to provide good quality results.
 Specifically, after 2 seconds of integration (around 7 camera observations) the provided estimations are already robust.
@@ -472,12 +472,12 @@ The non-optimized closed-form solution requires 3 seconds of integration before 
 
 
 Lastly, this method is robust even for high values of the gyroscope bias.
-Figure \ref{fig:biasGyroOpt} represents the quality of the estimations with the same artificial gyroscope bias from Figure \ref{fig:biasGyroCF}.
+Fig. \ref{fig:biasGyroOpt} represents the quality of the estimations with the same artificial gyroscope bias from Fig. \ref{fig:biasGyroCF}.
 
 
 
-As seen in Figure \ref{fig:biasGyroOpt}, after a certain integration duration, the estimations agree no matter how high the bias is.
-Moreover, the values on which these evaluations agree are equals to the ones in Figure \ref{fig:biasGyroCF} for the curve that has a gyroscope bias set to $0$.
+As seen in Fig. \ref{fig:biasGyroOpt}, after a certain integration duration, the estimations agree no matter how high the bias is.
+Moreover, the values on which these evaluations agree are equals to the ones in Fig. \ref{fig:biasGyroCF} for the curve that has a gyroscope bias set to $0_3$.
 
 
 By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.

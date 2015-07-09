@@ -413,9 +413,11 @@ inverting it is equivalent to finding the vector $X$ that minimizes the residual
 Since we can not express the gyroscope bias linearly,
 we define the following cost function:
 
-\[
-cost(B) = \argmin_X ||\Xi X - S||^2
-\]
+\begin{equation}
+  \label{eq:cost}
+  cost(B) = \argmin_X ||\Xi X - S||^2
+\end{equation}
+
 With:
 \begin{itemize}
 \item $B$ the gyroscope bias;
@@ -483,7 +485,38 @@ Moreover, the values on which these evaluations agree are equals to the ones in 
 By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
 Compared to the original method, the new method is now robust to the gyroscope bias, and also provides the gyroscope bias.
 
-\section{RESULTS}
+\section{VALIDATION}
+
+In this chapter we compare the performance on the estimations of the gravity, the initial velocity and the absolute scale obtained with three different methods:
+\begin{itemize}
+\item The original closed-form solution (Equation \ref{eq:mat1});
+\item Our modified closed-form solution (Equation \ref{eq:cost});
+\item Fast Semi-Direct Monocular Visual Odometry (SVO) described in \cite{Forster2014}.
+\end{itemize}
+The reason we included the SVO in the validation is for having a reference to state of the art visual inertial fusion method.
+However, this method requires to be initialized with the knowledge of the absolute scale.
+
+We set the integration duration for the closed-form solution to 3 seconds.
+The camera provides 60fps, but we discard most of the observations and consider only one observation every 0.3 seconds.
+Indeed, adding observations that are too close to each other does not add significant information to our system.
+
+%In a real applications, a proper online computation of the gyroscope bias can be reused.
+Since the gyroscope bias varies slowly over time, we can reuse its knowledge.
+In other words, we can use the optimized closed-form solution to compute the bias at the beginning of the sequence.
+Thereafter, we can quickly provide reliable state estimations with the standard closed-form solution by compensating with the computed bias.
+
+For long term navigation (longer than a minute), it would be advised to recompute the gyroscope bias every so often.
+This re-computation can use the knowledge of previously computed bias. % as stated in Section \ref{sec:reg}.
+
+%% The reason why we do not run the optimization for every state estimation is to speed up the computation.
+%% Despite the optimization is relatively fast since our cost function is defined only with respect to the gyroscope bias, it still has to run the closed-form solution several times for its gradient descent to converge.
+%% We found by experimentation that it usually requires around 6 iterations to converge.
+
+We validate our method against a different dataset than the one we used in the previous sections to draw our conclusions.
+Specifically, it contains IMU and camera measurements along with ground truth.
+The drone is flying indoor at low altitude.
+The feature extraction and matching is done with FAST corner algrotihm as in \cite{Forster2014}.
+
 \section{CONCLUSION}
 
 

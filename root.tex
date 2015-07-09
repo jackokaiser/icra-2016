@@ -122,7 +122,7 @@ We were able to get rid of this limitation with a simple statistical trick by ad
 
 By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
 Compared to the original method, the new method is now robust to the gyroscope bias, and also provides the gyroscope bias.
-%% Specifically, this method can accurately estimate the initial speed, the gravity, the distance to the features and the gyroscope bias for very short time of integration (around 2 seconds) and low amount of observed point-features (around 5).
+%% Specifically, this method can accurately estimate the initial speed, the gravity, the distance to the features and the gyroscope bias for very short time of integration (around 2 seconds) and low amount of observed point features (around 5).
 
 
 %% \begin{figure}[h!]
@@ -134,7 +134,7 @@ Compared to the original method, the new method is now robust to the gyroscope b
 \section{RELATED WORK}
 \section{THE CLOSED-FORM SOLUTION}
 
-In this paper, we do not provide a new derivation of the  closed-form solution.
+In this paper, we do not provide a new derivation of the closed-form solution.
 Instead, we consider the latest derivation proposed in \cite{Martinelli2014}.
 Specifically, the author expresses the state of the MAV with respect to the visual and inertial measurements in Equation \ref{eq:final1}:
 
@@ -144,8 +144,8 @@ S_j = \lambda_1^i\mu_1^i - V t_j - G \frac{t_j^2}{2} - \lambda^i_j \mu^i_j
 \end{equation}
 With:
 \begin{itemize}
-\item $\mu_j^i$ the normalized bearing of point-feature $i$ at time $t_j$ in the initial local frame;
-\item $\lambda_j^i$ the distance to the point-feature $i$ at time $t_j$;
+\item $\mu_j^i$ the normalized bearing of point feature $i$ at time $t_j$ in the initial local frame;
+\item $\lambda_j^i$ the distance to the point feature $i$ at time $t_j$;
 \item $V$ the initial velocity in the initial local frame;
 \item $G$ the initial gravity in the initial local frame;
 \item $S_j$ the integration up to time $t_j$ of the rotated linear acceleration data.
@@ -164,12 +164,13 @@ Note that the knowledge of $G$ is equivalent to the knowledge of the roll and pi
 The vectors $\mu_j^i$ are fully determined by camera observations and gyroscope measurements,
 and the vectors $S_j$ are determined by accelerometer and gyroscope measurements.
 
-As Equation \ref{eq:final1} holds for each three dimensions of all point-features $i=1,...,N$ and each observation starting from the second one $j=2,...n_i$, we therefore have a system consisting of $3(n_i-1)N$ equations in $6 + Nn_i$ unknowns.
+As Equation \ref{eq:final1} holds for each three dimensions of all point features $i=1,...,N$ and each observation starting from the second one $j=2,...n_i$, we therefore have a system consisting of $3(n_i-1)N$ equations in $6 + Nn_i$ unknowns.
 Indeed, note that when the first observation occurs, at $t_j = 0$, Equation \ref{eq:final1} is always satisfied thus does not provide information.
-We can write our system using matrix notations. Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
+We can write our system using matrix formulation.
+Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
 
 In \cite{Martinelli2014}, the author proceeded to one more step before expressing the underlying linear system.
-For an observation at time $t_j$, the equation of the first point-feature $i=1$ happening at time $t_j$ is subtracted to all other point-features $1<i<=N$ at time $t_j$ (Equation 7).
+For an observation at time $t_j$, the equation of the first point feature $i=1$ happening at time $t_j$ is subtracted to all other point features $1<i<=N$ at time $t_j$ (Equation 7).
 This additional step has the effect to corrupt all measurements with the first measurement,
 hence worsening the performance of the closed-form solution.
 In this paper, we do not take to this additional step.
@@ -177,12 +178,12 @@ In this paper, we do not take to this additional step.
 The linear system in Equation \ref{eq:final1} can be written in the following compact format:
 
 \begin{equation}
-\label{eq:mat1}
+\label{eq:mat1} \tag{9}
 \Xi X = S
 \end{equation}
 
 The matrix $\Xi$ and the vector $S$ are fully determined by the measurements, while $X$ is the unknown vector.
-More specifically:
+We have:
 
 \[
 S \equiv [S_2^T, ...,S_2^T, S_3^T,...,S_3^T,...,S_{n_i}^T,...,S_{n_i}^T]^T
@@ -211,14 +212,26 @@ X \equiv [ G^T, V^T, \lambda_1^1, ..., \lambda_1^N, ..., \lambda_{n_i}^1, ..., \
     \right]
 \end{multline}
 
-
 Where $T_j \equiv - \frac{t^2_j}{2} I_3$, $S_j \equiv -t_j I_3$ and $I_3$ is the identity 3 x 3 matrix; $0_{33}$ is the 3 x 3 zero matrix.
-Note that the matrix $\Xi$ and the vector $S$ are different from the one proposed in \cite{Martinelli2014}.
+Note that the matrix $\Xi$ and the vector $S$ are slightly different from the one proposed in \cite{Martinelli2014}.
 This is due to the additional step we did not take for numerical stability reasons.
 
-We can therefore recover the initial velocity, the roll and pitch angles and the distances to the point-features
-by finding the vector $X$ which satisfies \ref{eq:final1}.
+The sensor information is completely contained in the above linear system. Additionally, in \cite{Martinelli2014}, the author added a quadratic equation assuming the gravitational acceleration is a priori known.
+Let us denote the gravitational magnitude by $g$.
+We have the extra constraint $|G| = g$. We can express this constraint in matrix formulation:
 
+\begin{equation}
+\label{eq:mat2} \tag{10}
+| \Pi X | ^2 = g^2
+\end{equation}
+
+With $\Pi \equiv [I_3, 0_3, ..., 0_3]$.
+
+We can therefore recover the initial velocity, the roll and pitch angles and the distances to the point features
+by finding the vector $X$ which satisfies \ref{eq:mat1} and \ref{eq:mat2}.
+
+In the next sections, we will evaluate the performance of this method on real terrain data.
+This will allow us to identify its weaknesses and bring modifications to overcome them.
 
 %% The system therefore becomes:
 
@@ -234,6 +247,71 @@ by finding the vector $X$ which satisfies \ref{eq:final1}.
 
 
 \section{PERFORMANCE BOTTLENECKS}
+
+\subsection{Test setup}
+
+The MAV performs a motion while being tracked with an optical Vicon system.
+We can therefore compare our estimations with the ground truth.
+We define the relative error as the euclidian distance between the estimation and the ground truth,
+normalized by the groud truth.
+We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
+
+To identify the performance bottlenecks, we used IMU data obtained from terrain acquisitions
+while we simulated the point feature observations.
+This separation allowed us to know the ground truth for the distance to the point features
+and also better understand the weaknesses of our method.
+
+We represent this setup in Figure \ref{fig:testsetup}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\columnwidth]{images/setupTestDroneError.png}
+  \caption{Test setup for identifying the performance bottlenecks.
+    The drone is equipped with an IMU, and the visual measurements are simulated.
+    It performs a motion while being tracked by a Vicon system.\label{fig:testsetup}}
+\end{figure}
+
+In general, we use one camera observation every 0.3 seconds, even if the camera provides significantly more frames.
+Indeed, we can discard most of the camera observations.
+If two observations are too close to each other, then the additional equations do not bring much information to our system.
+Reducing the number of considered frames reduces the size of the matrices, thus speeds up the computations.
+
+As an example, over a time interval of 3 seconds, we obtain $11$ distinct frames.
+When observing 7 features, it yields a system of $3\times 10\times 7 = 210$ equations and $6+7\times 10=76$ unknowns.
+
+The method we use to solve the overconstrained linear system $\Xi X = S$ is a singular value decomposition (SVD) since it yields numerically robust solutions.
+
+In this section, we will start by presenting the results obtained with the original closed-form solution on terrain IMU data.
+Our goal is to identify its performance bottlenecks and introduce modifications to overcome them.
+
+%% The case of a biased gyroscope is addressed in chapter \ref{ch:gyro}.
+%% Indeed, the main contribution of this report is the simple method introduced in Section \ref{sec:computeBias} to compute the gyroscope bias with the closed-form solution, which happened to be a major performance bottleneck.
+
+\subsection{Original closed-form solution performance}
+
+The original closed-form solution described in Equation \ref{eq:mat1} will be used as a basis for our work.
+Moreover, we can also use the knowledge of the gravity magnitude in order to refine our results with Equation \ref{eq:mat2}.
+In this case, we are minimizing a linear objective function with a quadratic constraint.
+in Figure \ref{fig:original}, we represent the quality of the evaluations with and without this additional constraint.
+
+
+%% \begin{figure}[h!]
+%%   \centering
+%%   \resizebox{0.7\textwidth}{!}{\input{graph/CF2gravity}}
+%%   \caption{Original closed-form solution estimations with and without gravity knowledge refinement. We are observing 7 features  over a variable duration of integration.\label{fig:original}}
+%% \end{figure}
+
+Note how the evaluations get better as we increase the integration duration.
+Indeed, our equations come from an extended triangulation \cite{Martinelli2012}.
+Therefore, it requires a significant difference in the measurements over time to robustly estimate the state.
+Also note that the gravity is robustly estimated, whereas the estimations of the speed and the distance to the features is more erroneous.
+
+Since the gravity is well estimated with the standard closed-form, it comes without surprise that constraining its magnitude does not impact the results much.
+That is why the estimations with and without the refinement are so similar.
+
+With around 45\% of error on the speed and the distance to the features after 4 seconds of integration, the original closed-form solution does not perform very well on terrain data.
+In the following sections, we will introduce modifications to improve over these results.
+
 \section{ESTIMATING THE GYROSCOPE BIAS}
 \section{RESULTS}
 \section{CONCLUSION}

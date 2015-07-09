@@ -1,0 +1,63 @@
+% This file was created by matlab2tikz.
+% Minimal pgfplots version: 1.3
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width= 2in,
+height=1.66in,
+at={(1.751579in,1.09421in)},
+scale only axis,
+xmin=1.5,
+xmax=4.5,
+xlabel={Duration (s)},
+ytick={0.1,0.2,...,1,1.1},
+xtick={1.5,2,...,4,4.5},
+ymin=0,
+ymax=1,
+ylabel={Error},
+title style={font=\bfseries},
+legend style={legend cell align=left,align=left,draw=white!15!black}
+]
+\addplot [color=red,solid]
+  table[row sep=crcr]{%
+1.5	0.345420505285925\\
+2	0.0591269666437189\\
+2.5	0.0314634761572925\\
+3	0.0443930698554671\\
+3.5	0.0518808728966365\\
+4	0.0517486442145949\\
+4.5	0.0506422188840558\\
+};
+\addlegendentry{\textbar bias\textbar=0};
+
+\addplot [color=green,solid]
+  table[row sep=crcr]{%
+1.5	0.345695555937959\\
+2	0.060086124212135\\
+2.5	0.0337940864201277\\
+3	0.0419967425836958\\
+3.5	0.0537493965525162\\
+4	0.0516342878613844\\
+4.5	0.0473833798683534\\
+};
+\addlegendentry{\textbar bias\textbar=0.05};
+
+\addplot [color=blue,solid]
+  table[row sep=crcr]{%
+1.5	0.346564570148642\\
+2	0.0608748726887488\\
+2.5	0.0403201005186154\\
+3	0.0436805564269853\\
+3.5	0.0556848387804751\\
+4	0.0513853623130932\\
+4.5	0.0360060396972207\\
+};
+\addlegendentry{\textbar bias\textbar=0.2};
+
+\end{axis}
+\end{tikzpicture}%

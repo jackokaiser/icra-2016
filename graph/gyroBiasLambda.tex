@@ -1,0 +1,80 @@
+% This file was created by matlab2tikz.
+% Minimal pgfplots version: 1.3
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width= 2in,
+height=1.66in,
+at={(0.873053in,1.091895in)},
+scale only axis,
+xmin=1.5,
+xmax=4.5,
+xlabel={Duration (s)},
+ytick={0.1,0.2,...,1,1.1},
+xtick={1.5,2,...,4,4.5},
+ymin=0,
+ymax=1,
+ylabel={Error },
+title style={font=\bfseries},
+legend style={legend cell align=left,align=left,draw=white!15!black}
+]
+\addplot [color=red,solid]
+  table[row sep=crcr]{%
+1.5	0.588501115186842\\
+1.79	0.287270908510583\\
+2.08	0.137854459236222\\
+2.37	0.115712542188291\\
+2.66	0.0753045734064707\\
+2.95	0.073998505709674\\
+3.24	0.0632086539715139\\
+3.53	0.0460230129596447\\
+3.82	0.0431223004209657\\
+4.11	0.0404607225045588\\
+4.4	0.0337885403861846\\
+4.69	0.0282123677761989\\
+};
+
+\addlegendentry{\textbar bias\textbar =0};
+\addplot [color=green,solid]
+  table[row sep=crcr]{%
+1.5	0.741383426226708\\
+1.79	0.519892980583257\\
+2.08	0.333336391755812\\
+2.37	0.254324309986151\\
+2.66	0.228596578998227\\
+2.95	0.205884590431212\\
+3.24	0.201335428509984\\
+3.53	0.172243045996494\\
+3.82	0.12962659382189\\
+4.11	0.143276461876452\\
+4.4	0.189949178408101\\
+4.69	0.148207246552665\\
+};
+\addlegendentry{\textbar bias\textbar =0.05};
+
+\addplot [color=blue,solid]
+  table[row sep=crcr]{%
+1.5	0.936477750201457\\
+1.79	0.888685475512002\\
+2.08	0.84458398008591\\
+2.37	0.664604011781286\\
+2.66	0.507941744182365\\
+2.95	0.727135837974973\\
+3.24	0.576895145513454\\
+3.53	0.621499488167958\\
+3.82	0.689220373189602\\
+4.11	0.53113928172863\\
+4.4	0.600495648544404\\
+4.69	0.638113696786772\\
+};
+\addlegendentry{\textbar bias\textbar =0.2};
+
+
+
+\end{axis}
+\end{tikzpicture}%

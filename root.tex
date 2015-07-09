@@ -295,22 +295,28 @@ In this case, we are minimizing a linear objective function with a quadratic con
 in Figure \ref{fig:original}, we represent the quality of the evaluations with and without this additional constraint.
 
 
-%% \begin{figure}[h!]
-%%   \centering
-%%   \resizebox{0.7\textwidth}{!}{\input{graph/CF2gravity}}
-%%   \caption{Original closed-form solution estimations with and without gravity knowledge refinement. We are observing 7 features  over a variable duration of integration.\label{fig:original}}
-%% \end{figure}
+\begin{figure}[h!]
+  \centering
+    \resizebox{0.6\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}
+    \caption{Motion performed by the drone in 5 seconds.}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+    \resizebox{0.7\columnwidth}{!}{\input{graph/originalCF}}
+    \caption{Original closed-form solution estimations with and without gravity knowledge refinement. We are observing 5 features  over a variable duration of integration.\label{fig:original}}
+\end{figure}
+
 
 Note how the evaluations get better as we increase the integration duration.
 Indeed, our equations come from an extended triangulation \cite{Martinelli2012}.
 Therefore, it requires a significant difference in the measurements over time to robustly estimate the state.
-Also note that the gravity is robustly estimated, whereas the estimations of the speed and the distance to the features is more erroneous.
+Also note that the gravity is robustly estimated (around 5\% error), whereas the speed and the distance to the features is more erroneous (above 10\% error).
 
-Since the gravity is well estimated with the standard closed-form, it comes without surprise that constraining its magnitude does not impact the results much.
-That is why the estimations with and without the refinement are so similar.
+Since the gravity is well estimated with the original closed-form, it comes without surprise that constraining its magnitude does not improve the performance much.
+The distance to the features are slightly improved (around 1\% error decrease) at the expense of worsening estimation of the speed (around 20\% error increase).
 
-With around 45\% of error on the speed and the distance to the features after 4 seconds of integration, the original closed-form solution does not perform very well on terrain data.
-In the following sections, we will introduce modifications to improve over these results.
+%% In the following sections, we will introduce modifications to improve over these results.
 
 \section{ESTIMATING THE GYROSCOPE BIAS}
 \section{RESULTS}

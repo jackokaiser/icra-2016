@@ -152,12 +152,6 @@ With:
 \item $S_j$ the integration up to time $t_j$ of the rotated linear acceleration data.
 \end{itemize}
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.90\columnwidth]{images/closedFormExplained}
-  \caption{Visual representation of Equation \ref{eq:final1}.
-  The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
-\end{figure}
 
 
 The unknowns of Equation \ref{eq:final1} are the distances $\lambda_j^i$ and the vectors $V$ and $G$.
@@ -165,8 +159,17 @@ Note that the knowledge of $G$ is equivalent to the knowledge of the roll and pi
 The vectors $\mu_j^i$ are fully determined by camera observations and gyroscope measurements,
 and the vectors $S_j$ are determined by accelerometer and gyroscope measurements.
 
-As Equation \ref{eq:final1} holds for each three dimensions of all point features $i=1,...,N$ and each observation starting from the second one $j=2,...n_i$, we therefore have a system consisting of $3(n_i-1)N$ equations in $6 + Nn_i$ unknowns.
-Indeed, note that when the first observation occurs, at $t_j = 0$, Equation \ref{eq:final1} is always satisfied thus does not provide information.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.90\columnwidth]{images/closedFormExplained}
+  \caption{Visual representation of Equation \ref{eq:final1}.
+  The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
+\end{figure}
+
+Equation \ref{eq:final1} holds for each three dimensions of all point features $i=1,...,N$ and each observation starting from the second one $j=2,...n_i$.
+We therefore have a linear system consisting of $3(n_i-1)N$ equations in $6 + Nn_i$ unknowns.
+Indeed, note that when the first observation occurs, at $t_j = 0$,
+Equation \ref{eq:final1} is always satisfied thus does not provide information.
 We can write our system using matrix formulation.
 Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
 

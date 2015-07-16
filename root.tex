@@ -154,7 +154,7 @@ With:
 
 
 
-The unknowns of Equation \ref{eq:final1} are the distances $\lambda_j^i$ and the vectors $V$ and $G$.
+The unknowns of Equation \ref{eq:final1} are the scalars $\lambda_j^i$ and the vectors $V$ and $G$.
 Note that the knowledge of $G$ is equivalent to the knowledge of the roll and pitch angles.
 The vectors $\mu_j^i$ are fully determined by camera observations and gyroscope measurements,
 and the vectors $S_j$ are determined by accelerometer and gyroscope measurements.
@@ -354,7 +354,7 @@ Despite a high accelerometer bias the closed-form solution still provides robust
         \caption{Impact of the accelerometer bias on the performance of the closed-form solution. We are observing 7 features  over a variable duration of integration.\label{fig:biasAccCF}}
 \end{figure}
 
-As seen on the Fig. \ref{fig:biasAccCF}, neither the gravity, the velocity or the lambdas are impacted by the accelerometer bias.
+As seen on the Fig. \ref{fig:biasAccCF}, neither the estimation of the gravity, the velocity or the lambdas are impacted by the accelerometer bias.
 
 In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
 However, the estimation of the accelerometer bias with this method is not robust since our system is only slightly affected by it.
@@ -482,7 +482,9 @@ Fig. \ref{fig:biasGyroOpt} represents the quality of the estimations with the sa
 
 
 As seen in Fig. \ref{fig:biasGyroOpt}, after a certain integration duration, the estimations agree no matter how high the bias is.
-Moreover, the values on which these evaluations agree are equals to the ones in Fig. \ref{fig:biasGyroCF} for the curve that has a gyroscope bias set to $0_3$.
+In other words, given that the integration duration is long enough, this method is unaffected by the gyroscope bias.
+%% This method can therefore fully compensate for high values of the gyroscope bias.
+%% Moreover, the values on which these evaluations agree are equals to the ones for the curve that has a gyroscope bias set to $0_3$.
 
 
 By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
@@ -504,11 +506,18 @@ We compare the performance on the estimations of the gravity and the initial vel
 \item Fast Semi-Direct Monocular Visual Odometry (SVO) described in \cite{Forster2014}.
 \end{itemize}
 The reason we included the SVO in the validation is for having a reference to state of the art visual inertial fusion method.
-However, this method requires to be initialized with the knowledge of the absolute scale.
+However, this method requires to be initialized with the knowledge of the absolute scale, whereas our method works without initialization.
 
 We set the integration duration for the closed-form solution to 2 seconds.
 The camera provides 60fps, but we discard most of the observations and consider only one observation every 0.3 seconds.
 Indeed, adding observations that are too close to each other does not add significant information to our system.
+
+\begin{figure}[h!]
+   \centering
+   \resizebox{0.7\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3opt-KF.tex}}
+                %% \caption{Estimation error of the closed-form solution against the optimized closed-form solution.  We are observing 30 features  over a variable duration of integration. The true gyroscope bias is $[0.0276,   -0.0024,    0.0417]$. \label{fig:optEstimate}}
+\end{figure}
+
 
 %In a real applications, a proper online computation of the gyroscope bias can be reused.
 %% Since the gyroscope bias varies slowly over time, we can reuse its knowledge.

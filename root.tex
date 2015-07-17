@@ -71,7 +71,19 @@ Absolute scale velocity determination combining visual and inertial measurements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 
-Hi
+% % math approach here; mobile robot in intro instead.
+% The visual-inertial structure from motion problem consists of recovering informations about the environment and our relative position within it.
+
+State of the art approaches for visual-inertial sensor fusion are filter based algorithms. These methods are recursive by design and therefore require an initialization.
+Due to the nonlinearity of these systems, a poor initialization can have a dramatic impact on the performance of the estimations.
+On the other hand, methods that work without initialization have been developed in computer vision but they can only determine physical quantities up to a scale.
+
+In this report we evaluate a novel closed-form solution that recovers the initial velocity, the attitude and the absolute scale by fusing visual and inertial measurements.
+By nature, a closed-form solution is deterministic and thus does not require any initialization.
+
+By experimenting the closed-form solution with real and synthetic data, we were able to improve its robustness against noisy measurements.
+The main contribution of this report is the introduction of a simple method that automatically estimates the gyroscope bias which was a major performance bottleneck.
+Compared to the original method, the new method is now robust to this bias, and also provides the gyroscope bias.
 
 \end{abstract}
 
@@ -646,6 +658,36 @@ Indeed, adding observations that are too close to each other does not add signif
 
 \section{CONCLUSION}
 
+For a MAV, limiting the number of on-board sensor is important to save power consumption and processing power.
+A popular choice of sensors is a camera coupled with an IMU for their complementary.
+However, the methods for fusing visual and inertial measurements so far introduced are filter based, hence require an initialization.
+Providing a reliable state initialization is critical for these algorithms to work correctly.
+
+In this paper, we have studied the recent closed-form solution proposed by \cite{Martinelli2014} that performs visual-inertial sensor fusion without requiring an initialization.
+We implemented this method in order to test it with real terrain data.
+This allowed us to identify its performance bottlenecks and bring modifications to overcome them.
+
+Specifically, we started by reformulating the equations for greater numerical stability.
+We then investigated the impact of biased inertial measurements.
+Despite the case of biased accelerometer was originally studied in \cite{Martinelli2014} we show that its low impact on the system makes it hard to estimate.
+
+One major performance bottleneck of this method was the impact of biased gyroscope measurements.
+In other words, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise - and expensive - gyroscope.
+We then introduced a simple method that automatically estimates this bias.
+
+%% However, this method requires a significant amount of data to provide correct estimates of the gyroscope bias (either many features or long integration duration).
+%% We were able to get rid of this limitation with a simple statistical trick by adding a regularization term to our cost function.
+%% %tweak in the cost function we are minimizing.
+
+%% By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
+%% Compared to the original method, the new method is now robust to the gyroscope bias, and also provides the gyroscope bias.
+
+We validated this method by comparing its performance against the original method and the SVO described in \cite{Forster2014} which is the state of the art approach for pose estimation on MAV.
+
+For future work, we see this optimized closed-form solution being implemented on a MAV to provide accurate state initialization.
+This would allow aggressive take-off manoeuvres, such as hand throwing the MAV in the air as in \cite{Faessler2015}.
+With our technique, we could get rid of the altimeter sensor.
+Therefore, the drone could perform any motion right after the throw instead of having a required hovering stage to compute the absolute scale.
 
 \bibliographystyle{plain}
 \bibliography{library}

@@ -469,7 +469,7 @@ In this section, we propose a different approach to estimate the gyroscope bias 
 Since our system of equations (\ref{eq:final1}) is overconstrained,
 inverting it is equivalent to finding the vector $X$ that minimizes the residual $||\Xi X - S||^2$.
 
-Since we can not express the gyroscope bias linearly,
+Because we can not express the gyroscope bias linearly,
 we define the following cost function:
 
 \begin{equation}
@@ -542,16 +542,72 @@ In other words, given that the integration duration is long enough, this method 
 %% This method can therefore fully compensate for high values of the gyroscope bias.
 %% Moreover, the values on which these evaluations agree are equals to the ones for the curve that has a gyroscope bias set to $0_3$.
 
+However, for very short time of integration ($<2$ seconds), the gyroscope bias can be estimated to large and unlikely values.
+To understand this misestimation, in Fig. \ref{fig:cost} we plot the residual with respect to the bias, which is the cost function we are minimizing.
+We highlight a misestimation of the gyroscope bias by setting the duration of integration to 2 seconds while observing 7 features.
+We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
 
-By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
-Compared to the original method, the new method is now robust to the gyroscope bias, and also provides the gyroscope bias.
+\begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.47\columnwidth}
+                \resizebox{\columnwidth}{!}{\input{graph/costXZ}}
+                \caption{Residual with respect to $B_x$ and $B_z$}
+        \end{subfigure}~
+        \begin{subfigure}[b]{0.47\columnwidth}
+                \resizebox{\columnwidth}{!}{\input{graph/costYZ}}
+                \caption{Residual with respect to $B_y$ and $B_z$}
+        \end{subfigure}
+        \caption{Cost function (residual) with respect to the gyroscope bias for a small amount of available measurements (integration of 2 seconds while observing 7 features)\label{fig:cost}}
+\end{figure}
+
+As we can see in Fig. \ref{fig:cost}, the cost function admits a symmetry with respect to $B_z$.
+
+\subsection{Removing the symmetry in the cost function}
+
+The symmetry in the cost function is induced by the strong weight of the gravity in the equation.
+In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when this direction $\vec{u}$ is collinear with the gravity throughout the motion.
+In the terrain data we had, the motion satisfies this constraint.
+Specifically, the gyroscope was strapped on the MAV such that the vector $[0,0,1]$ in the gyroscope frame was pointing upwards when the MAV was hovering.
+That is why the residual varies only slightly for certain time sequences with respect to this vector.
+Indeed, in normal operations, a MAV will often have a pose close to its hovering stance in order to stay stable.
+
+If the MAV rotates such that the vector $\vec{u}$ becomes non collinear with the gravity, the cost function does not exhibit this symmetry anymore.
+In this case the gyroscope bias is well estimated.
+
+A simple solution to avoid having that symmetry in our system would be to constrain the motion of our MAV while it is operating.
+Another way to artificially get rid of this symmetry is to tweak the cost function.
+Specifically, we can add a regularization term that penalizes high estimations of the gyroscpe bias:
+
+\begin{equation}
+cost(B) = ||\Xi X - S||^2 + \lambda ||B||
+\end{equation}
+
+The coefficient $\lambda$ is the weight given to how much we want the bias to be small.
+For small values of $\lambda$, our cost function is similar to the previous one and the bias can grow arbitrarily high.
+For high values of $\lambda$, the estimations provided by the optimized closed-form solution are similar to the ones provided by the standard closed-form solution.
+Indeed, high values of $\lambda$ force the estimation of the bias to $0_3$.
+
+Note that, instead of forcing the gyroscope bias to be close to $0_3$, we can easily force it to be close to any value.
+Therefore, if we have the knowledge of an approximately known gyroscope bias, we can use it to provide a better estimation of the gyroscope bias.
+
+\[
+cost(B) = ||\Xi X - S||^2 + \lambda ||B - B^{approx}||
+\]
+
+With $B^{approx}$ the known approximate gyroscope bias.
+This methods allow us to reuse previously computed gyroscope bias since it is known to slowly vary over time.
+
+Selecting a reliable and safe value for the regularization parameter $\lambda$ is complicated.
+In this paper, we picked a value of $\lambda$ by experimentation.
 
 \section{VALIDATION}
 
 We validate our method against a different dataset than the one we used in the previous sections to draw our conclusions.
 Specifically, it contains IMU and camera measurements along with ground truth.
-Therefore, we are now only relying on fully real terrain data,
-but also we do not have the ground truth for the distance to the point features anymore.
+Therefore, we are now only relying on fully real terrain data.
+However, since we are no longer simulating the point features, we do not have the ground truth for the distance to the point features anymore.
+We can therefore only compare the performance of the evaluation of the speed and the gravity.
+
 The drone is flying indoor at low altitude.
 The feature extraction and matching is done with FAST corner algrotihm as in \cite{Forster2014}.
 
@@ -561,17 +617,17 @@ We compare the performance on the estimations of the gravity and the initial vel
 \item Our modified closed-form solution (Equation \ref{eq:cost});
 \item Fast Semi-Direct Monocular Visual Odometry (SVO) described in \cite{Forster2014}.
 \end{itemize}
-The reason we included the SVO in the validation is for having a reference to state of the art visual inertial fusion method.
+The reason we included the SVO in the validation is for having a reference to state of the art pose estimation method.
 However, this method requires to be initialized with the knowledge of the absolute scale, whereas our method works without initialization.
 
-We set the integration duration for the closed-form solution to 2 seconds.
+We set the integration duration for the closed-form solution to 2.8 seconds.
 The camera provides 60fps, but we discard most of the observations and consider only one observation every 0.3 seconds.
 Indeed, adding observations that are too close to each other does not add significant information to our system.
 
 \begin{figure}[h!]
    \centering
    \resizebox{0.7\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3opt-KF.tex}}
-                %% \caption{Estimation error of the closed-form solution against the optimized closed-form solution.  We are observing 30 features  over a variable duration of integration. The true gyroscope bias is $[0.0276,   -0.0024,    0.0417]$. \label{fig:optEstimate}}
+   \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{Forster2014}. The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.}
 \end{figure}
 
 

@@ -70,21 +70,15 @@ Absolute scale velocity determination combining visual and inertial measurements
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-
-% % math approach here; mobile robot in intro instead.
-% The visual-inertial structure from motion problem consists of recovering informations about the environment and our relative position within it.
-
-State of the art approaches for visual-inertial sensor fusion are filter based algorithms. These methods are recursive by design and therefore require an initialization.
-Due to the nonlinearity of these systems, a poor initialization can have a dramatic impact on the performance of the estimations.
-On the other hand, methods that work without initialization have been developed in computer vision but they can only determine physical quantities up to a scale.
-
-In this report we evaluate a novel closed-form solution that recovers the initial velocity, the attitude and the absolute scale by fusing visual and inertial measurements.
-By nature, a closed-form solution is deterministic and thus does not require any initialization.
-
-By experimenting the closed-form solution with real and synthetic data, we were able to improve its robustness against noisy measurements.
-The main contribution of this report is the introduction of a simple method that automatically estimates the gyroscope bias which was a major performance bottleneck.
-Compared to the original method, the new method is now robust to this bias, and also provides the gyroscope bias.
-
+  State of the art approaches for visual-inertial sensor fusion are filter based algorithms.
+  These methods are recursive by design and therefore require an initialization.
+  Due to the nonlinearity of these systems, a poor initialization can have a dramatic impact on the performance of the estimations.
+  Recently a closed-form solution providing such an initialization has been derived.
+  Despite mathematically sound it is not robust to noisy sensor data.
+  In this paper, we study the impact of noisy sensor on the performance of the method.
+  Specifically, the gyroscope bias is shown to be a major performance bottleneck.
+  We then propose a method to automatically estimate this bias.
+  Compared to the original method, the new method is now robust to this bias, and also provides the gyroscope bias.
 \end{abstract}
 
 

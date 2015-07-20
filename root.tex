@@ -221,7 +221,7 @@ We do not express these constant calibration terms explicitly here for clarity r
 
 The unknowns of Equation \ref{eq:final1} are the scalars $\lambda_j^i$ and the vectors $V$ and $G$.
 Note that the knowledge of $G$ is equivalent to the knowledge of the roll and pitch angles.
-The vectors $\mu_j^i$ are fully determined by camera observations and gyroscope measurements,
+The vectors $\mu_j^i$ are fully determined by visual and gyroscope measurements,
 and the vectors $S_j$ are determined by accelerometer and gyroscope measurements.
 
 \begin{figure}
@@ -231,15 +231,15 @@ and the vectors $S_j$ are determined by accelerometer and gyroscope measurements
   The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
 \end{figure}
 
-Equation \ref{eq:final1} holds for each three dimensions of all point features $i=1,...,N$ and each observation starting from the second one $j=2,...n_i$.
+Equation \ref{eq:final1} holds for each three dimensions of all point features $i=1,...,N$ and each frame starting from the second one $j=2,...n_i$.
 We therefore have a linear system consisting of $3(n_i-1)N$ equations in $6 + Nn_i$ unknowns.
-Indeed, note that when the first observation occurs, at $t_j = 0$,
+Indeed, note that when the first frame occurs, at $t_j = 0$,
 Equation \ref{eq:final1} is always satisfied thus does not provide information.
 We can write our system using matrix formulation.
 Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
 
 In \cite{Martinelli2014}, the author proceeded to one more step before expressing the underlying linear system.
-For an observation at time $t_j$, the equation of the first point feature $i=1$ happening at time $t_j$ is subtracted to all other point features $1<i<=N$ at time $t_j$ (Equation 7).
+For a given frame $j$, the equation of the first point feature $i=1$ is subtracted to all other point features equation $1<i<=N$ concerning frame $j$ (Equation 7).
 This additional step has the effect to corrupt all measurements with the first measurement,
 hence worsening the performance of the closed-form solution.
 In this paper, we do not take to this additional step.
@@ -326,7 +326,7 @@ normalized by the ground truth.
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
 
 To identify the performance bottlenecks, we used IMU data obtained from terrain acquisitions
-while we simulated the point feature observations.
+while we simulated the visual measurements.
 This separation allowed us to know the ground truth for the distance to the point features
 and also better understand the weaknesses of our method.
 
@@ -537,7 +537,7 @@ We can initialize the optimization process with $B = 0_3$ since the bias is usua
 The optimized closed-form solution provides better results than the standard closed-form solution. Fig. \ref{fig:optEstimate} depicts an improvement in precision of around $5\%$ for the distance to the features, and around $13\%$ for the speed after 4 seconds of integration.
 
 Moreover, the optimized closed-form solution requires a shorter integration duration to provide good quality results.
-Specifically, after 2 seconds of integration (around 7 camera observations) the provided estimations are already robust.
+Specifically, after 2 seconds of integration (around 7 frames) the provided estimations are already robust.
 The non-optimized closed-form solution requires 3 seconds of integration before converging to acceptable estimations.
 
 
@@ -630,8 +630,8 @@ The reason we included the SVO in the validation is for having a reference to st
 However, this method requires to be initialized with the knowledge of the absolute scale, whereas our method works without initialization.
 
 We set the integration duration for the closed-form solution to 2.8 seconds.
-The camera provides 60fps, but we discard most of the observations and consider only one observation every 0.3 seconds.
-Indeed, adding observations that are too close to each other does not add significant information to our system.
+The camera provides 60fps, but we discard most of the frames and consider only one frame every 0.3 seconds.
+Indeed, considering frames that are too close to each other does not add significant information to our system.
 
 \begin{figure}
    \centering

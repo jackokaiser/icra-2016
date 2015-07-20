@@ -74,7 +74,7 @@ Absolute scale velocity determination combining visual and inertial measurements
   These methods are recursive by design and therefore require an initialization.
   Due to the nonlinearity of these systems, a poor initialization can have a dramatic impact on the performance of the estimations.
   Recently a closed-form solution providing such an initialization has been derived.
-  Despite mathematically sound it is not robust to noisy sensor data.
+  Despite mathematically sound, it is not robust to noisy sensor data in practice.
   In this paper, we study the impact of noisy sensor on the performance of the method.
   Specifically, the gyroscope bias is shown to be a major performance bottleneck.
   We then propose a method to automatically estimate this bias.
@@ -89,11 +89,11 @@ Absolute scale velocity determination combining visual and inertial measurements
 
 
 
-Autonomous mobile robots navigating in unknow environments have an intrinsic need to perform localization and mapping using only on-board sensors.
+Autonomous mobile robots navigating in unknown environments have an intrinsic need to perform localization and mapping using only on-board sensors.
 Concerning Micro Aerial Vehicles (MAV), a critical issue is to limit the number of on-board sensors to reduce weight and power consumption.
 Therefore, a common setup is to combine a monocular camera with an inertial measurements unit (IMU).
 On top of being cheap, these sensors have very interesting complementarities.
-Additionaly, they can operate in indoor environments where Global Positioning System (GPS) signals are shadowed.
+Additionally, they can operate in indoor environments where Global Positioning System (GPS) signals are shadowed.
 An open question is how to optimally fuse the information provided by these sensors.
 
 Currently, most sensor fusion algorithms are either filter based or iterative. That is, given a current state and measurements, they return an updated state.
@@ -101,30 +101,28 @@ While working well in practice, these algorithms need to be provided by an exter
 
 The initialization of a filter based method is critical.
 Due to nonlinearities of the system, a poor initialization can result into converging towards local minima and  providing faulty states with high confidence.
-Indeed, another shortcoming of filters is that they can silently fail.
+%% Indeed, another shortcoming of filters is that they can silently fail.
 
-In this work we demonstrate the efficiency of a recent closed-form solution introduced in \cite{Martinelli2012}\cite{Martinelli2014} that fuses visual and inertial data to obtain the structure of the environment at the global scale along with the attitude and the speed of the robot.
-
+In this paper we demonstrate the efficiency of a recent closed-form solution introduced in \cite{Martinelli2012}\cite{Martinelli2014} that fuses visual and inertial data to obtain the structure of the environment at the global scale along with the attitude and the speed of the robot.
 By nature, a closed-form solution is deterministic and thus does not require any initialization.
-It is assumed that the camera is calibrated and the transformation between the IMU and the camera is known.
-This is a fair assumption for industrial drones to come pre-calibrated.
 
-In this work, we have studied the recent closed-form solution proposed by \cite{Martinelli2014} that performs visual-inertial sensor fusion without requiring an initialization.
+%% It is assumed that the camera is calibrated and the transformation between the IMU and the camera is known.
+%% This is a fair assumption for industrial drones to come pre-calibrated.
+
 We implemented this method in order to test it with real terrain data.
 This allowed us to identify its bottlenecks and bring modifications to overcome them.
-
-Specifically, we started by reformulating the equations for greater numerical stability.
-This lead to a major leap in the quality of the estimations.
-
-We then investigated the impact of biased inertial measurements.
+Specifically, we investigated the impact of biased inertial measurements.
 Despite the case of biased accelerometer was originally studied in \cite{Martinelli2014} we show that its low impact on the system makes it hard to estimate.
+
+%% Specifically, we started by reformulating the equations for greater numerical stability.
+%% This lead to a major leap in the quality of the estimations.
 
 One major bottleneck of this method was the impact of biased gyroscope measurements.
 In other words, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise - and expensive - gyroscope.
 We then introduced a simple method that automatically estimates this bias.
 
-However, this method requires a significant amount of data to provide correct estimates of the gyroscope bias (either many features or long time of integration).
-We were able to get rid of this limitation with a simple statistical trick by adding a regularization term to our cost function.
+%% However, this method requires a significant amount of data to provide correct estimates of the gyroscope bias (either many features or long time of integration).
+%% We were able to get rid of this limitation with a simple statistical trick by adding a regularization term to our cost function.
 %tweak in the cost function we are minimizing.
 
 By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
@@ -142,13 +140,14 @@ Compared to the original method, the new method is now robust to the gyroscope b
 
 The problem of fusing vision and inertial data has been extensively investigated in the past.
 However, most of the proposed methods require an external state initialization.
-Because of the system non-linearities, lack of precise initialization can irreparably damage the entire estimation process.
+Because of the system nonlinearities, lack of precise initialization can irreparably damage the entire estimation process.
 In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}.
 
 We are therefore interested into a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
 
 Some deterministic solutions have been introduced in the field of computer vision and rely only on visual measurements.
-These techniques can recover the relative rotation and translation up to scale between two camera poses.
+These techniques can recover the relative rotation and translation up to scale between two camera poses \cite{Longuet-Higgins1981}\cite{Hartley1997}\cite{Nister2003}\cite{Hartley2004}\cite{Li2006}.
+These techniques are currently used in state-of-the-art visual navigation methods on MAV in order to initialize maps \cite{Weiss2012}\cite{Forster2014}.
 However, the knowledge of the absolute scale and at least the absolute roll and pitch angles are essential for the MAV.
 It is required to take the inertial measurements into consideration to compute these values deterministically.
 
@@ -169,7 +168,7 @@ It is therefore not applicable for our minimal configuration.
 A procedure to quickly re-initialize a MAV after a failure is discussed in \cite{Faessler2015}.
 However, their method also requires an altimeter to estimate the absolute scale.
 
-An known object is used in \cite{Gemeiner2007} to recover the initial pose of the MAV.
+A landmark of known dimension is used in \cite{Gemeiner2007} to recover the initial pose of the MAV.
 This method is therefore not suited to unknown environment.
 
 Recently, a closed-form solution has been introduced in \cite{Martinelli2012}.
@@ -190,10 +189,10 @@ While being mathematically sound, this closed-form solution is not robust to noi
 For this reason, to the best of our knowledge, it has never been used in an actual application.
 In this paper we carry out an analysis to find out its limitations.
 Specifically, we show that it is resilient to the accelerometer bias but strongly affected by the gyroscope bias.
-We then introduce a simple method that automatically estimates this bias.
+We then introduce a simple method that automatically estimates the gyroscope bias.
 By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
 Compared to the original method, the new method is now robust to the gyroscope bias, and also provides the gyroscope bias.
-We validate our new method against real terrain data to proove its robustness against noisy sensors.
+We validate our new method against real terrain data to prove its robustness against noisy sensors.
 
 \section{THE CLOSED-FORM SOLUTION}
 
@@ -215,13 +214,17 @@ With:
 \end{itemize}
 
 
+The local frame refers to a frame of reference common to the IMU and the camera.
+In a real application, we would work in the IMU frame and have some additional constant terms
+accounting for the camera-IMU transformation.
+We do not express these constant calibration terms explicitly here for clarity reasons.
 
 The unknowns of Equation \ref{eq:final1} are the scalars $\lambda_j^i$ and the vectors $V$ and $G$.
 Note that the knowledge of $G$ is equivalent to the knowledge of the roll and pitch angles.
 The vectors $\mu_j^i$ are fully determined by camera observations and gyroscope measurements,
 and the vectors $S_j$ are determined by accelerometer and gyroscope measurements.
 
-\begin{figure}[h!]
+\begin{figure}
   \centering
   \includegraphics[width=0.90\columnwidth]{images/closedFormExplained}
   \caption{Visual representation of Equation \ref{eq:final1}.
@@ -318,8 +321,8 @@ This will allow us to identify its weaknesses and bring modifications to overcom
 
 The MAV performs a motion while being tracked with an optical Vicon system.
 We can therefore compare our estimations with the ground truth.
-We define the relative error as the euclidian distance between the estimation and the ground truth,
-normalized by the groud truth.
+We define the relative error as the euclidean distance between the estimation and the ground truth,
+normalized by the ground truth.
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
 
 To identify the performance bottlenecks, we used IMU data obtained from terrain acquisitions
@@ -329,7 +332,7 @@ and also better understand the weaknesses of our method.
 
 We represent this setup in Fig. \ref{fig:testsetup}.
 
-\begin{figure}[h!]
+\begin{figure}
   \centering
   \includegraphics[width=\columnwidth]{images/setupTestDroneError.png}
   \caption{Test setup for identifying the performance bottlenecks.
@@ -337,9 +340,9 @@ We represent this setup in Fig. \ref{fig:testsetup}.
     It performs a motion while being tracked by a Vicon system.\label{fig:testsetup}}
 \end{figure}
 
-In general, we use one camera observation every 0.3 seconds, even if the camera provides significantly more frames.
-Indeed, we can discard most of the camera observations.
-If two observations are too close to each other, then the additional equations do not bring much information to our system.
+In general, we use one frame every 0.3 seconds, even if the camera provides significantly more frames.
+Indeed, we can discard most of the frames provided by the camera.
+If two frames are too close to each other, then the additional equations do not bring much information to our system.
 Reducing the number of considered frames reduces the size of the matrices, thus speeds up the computations.
 
 As an example, over a time interval of 3 seconds, we obtain $11$ distinct frames.
@@ -361,13 +364,13 @@ In this case, we are minimizing a linear objective function with a quadratic con
 in Fig. \ref{fig:original}, we represent the quality of the evaluations with and without this additional constraint.
 
 
-\begin{figure}[h!]
+\begin{figure}
   \centering
     \resizebox{0.6\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}
     \caption{Motion performed by the drone in 5 seconds.}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}
   \centering
     \resizebox{0.7\columnwidth}{!}{\input{graph/originalCF}}
     \caption{Original closed-form solution estimations with and without gravity knowledge refinement. We are observing 5 features  over a variable duration of integration.\label{fig:original}}
@@ -380,10 +383,10 @@ Therefore, it requires a significant difference in the measurements over time to
 Also note that the gravity is robustly estimated (around 5\% error), whereas the speed and the distance to the features is more erroneous (above 10\% error).
 
 Since the gravity is well estimated with the original closed-form, it comes without surprise that constraining its magnitude does not improve the performance much.
-The distance to the features are slightly improved (around 1\% error decrease) at the expense of worsening estimation of the speed (around 20\% error increase).
+The distance to the features are slightly improved (around 1\% error decrease) at the expense of worsening the estimation of the speed (around 20\% error increase).
 
 %% In the following sections, we will introduce modifications to improve over these results.
-In the following sections, we will study the impact of biased inertial measurements on the performance of the closed-form solution.
+In the following sections, we will study the impact of biased inertial measurements on the performance of the closed-form solution without considering the gravity refinement.
 
 \subsection{Impact of accelerometer bias on the performance}
 In order to visualize the impact of the accelerometer bias on the performance,
@@ -391,7 +394,7 @@ we corrupt the accelerometer measurements provided by our terrain IMU by adding 
 
 Despite a high accelerometer bias the closed-form solution still provides robust results.
 
-\begin{figure}[h!]
+\begin{figure}
         \centering
 
         \begin{subfigure}[b]{0.5\columnwidth}
@@ -432,7 +435,7 @@ we corrupt the gyroscope measurements provided by our terrain IMU by adding an a
 
 Our experiments have shown that the presence of gyroscope bias significantly damages the results of the closed-form solution.
 
-\begin{figure}[h!]
+\begin{figure}
         \centering
 
         \begin{subfigure}[b]{0.5\columnwidth}
@@ -492,19 +495,19 @@ With:
 By minimizing this cost function, we recover the gyroscope bias $B$ and the unknown vector $X$ which compensated for the gyroscope bias $B$.
 We can initialize the optimization process with $B = 0_3$ since the bias is usually a rather small quantity.
 
-\begin{figure}[h!]
+\begin{figure}
   \centering
   \resizebox{0.7\columnwidth}{!}{\input{graph/biasEstimation30Ft}}
   \caption{Gyroscope bias estimation from nonlinear minimization of the residual. We are observing 30 features  over a variable duration of integration. The true gyroscope bias is $[0.0276,   -0.0024,    0.0417]$. \label{fig:gBiasEstimate}}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}
    \centering
    \resizebox{0.7\columnwidth}{!}{\input{graph/CF3vsOpt30Ft}}
                 \caption{Estimation error of the closed-form solution against the optimized closed-form solution.  We are observing 30 features  over a variable duration of integration. The true gyroscope bias is $[0.0276,   -0.0024,    0.0417]$. \label{fig:optEstimate}}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}
         \centering
 
         \begin{subfigure}[b]{0.5\columnwidth}
@@ -553,7 +556,7 @@ To understand this misestimation, in Fig. \ref{fig:cost} we plot the residual wi
 We highlight a misestimation of the gyroscope bias by setting the duration of integration to 2 seconds while observing 7 features.
 We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
 
-\begin{figure}[h!]
+\begin{figure}
         \centering
         \begin{subfigure}[b]{0.47\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/costXZ}}
@@ -582,7 +585,7 @@ In this case the gyroscope bias is well estimated.
 
 A simple solution to avoid having that symmetry in our system would be to constrain the motion of our MAV while it is operating.
 Another way to artificially get rid of this symmetry is to tweak the cost function.
-Specifically, we can add a regularization term that penalizes high estimations of the gyroscpe bias:
+Specifically, we can add a regularization term that penalizes high estimations of the gyroscope bias:
 
 \begin{equation}
 cost(B) = ||\Xi X - S||^2 + \lambda ||B||
@@ -615,7 +618,7 @@ However, since we are no longer simulating the point features, we do not have th
 We can therefore only compare the performance of the evaluation of the speed and the gravity.
 
 The drone is flying indoor at low altitude.
-The feature extraction and matching is done with FAST corner algrotihm as in \cite{Forster2014}.
+The feature extraction and matching is done with FAST corner algorithm as in \cite{Forster2014}.
 
 We compare the performance on the estimations of the gravity and the initial velocity obtained with three different methods:
 \begin{itemize}
@@ -630,7 +633,7 @@ We set the integration duration for the closed-form solution to 2.8 seconds.
 The camera provides 60fps, but we discard most of the observations and consider only one observation every 0.3 seconds.
 Indeed, adding observations that are too close to each other does not add significant information to our system.
 
-\begin{figure}[h!]
+\begin{figure}
    \centering
    \resizebox{0.7\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3opt-KF.tex}}
    \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{Forster2014}. The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.}
@@ -661,8 +664,7 @@ In this paper, we have studied the recent closed-form solution proposed by \cite
 We implemented this method in order to test it with real terrain data.
 This allowed us to identify its performance bottlenecks and bring modifications to overcome them.
 
-Specifically, we started by reformulating the equations for greater numerical stability.
-We then investigated the impact of biased inertial measurements.
+We investigated the impact of biased inertial measurements.
 Despite the case of biased accelerometer was originally studied in \cite{Martinelli2014} we show that its low impact on the system makes it hard to estimate.
 
 One major performance bottleneck of this method was the impact of biased gyroscope measurements.
@@ -679,9 +681,9 @@ We then introduced a simple method that automatically estimates this bias.
 We validated this method by comparing its performance against the original method and the SVO described in \cite{Forster2014} which is the state of the art approach for pose estimation on MAV.
 
 For future work, we see this optimized closed-form solution being implemented on a MAV to provide accurate state initialization.
-This would allow aggressive take-off manoeuvres, such as hand throwing the MAV in the air as in \cite{Faessler2015}.
-With our technique, we could get rid of the altimeter sensor.
-Therefore, the drone could perform any motion right after the throw instead of having a required hovering stage to compute the absolute scale.
+This would allow aggressive take-off maneuvers, such as hand throwing the MAV in the air \cite{Faessler2015}.
+With our technique however, we could get rid of the altimeter sensor.
+The drone could therefore perform any motion right after the throw instead of having a required hovering stage to compute the absolute scale.
 
 \bibliographystyle{plain}
 \bibliography{library}

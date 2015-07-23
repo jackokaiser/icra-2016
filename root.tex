@@ -35,6 +35,26 @@
 \usepackage{subcaption}
 
 \usepackage{pgfplots}
+
+% argument #1: any options
+\newenvironment{customlegend}[1][]{%
+    \begingroup
+    % inits/clears the lists (which might be populated from previous
+    % axes):
+    \csname pgfplots@init@cleared@structures\endcsname
+    \pgfplotsset{#1}%
+}{%
+    % draws the legend:
+    \csname pgfplots@createlegend\endcsname
+    \endgroup
+}%
+
+% makes \addlegendimage available (typically only available within an
+% axis environment):
+\def\addlegendimage{\csname pgfplots@addlegendimage\endcsname}
+\def\addlegendentry{\csname pgfplots@addlegendentry\endcsname}
+
+
 \newcommand{\rot}[2]{\ensuremath{C_{\,#1}^{\,#2}}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
 \definecolor{amethyst}{rgb}{0.5, 0.3, 0.7}
@@ -441,22 +461,24 @@ we corrupt the gyroscope measurements provided by our terrain IMU by adding an a
 Our experiments have shown that the presence of gyroscope bias significantly damages the results of the closed-form solution.
 
 \begin{figure}
-        \centering
+  \centering
+        \hspace{0.2\columnwidth}%
+        \begin{subfigure}[b]{0.3\columnwidth}
+                \resizebox{\columnwidth}{!}{\input{graph/gyroBiasLegend}}
+                \caption{Legend}
 
+        \end{subfigure}%
         \begin{subfigure}[b]{0.5\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/gyroBiasGravity}}
                 \caption{Gravity estimation error}
 
-        \end{subfigure}%
-        ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-          %(or a blank line to force the subfigure onto a new line)
+        \end{subfigure}
+        ~
         \begin{subfigure}[b]{0.5\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/gyroBiasSpeed}}
                 \caption{Velocity estimation error}
 
-        \end{subfigure}
-        ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-          %(or a blank line to force the subfigure onto a new line)
+        \end{subfigure}%
         \begin{subfigure}[b]{0.5\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/gyroBiasLambda}}
                 \caption{Lambda estimation error}

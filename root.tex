@@ -345,13 +345,13 @@ We represent this setup in Fig. \ref{fig:testsetup}.
     It performs a motion while being tracked by a Vicon system.\label{fig:testsetup}}
 \end{figure}
 
-In general, we use one frame every 0.3 seconds, even if the camera provides significantly more frames.
+In general, we use one frame every 0.1 seconds, even if the camera provides significantly more frames.
 Indeed, we can discard most of the frames provided by the camera.
 If two frames are too close to each other, then the additional equations do not bring much information to our system.
 Reducing the number of considered frames reduces the size of the matrices, thus speeds up the computations.
 
-As an example, over a time interval of 3 seconds, we obtain $11$ distinct frames.
-When observing 7 features, it yields a system of $3\times 10\times 7 = 210$ equations and $6+7\times 10=76$ unknowns.
+As an example, over a time interval of 3 seconds, we obtain $31$ distinct frames.
+When observing 7 features, it yields a system of $3\times 30\times 7 = 630$ equations and $6+7\times 31=223$ unknowns.
 
 The method we use to solve the overconstrained linear system $\Xi X = S$ is a singular value decomposition (SVD) since it yields numerically robust solutions.
 
@@ -635,7 +635,7 @@ The reason we included the SVO in the validation is for having a reference to st
 However, this method requires to be initialized with the knowledge of the absolute scale, whereas our method works without initialization.
 
 We set the integration duration for the closed-form solution to 2.8 seconds.
-The camera provides 60fps, but we discard most of the frames and consider only one frame every 0.3 seconds.
+The camera provides 60fps, but we discard most of the frames and consider only one frame every 0.1 seconds.
 Indeed, considering frames that are too close to each other does not add significant information to our system.
 
 \begin{figure}

@@ -420,22 +420,24 @@ we corrupt the accelerometer measurements provided by our terrain IMU by adding 
 Despite a high accelerometer bias the closed-form solution still provides robust results.
 
 \begin{figure}
-        \centering
+  \centering
+        \hspace{0.2\columnwidth}%
+        \begin{subfigure}[b]{0.3\columnwidth}
+                \resizebox{\columnwidth}{!}{\input{graph/gyroBiasLegend}}
+                \caption{Legend}
 
+        \end{subfigure}%
         \begin{subfigure}[b]{0.5\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/accBiasGravity}}
                 \caption{Gravity estimation error}
 
-        \end{subfigure}%
-        ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-          %(or a blank line to force the subfigure onto a new line)
+        \end{subfigure}
+        ~
         \begin{subfigure}[b]{0.5\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/accBiasSpeed}}
                 \caption{Velocity estimation error}
 
-        \end{subfigure}
-        ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-          %(or a blank line to force the subfigure onto a new line)
+        \end{subfigure}%
         \begin{subfigure}[b]{0.5\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/accBiasLambda}}
                 \caption{Lambda estimation error}
@@ -476,7 +478,7 @@ Our experiments have shown that the presence of gyroscope bias significantly dam
         ~
         \begin{subfigure}[b]{0.5\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/gyroBiasSpeed}}
-                \caption{Velocity estimation error}
+                \caption{Velocity estimation error (from 0\% to 200\%)}
 
         \end{subfigure}%
         \begin{subfigure}[b]{0.5\columnwidth}

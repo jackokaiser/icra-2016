@@ -401,7 +401,7 @@ in Fig. \ref{fig:original}, we represent the quality of the evaluations with and
 \begin{figure}
   \centering
     \resizebox{0.7\columnwidth}{!}{\input{graph/originalCF}}
-    \caption{Original closed-form solution estimations with and without gravity knowledge refinement. We are observing 5 features  over a variable duration of integration.\label{fig:original}}
+    \caption{Original closed-form solution estimations with and without gravity knowledge refinement. We are observing 12 features  over a variable duration of integration.\label{fig:original}}
 \end{figure}
 
 
@@ -411,7 +411,8 @@ Therefore, it requires a significant difference in the measurements over time to
 Also note that the gravity is robustly estimated (around 5\% error), whereas the speed and the distance to the features is more erroneous (above 10\% error).
 
 Since the gravity is well estimated with the original closed-form, it comes without surprise that constraining its magnitude does not improve the performance much.
-The distance to the features are slightly improved (around 1\% error decrease) at the expense of worsening the estimation of the speed (around 20\% error increase).
+That is why the curves representing the performance with and without the gravity refinement are so close.
+%% The distance to the features are slightly improved (around 1\% error decrease) at the expense of worsening the estimation of the speed (around 20\% error increase).
 
 %% In the following sections, we will introduce modifications to improve over these results.
 In the following sections, we will study the impact of biased inertial measurements on the performance of the closed-form solution without considering the gravity refinement.
@@ -569,14 +570,14 @@ We can initialize the optimization process with $B = 0_3$ since the bias is usua
 
 %% This technique is similar to the one used in \cite{Abbeel2005}, where the author minimizes the residual of a Kalman filter in order to recover the noise matrix for the sensors.
 
-The optimized closed-form solution provides better results than the standard closed-form solution. Fig. \ref{fig:optEstimate} depicts an improvement in precision of around $5\%$ for the distance to the features, and around $13\%$ for the speed after 4 seconds of integration.
+The optimized closed-form solution provides better results than the standard closed-form solution. Fig. \ref{fig:optEstimate} depicts an improvement in precision of around $13\%$ for the distance to the features, and around $30\%$ for the speed after 4 seconds of integration.
 
-Moreover, the optimized closed-form solution requires a shorter integration duration to provide good quality results.
-Specifically, after 2 seconds of integration (around 7 frames) the provided estimations are already robust.
-The non-optimized closed-form solution requires 3 seconds of integration before converging to acceptable estimations.
+%% Moreover, the optimized closed-form solution requires a shorter integration duration to provide good quality results.
+%% Specifically, after 2 seconds of integration (around 7 frames) the provided estimations are already robust.
+%% The non-optimized closed-form solution requires 3 seconds of integration before converging to acceptable estimations.
 
 
-Lastly, this method is robust even for high values of the gyroscope bias.
+Moreover, this method is robust even for high values of the gyroscope bias.
 Fig. \ref{fig:biasGyroOpt} represents the quality of the estimations with the same artificial gyroscope bias from Fig. \ref{fig:biasGyroCF}.
 
 
@@ -586,7 +587,7 @@ In other words, given that the integration duration is long enough, this method 
 %% This method can therefore fully compensate for high values of the gyroscope bias.
 %% Moreover, the values on which these evaluations agree are equals to the ones for the curve that has a gyroscope bias set to $0_3$.
 
-However, for very short time of integration ($<2$ seconds), the gyroscope bias can be estimated to large and unlikely values.
+However, for very short time of integration ($<1.7$ seconds), the gyroscope bias can be estimated to large and unlikely values.
 To understand this misestimation, in Fig. \ref{fig:cost} we plot the residual with respect to the bias, which is the cost function we are minimizing.
 We highlight a misestimation of the gyroscope bias by setting the duration of integration to 2 seconds while observing 7 features.
 We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.

@@ -536,26 +536,29 @@ We can initialize the optimization process with $B = 0_3$ since the bias is usua
                 \caption{Estimation error of the closed-form solution against the optimized closed-form solution.  We are observing 30 features  over a variable duration of integration. The true gyroscope bias is $[0.0276,   -0.0024,    0.0417]$. \label{fig:optEstimate}}
 \end{figure}
 
-\begin{figure}
-        \centering
 
-        \begin{subfigure}[b]{0.5\columnwidth}
-                \resizebox{\columnwidth}{!}{\input{graph/opt30ftgravity}}
-                \caption{Gravity estimation relative error}
+\begin{figure}
+  \centering
+        \hspace{0.2\columnwidth}%
+        \begin{subfigure}[b]{0.3\columnwidth}
+                \resizebox{\columnwidth}{!}{\input{graph/gyroBiasLegend}}
+                \caption{Legend}
 
         \end{subfigure}%
-        ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-          %(or a blank line to force the subfigure onto a new line)
         \begin{subfigure}[b]{0.5\columnwidth}
-                \resizebox{\columnwidth}{!}{\input{graph/opt30ftspeed}}
-                \caption{Velocity estimation relative error}
+                \resizebox{\columnwidth}{!}{\input{graph/opt7ftGravity}}
+                \caption{Gravity estimation error}
 
         \end{subfigure}
-        ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
-          %(or a blank line to force the subfigure onto a new line)
+        ~
         \begin{subfigure}[b]{0.5\columnwidth}
-                \resizebox{\columnwidth}{!}{\input{graph/opt30ftLambda}}
-                \caption{Lambda estimation relative error}
+                \resizebox{\columnwidth}{!}{\input{graph/opt7ftSpeed}}
+                \caption{Velocity estimation error}
+
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\columnwidth}
+                \resizebox{\columnwidth}{!}{\input{graph/opt7ftLambda}}
+                \caption{Lambda estimation error}
 
         \end{subfigure}
         \caption{Impact of the gyroscope bias on the performance of the optimized closed-form solution. We are observing 7 features  over a variable duration of integration. \label{fig:biasGyroOpt}}

@@ -1,3 +1,5 @@
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+%pdflatex -shell-escape root.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %2345678901234567890123456789012345678901234567890123456789012345678901234567890
 %        1         2         3         4         5         6         7         8
@@ -35,6 +37,8 @@
 \usepackage{subcaption}
 
 \usepackage{pgfplots}
+%% \usepgfplotslibrary{external}
+%% \tikzexternalize
 \newcommand{\rot}[2]{\ensuremath{C_{\,#1}^{\,#2}}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
 \definecolor{amethyst}{rgb}{0.5, 0.3, 0.7}
@@ -44,11 +48,11 @@
 \pgfplotsset{plot coordinates/math parser=false}
 
 \title{\LARGE \bf
-Absolute scale velocity determination combining visual and inertial measurements for micro aerial vehicles
+State Initialization in Visual Inertial aided Navigation robust to noisy sensor data
 }
 
 
-\author{Jacques Kaiser and Agostino Martinelli% <-this % stops a space
+\author{Jacques Kaiser, Agostino Martinelli and Davide Scaramuzza% <-this % stops a space
 %% \thanks{*This work was not supported by any organization}% <-this % stops a space
 %% \thanks{$^{1}$Albert Author is with Faculty of Electrical Engineering, Mathematics and Computer Science,
 %%         University of Twente, 7500 AE Enschede, The Netherlands
@@ -162,7 +166,7 @@ It is required to take the inertial measurements into consideration to compute t
 
 
 A closed-form solution is provided in \cite{Engel2013} to determine the absolute scale.
-However they assume an additional on-board sensor measuring a metric quantity, such as an altimeter or an air pressure sensor.
+However, it needs an additional on-board sensor measuring a metric quantity, such as an altimeter or an air pressure sensor.
 It is therefore not applicable for our minimal configuration.
 
 A procedure to quickly re-initialize a MAV after a failure is discussed in \cite{Faessler2015}.
@@ -180,12 +184,12 @@ This closed-form has been improved in \cite{Li2013} to work with unknown camera-
 Specifically, the translation between the camera and the IMU is expressed as an unknown in the linear system.
 However, the relative rotation between the camera and the IMU can not be expressed this way,
 thus an alternative way to compute it is proposed.
-Their method is therefore independent of external camera-IMU calibration, hence well suited for power-on-and-go systems.
+This method is therefore independent of external camera-IMU calibration, hence well suited for power-on-and-go systems.
 
 A more intuitive expression of the same closed-form solution is derived in \cite{Martinelli2014}.
 This formulation also provides the accelerometer bias, which can also be expressed as an unknown in the linear system.
 
-While being mathematically sound, this closed-form solution is not robust to noisy sensor data \cite{Faessler2015}.
+While being mathematically sound, this closed-form solution is not robust to noisy sensor data.
 For this reason, to the best of our knowledge, it has never been used in an actual application.
 In this paper we carry out an analysis to find out its limitations.
 Specifically, we show that it is resilient to the accelerometer bias but strongly affected by the gyroscope bias.
@@ -198,7 +202,8 @@ We validate our new method against real terrain data to prove its robustness aga
 
 In this paper, we do not provide a new derivation of the closed-form solution.
 Instead, we consider the latest derivation proposed in \cite{Martinelli2014}.
-Specifically, the author expresses the state of the MAV with respect to the visual and inertial measurements in Equation \ref{eq:final1}:
+Specifically, let us refer to a short interval of time (of the order of $3$ seconds). We assume that during this interval of time the camera observes simultaneously $N$ point-features and we denote by $t_1,~t_2,\cdots,t_{n_i}$ the times of this interval when the camera provides an image of these points. Without loss of generality, we can assume that $t_1=0$.
+The following equation holds (see \cite{Martinelli2014} for its derivation):
 
 
 \begin{equation} \tag{6} \label{eq:final1}
@@ -206,11 +211,11 @@ S_j = \lambda_1^i\mu_1^i - V t_j - G \frac{t_j^2}{2} - \lambda^i_j \mu^i_j
 \end{equation}
 With:
 \begin{itemize}
-\item $\mu_j^i$ the normalized bearing of point feature $i$ at time $t_j$ in the initial local frame;
+\item $\mu_j^i$ the normalized bearing of point feature $i$ at time $t_j$ in the local frame at time $t_1$;
 \item $\lambda_j^i$ the distance to the point feature $i$ at time $t_j$;
-\item $V$ the initial velocity in the initial local frame;
-\item $G$ the initial gravity in the initial local frame;
-\item $S_j$ the integration up to time $t_j$ of the rotated linear acceleration data.
+\item $V$ the velocity in the local frame at time $t_1$;
+\item $G$ the gravity in the local frame  at time $t_1$;
+\item $S_j$ the integration in the interval $[t_1, ~t_j]$ of the rotated linear acceleration data (i.e., the integration of the inertial measurements).
 \end{itemize}
 
 
@@ -221,7 +226,7 @@ We do not express these constant calibration terms explicitly here for clarity r
 
 The unknowns of Equation \ref{eq:final1} are the scalars $\lambda_j^i$ and the vectors $V$ and $G$.
 Note that the knowledge of $G$ is equivalent to the knowledge of the roll and pitch angles.
-The vectors $\mu_j^i$ are fully determined by visual and gyroscope measurements,
+The vectors $\mu_j^i$ are fully determined by visual and gyroscope measurements \footnote{The gyroscope measurements in the interval $[t_1, ~t_j]$ are needed to express the bearing at time $t_j$ in the frame at time $t_1$},
 and the vectors $S_j$ are determined by accelerometer and gyroscope measurements.
 
 \begin{figure}
@@ -231,16 +236,16 @@ and the vectors $S_j$ are determined by accelerometer and gyroscope measurements
   The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
 \end{figure}
 
-Equation \ref{eq:final1} holds for each three dimensions of all point features $i=1,...,N$ and each frame starting from the second one $j=2,...n_i$.
+Equation \ref{eq:final1} provides three scalar equations for each point feature $i=1,...,N$ and each frame starting from the second one $j=2,...n_i$.
 We therefore have a linear system consisting of $3(n_i-1)N$ equations in $6 + Nn_i$ unknowns.
-Indeed, note that when the first frame occurs, at $t_j = 0$,
+Indeed, note that when the first frame occurs, at $t_1 = 0$,
 Equation \ref{eq:final1} is always satisfied thus does not provide information.
 We can write our system using matrix formulation.
 Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
 
 In \cite{Martinelli2014}, the author proceeded to one more step before expressing the underlying linear system.
 For a given frame $j$, the equation of the first point feature $i=1$ is subtracted to all other point features equation $1<i<=N$ concerning frame $j$ (Equation 7).
-This additional step has the effect to corrupt all measurements with the first measurement,
+This additional step, very useful to detect system singularities, has the effect to corrupt all measurements with the first measurement,
 hence worsening the performance of the closed-form solution.
 In this paper, we do not take to this additional step.
 
@@ -299,9 +304,7 @@ We have the extra constraint $|G| = g$. We can express this constraint in matrix
 | \Pi X | ^2 = g^2
 \end{equation}
 
-With $\Pi \equiv [I_3, 0_3, ..., 0_3]$.
-
-We can therefore recover the initial velocity, the roll and pitch angles and the distances to the point features
+\noindent With $\Pi \equiv [I_3, 0_3, ..., 0_3]$. We can therefore recover the initial velocity, the roll and pitch angles and the distances to the point features
 by finding the vector $X$ which satisfies \ref{eq:mat1} and \ref{eq:mat2}.
 
 In the next sections, we will evaluate the performance of this method on real terrain data.
@@ -333,7 +336,7 @@ We measure our error on the absolute scale by computing the mean error over all 
 To identify the performance bottlenecks, we used IMU data obtained from terrain acquisitions
 while we simulated the visual measurements.
 This separation allowed us to know the ground truth for the distance to the point features
-and also better understand the weaknesses of our method.
+and also better understand the weaknesses of our method. Note that in the final experiment (see section \ref{SectionPerformance}) we use real visual measurements.
 
 We represent this setup in Fig. \ref{fig:testsetup}.
 
@@ -614,7 +617,7 @@ This methods allow us to reuse previously computed gyroscope bias since it is kn
 Selecting a reliable and safe value for the regularization parameter $\lambda$ is complicated.
 In this paper, we picked a value of $\lambda$ by experimentation.
 
-\section{VALIDATION}
+\section{VALIDATION}\label{SectionPerformance}
 
 We validate our method against a different dataset than the one we used in the previous sections to draw our conclusions.
 Specifically, it contains IMU and camera measurements along with ground truth.
@@ -660,10 +663,10 @@ Indeed, considering frames that are too close to each other does not add signifi
 
 \section{CONCLUSION}
 
-For a MAV, limiting the number of on-board sensor is important to save power consumption and processing power.
-A popular choice of sensors is a camera coupled with an IMU for their complementary.
-However, the methods for fusing visual and inertial measurements so far introduced are filter based, hence require an initialization.
-Providing a reliable state initialization is critical for these algorithms to work correctly.
+%For a MAV, limiting the number of on-board sensor is important to save power consumption and processing power.
+%A popular choice of sensors is a camera coupled with an IMU for their complementary.
+%However, the methods for fusing visual and inertial measurements so far introduced are filter based, hence require an initialization.
+%Providing a reliable state initialization is critical for these algorithms to work correctly.
 
 In this paper, we have studied the recent closed-form solution proposed by \cite{Martinelli2014} that performs visual-inertial sensor fusion without requiring an initialization.
 We implemented this method in order to test it with real terrain data.

@@ -672,8 +672,14 @@ Indeed, considering frames that are too close to each other does not add signifi
 \begin{figure}
    \centering
    \resizebox{0.7\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3opt-KF.tex}}
-   \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{Forster2014}. The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.}
+   \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{Forster2014}. The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.\label{fig:valid}}
 \end{figure}
+
+As seen in Fig. \ref{fig:valid}, the original closed-form solution and the optimized closed-form solution have similar performance.
+Indeed, for this dataset the gyroscope bias was estimated to $B = [0.0003, 0.009, 0.001]$, which is very low $(||B|| = 0.0091)$.
+
+Moreover, the performance is also similar to the one obtained with a well-initialized SVO.
+We remind the reader that unlike SVO, the closed-form solution does not require the knowledge of the absolute scale to be provided.
 
 
 %In a real applications, a proper online computation of the gyroscope bias can be reused.

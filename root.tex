@@ -72,14 +72,11 @@ State Initialization in Visual Inertial aided Navigation robust to noisy sensor 
 }
 
 
-\author{Jacques Kaiser, Agostino Martinelli and Davide Scaramuzza% <-this % stops a space
-%% \thanks{*This work was not supported by any organization}% <-this % stops a space
-%% \thanks{$^{1}$Albert Author is with Faculty of Electrical Engineering, Mathematics and Computer Science,
-%%         University of Twente, 7500 AE Enschede, The Netherlands
-%%         {\tt\small albert.author@papercept.net}}%
-%% \thanks{$^{2}$Bernard D. Researcheris with the Department of Electrical Engineering, Wright State University,
-%%         Dayton, OH 45435, USA
-%%         {\tt\small b.d.researcher@ieee.org}}%
+\author{Jacques Kaiser$^{1}$, Agostino Martinelli$^{1}$, Flavio Fontana$^{2}$ and Davide Scaramuzza$^{2}$% <-this % stops a space
+ \thanks{*This work was supported by the French National Research
+Agency ANR through the project VIMAD}% <-this % stops a space
+ \thanks{$^{1}$ INRIA Rhone Alpes, Grenoble, France. Email: jacko.kaiser@gmail.com, agostino.martinelli@ieee.org}%
+ \thanks{$^{2}$ Robotics and Perception Group, University of Zurich, Switzerland. Email: fforster,sdavideg@ifi.uzh.ch}%
 }
 
 
@@ -207,8 +204,6 @@ thus an alternative way to compute it is proposed.
 This method is therefore independent of external camera-IMU calibration, hence well suited for power-on-and-go systems.
 
 A more intuitive expression of the same closed-form solution is derived in \cite{Martinelli2014}.
-This formulation also provides the accelerometer bias, which can also be expressed as an unknown in the linear system.
-
 While being mathematically sound, this closed-form solution is not robust to noisy sensor data.
 For this reason, to the best of our knowledge, it has never been used in an actual application.
 In this paper we carry out an analysis to find out its limitations.
@@ -455,7 +450,7 @@ As seen on the Fig. \ref{fig:biasAccCF}, neither the estimation of the gravity, 
 In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
 However, the estimation of the accelerometer bias with this method is not robust since our system is only slightly affected by it.
 
-This is a counterintuitive results. Since our equations contain an integration of the acceleration, we also perform an integration of the accelerometer bias.
+This is a counterintuitive result. Since our equations contain an integration of the acceleration, we also perform an integration of the accelerometer bias.
 We would have expected the accelerometer bias to have a greater impact on the solutions yielded by the system.
 
 
@@ -511,7 +506,7 @@ In this section, we propose a different approach to estimate the gyroscope bias 
 Since our system of equations (\ref{eq:final1}) is overconstrained,
 inverting it is equivalent to finding the vector $X$ that minimizes the residual $||\Xi X - S||^2$.
 
-Because we can not express the gyroscope bias linearly,
+Since we cannot express the gyroscope bias linearly,
 we define the following cost function:
 
 \begin{equation}
@@ -526,7 +521,7 @@ With:
 \end{itemize}
 
 By minimizing this cost function, we recover the gyroscope bias $B$ and the unknown vector $X$ which compensated for the gyroscope bias $B$.
-We can initialize the optimization process with $B = 0_3$ since the bias is usually a rather small quantity.
+We can initialize the optimization process with $B = 0_3$ since the bias is usually a rather small quantity. Figure \ref{fig:gBiasEstimate} displays the three components of the bias estimated by this minimization.
 
 \begin{figure}
   \centering
@@ -609,7 +604,7 @@ As we can see in Fig. \ref{fig:cost}, the cost function admits a symmetry with r
 
 \subsection{Removing the symmetry in the cost function}
 
-The symmetry in the cost function is induced by the strong weight of the gravity in the equation.
+The symmetry in the cost function is induced by the strong weight of the gravity in the equation \ref{eq:final1}.
 In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when this direction $\vec{u}$ is collinear with the gravity throughout the motion.
 In the terrain data we had, the motion satisfies this constraint.
 Specifically, the gyroscope was strapped on the MAV such that the vector $[0,0,1]$ in the gyroscope frame was pointing upwards when the MAV was hovering.

@@ -172,13 +172,8 @@ It is required to take the inertial measurements into consideration to compute t
 
 %, therefore no assumptions can be made about its properties.
 
-
-A closed-form solution was provided in \cite{Engel2013} to determine the absolute scale.
-However, it needs an additional on-board sensor measuring a metric quantity, such as an altimeter or an air pressure sensor.
-It is therefore not applicable for our minimal configuration.
-
 A procedure to quickly re-initialize a MAV after a failure was presented in \cite{Faessler2015}.
-However, their method also requires an altimeter to initialize the absolute scale.
+However, their method requires an altimeter to initialize the absolute scale.
 
 A landmark of known dimension was used in \cite{Gemeiner2007} to recover the initial pose of the MAV.
 This method is therefore not suited to unknown environment.
@@ -371,8 +366,8 @@ We represent this setup in Fig. \ref{fig:testsetup}.
 \end{figure}
 
 In general, we use one frame every 0.1 seconds, even if the camera provides significantly more frames.
-Indeed, we can discard most of the frames provided by the camera.
-If two frames are too close to each other, then the additional equations do not bring much information to our system.
+If two consecutive frames are seperated by less than 0.1 seconds, their respective equations in our linear system will be similar, thus not bring much information.
+
 Reducing the number of considered frames reduces the size of the matrices, thus speeds up the computations.
 As an example, over a time interval of 3 seconds, we obtain $31$ distinct frames.
 When observing 7 features, it yields a system of $3\times 30\times 7 = 630$ equations and $6+7\times 31=223$ unknowns.
@@ -656,19 +651,19 @@ We compare the performance on the estimations of the gravity and the initial vel
 \begin{itemize}
 \item The original closed-form solution (Equation \ref{eq:mat1});
 \item Our modified closed-form solution (Equation \ref{eq:cost});
-\item The loosely-coupled visual-inertial algorithm in \cite{LynenIROS13} using pose estimates from the Semi-direct Visual Odometry (SVO) package \cite{Forster2014} (how to combine the sensor fusion in \cite{LynenIROS13} with SVO can be found in \cite{FaesslerICRA15}).
+\item The loosely-coupled visual-inertial algorithm (MSF) in \cite{LynenIROS13} using pose estimates from the Semi-direct Visual Odometry (SVO) package \cite{Forster2014} (how to combine the sensor fusion in \cite{LynenIROS13} with SVO can be found in \cite{FaesslerICRA15}).
 \end{itemize}
 The reason we included the SVO in the validation is for having a reference to state-of-the-art pose estimation method.
 However, this method requires to be initialized with the knowledge of the absolute scale, whereas our method works without initialization.
 
 We set the integration duration for the closed-form solution to 2.8 seconds.
 The camera provides 60fps, but we discard most of the frames and consider only one frame every 0.1 seconds.
-Indeed, considering frames that are too close to each other does not add significant information to our system.
+Indeed, considering frames that are separated by a time interval shorter than 0.1 seconds does not add significant information to our system.
 
 \begin{figure}
    \centering
    \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3opt-KF.tex}}
-   \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{Forster2014}. The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.\label{fig:valid}}
+   \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{FaesslerICRA15}. The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.\label{fig:valid}}
 \end{figure}
 
 As seen in Fig. \ref{fig:valid}, the original closed-form solution and the optimized closed-form solution have similar performance.
@@ -716,7 +711,7 @@ We then introduced a simple method that automatically estimates this bias.
 %% By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
 %% Compared to the original method, the new method is now robust to the gyroscope bias, and also provides the gyroscope bias.
 
-We validated this method by comparing its performance against the original method and the SVO described in \cite{Forster2014} which is the-state-of-the-art approach for pose estimation on MAV.
+We validated this method by comparing its performance against the original method and the SVO described in \cite{FaesslerICRA15} which is the-state-of-the-art approach for pose estimation on MAV.
 
 For future work, we see this optimized closed-form solution being implemented on a MAV to provide accurate state initialization.
 This would allow aggressive take-off maneuvers, such as hand throwing the MAV in the air, as already demonstrated in \cite{Faessler2015} with a range sensor.

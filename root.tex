@@ -95,26 +95,7 @@ Agency ANR through the project VIMAD}% <-this % stops a space
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-Abstract1\\
-State of the art approaches for visual-inertial sensor fusion use filter-based algorithms.
-  These methods are recursive by design and therefore require an initialization.
-  Due to the nonlinearity of these systems, a poor initialization can have a dramatic impact on the performance of the estimations.
-  Recently, this sensor fusion problem has also been addressed by using optimization-based approaches. These methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearize past states. On the other hand, also in this case, having an automatic method able to quickly initialize the state before performing the optimization can be an advantage since it makes the optimization process more robust against the presence of local minima.
-This paper introduces a new method to determine in closed-form a state initialization. Specifically, the proposed method determines the velocity and the attitude (roll and pitch angles) of a monocular camera by only using inertial
-measurements and bearing measurements of several point features delivered by the camera in a short time interval. Additionally, also the distances of the observed features are determined. With respect to the method introduced in \cite{Martinelli2014}, which determines in closed-form the same physical quantities, the one here proposed is robust against biased gyroscope measurements.
-The paper starts by analyzing the limitations of the method introduced in \cite{Martinelli2014}. This analysis, performed by making use of both real and synthetic data, clearly shows that the gyroscope bias significantly affects the performance of this method. The paper introduces a new method able to automatically estimate this bias. Compared to the original method, the new method is robust to this bias and simultaneously calibrates the gyroscope. We successfully evaluate the performance of the proposed method on both simulated and real data.
-
-
-
-Abstract2\\
-  State of the art approaches for visual-inertial sensor fusion use filter-based algorithms.
-  These methods are recursive by design and therefore require an initialization.
-  Due to the nonlinearity of these systems, a poor initialization can have a dramatic impact on the performance of the estimations.
-  Recently, a closed-form solution providing such an initialization has been derived.
-  In this paper, we study the impact of noisy sensors on the performance of this solution.
-  Specifically, the gyroscope bias is shown to be a major performance bottleneck.
-  We then propose a method to automatically estimate this bias.
-  Compared to the original method, the new method is now robust to this bias and automatically calibrates the gyroscope. We successfully evaluate the performance of the proposed approach on both simulated and real data.
+State of the art approaches for visual-inertial sensor fusion use filter-based or optimization-based algorithms. Due to the nonlinearity of the system, a poor initialization can have a dramatic impact on the performance of these estimation methods. Recently, a closed-form solution providing such an initialization was derived in \cite{Martinelli2014}. That solution determines in a short time interval (around 2s) the velocity (angular and linear) of a monocular camera in metric units by only using inertial measurements and image features. In this paper, we study the impact of noisy sensors on the performance of this closed-form solution and show that the gyroscope bias significantly affects the performance of the method. Therefore, we introduce a new method to automatically estimate this bias in closed form. Compared to the original method, the new approach is now robust to this bias and automatically calibrates the gyroscope. The performance of the proposed approach is successfully demonstrated on both simulated and real data from a quadrotor MAV.
 \end{abstract}
 
 

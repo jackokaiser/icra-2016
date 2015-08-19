@@ -348,10 +348,26 @@ We represent this setup in Fig. \ref{fig:testsetup}.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\columnwidth]{images/setupTestDroneError.png}
-  \caption{Test setup for identifying the performance limitations.
+  \begin{subfigure}[t]{\columnwidth}
+    \includegraphics[width=\textwidth]{images/setupTestDroneError.png}
+    \caption{Sketch of the experimental setup}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.489\columnwidth}
+  \includegraphics[width=\textwidth]{images/quadrotor_closeup.jpg}
+  \caption{A closeup of our quadrotor: 1) down-looking camera,
+2) Odroid U3 quad-core computer, 3) PIXHAWK autopilot}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.489\columnwidth}
+  \includegraphics[width=\textwidth]{images/realExperiment.png}
+  \caption{Our flying arena equipped with an OptiTrack motion-capture system (for ground-truth recording)}
+  \end{subfigure}
+  %% \begin{subfigure}[t]{0.489\columnwidth}
+  %% \includegraphics{images/virtualExperiment.png}
+  %% \caption{}
+  %% \end{subfigure}
+  \caption{Experimental setup for identifying the limitations of the performance.
     The drone is equipped with an IMU, and the visual measurements are simulated.
-    It performs a motion while being tracked by a Vicon system.\label{fig:testsetup}}
+    \label{fig:testsetup}}
 \end{figure}
 
 In general, we use one frame every 0.1 seconds, even if the camera provides significantly more frames.
@@ -700,7 +716,7 @@ We then introduced a simple method that automatically estimates this bias.
 %% By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
 %% Compared to the original method, the new method is now robust to the gyroscope bias, and also provides the gyroscope bias.
 
-We validated this method by comparing its performance against the original method and the SVO described in \cite{Majdik2015} which is the-state-of-the-art approach for pose estimation on MAV.
+We validated this method by comparing its performance against the original method and the SVO described in \cite{Forster2014} which is the-state-of-the-art approach for pose estimation on MAV.
 
 For future work, we see this optimized closed-form solution being implemented on a MAV to provide accurate state initialization.
 This would allow aggressive take-off maneuvers, such as hand throwing the MAV in the air, as already demonstrated in \cite{Faessler2015} with a range sensor.

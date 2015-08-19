@@ -640,7 +640,7 @@ We compare the performance on the estimations of the gravity and the initial vel
 \begin{itemize}
 \item The original closed-form solution (Equation \ref{eq:mat1});
 \item Our modified closed-form solution (Equation \ref{eq:cost});
-\item Fast Semi-Direct Monocular Visual Odometry (SVO) (described in \cite{Forster2014}).
+\item The loosely-coupled visual-inertial algorithm in \cite{LynenIROS13} using pose estimates from the Semi-direct Visual Odometry (SVO) package \cite{Forster2014} (how to combine the sensor fusion in \cite{LynenIROS13} with SVO can be found in \cite{FaesslerICRA15}).
 \end{itemize}
 The reason we included the SVO in the validation is for having a reference to state-of-the-art pose estimation method.
 However, this method requires to be initialized with the knowledge of the absolute scale, whereas our method works without initialization.

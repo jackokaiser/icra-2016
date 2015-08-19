@@ -171,6 +171,10 @@ It is required to take the inertial measurements into consideration to compute t
 %% However, their method is purely numerical and we can not analytically derive its properties.
 
 %, therefore no assumptions can be made about its properties.
+A closed-form method to estimate the scale of a monocular SLAM system from additional
+metric sensors is provided in \cite{Engel2014}.
+However, the metric sensor must measure the absolute scale directly, such as an altimeter or a GPS.
+This method is therefore not applicable for purely visual-inertial applications.
 
 A procedure to quickly re-initialize a MAV after a failure was presented in \cite{Faessler2015}.
 However, their method requires an altimeter to initialize the absolute scale.
@@ -578,7 +582,7 @@ In other words, given that the integration duration is long enough, this method 
 %% This method can therefore fully compensate for high values of the gyroscope bias.
 %% Moreover, the values on which these evaluations agree are equals to the ones for the curve that has a gyroscope bias set to $0_3$.
 
-However, for very short time of integration ($<1.7$ seconds), the proposed method can fail by providing a gyroscope bias much larger than the true.
+However, for very short time of integration ($<1.7$ seconds), the proposed method can fail by providing a gyroscope bias much larger than the correct one.
 To understand this misestimation, in Fig. \ref{fig:cost} we plot the residual with respect to the bias, which is the cost function we are minimizing.
 We highlight a misestimation of the gyroscope bias by setting the duration of integration to 2 seconds while observing 7 features.
 We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.

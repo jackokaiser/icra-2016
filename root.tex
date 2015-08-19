@@ -248,7 +248,7 @@ and the vectors $S_j$ are determined by accelerometer and gyroscope measurements
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.90\columnwidth]{images/closedFormExplained}
+  \includegraphics[width=\columnwidth]{images/closedFormExplained}
   \caption{Visual representation of Equation \ref{eq:final1}.
   The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
 \end{figure}
@@ -392,13 +392,13 @@ In Fig. \ref{fig:original}, we display the performance of the  original closed-f
 
 \begin{figure}
   \centering
-    \resizebox{0.6\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}
+    \resizebox{\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}
     \caption{Motion performed by the drone in 5 seconds.}
 \end{figure}
 
 \begin{figure}
   \centering
-    \resizebox{0.7\columnwidth}{!}{\input{graph/originalCF}}
+    \resizebox{\columnwidth}{!}{\input{graph/originalCF}}
     \caption{Original closed-form solution estimations with and without gravity knowledge refinement. We are observing 12 features  over a variable duration of integration.\label{fig:original}}
 \end{figure}
 
@@ -525,13 +525,13 @@ We can initialize the optimization process with $B = 0_3$ since the bias is usua
 
 \begin{figure}
   \centering
-  \resizebox{0.7\columnwidth}{!}{\input{graph/biasEstimation12Ft}}
+  \resizebox{\columnwidth}{!}{\input{graph/biasEstimation12Ft}}
   \caption{Gyroscope bias estimation from nonlinear minimization of the residual. We are observing 12 features  over a variable duration of integration. \label{fig:gBiasEstimate}}
 \end{figure}
 
 \begin{figure}
    \centering
-   \resizebox{0.7\columnwidth}{!}{\input{graph/CF3vsOpt12Ft}}
+   \resizebox{\columnwidth}{!}{\input{graph/CF3vsOpt12Ft}}
                 \caption{Estimation error of the original closed-form solution against the optimized closed-form solution.  We are observing 12 features  over a variable duration of integration. \label{fig:optEstimate}}
 \end{figure}
 
@@ -587,11 +587,11 @@ We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
 
 \begin{figure}
         \centering
-        \begin{subfigure}[b]{0.47\columnwidth}
+        \begin{subfigure}[b]{0.489\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/costXZ}}
                 \caption{Residual with respect to $B_x$ and $B_z$}
         \end{subfigure}~
-        \begin{subfigure}[b]{0.47\columnwidth}
+        \begin{subfigure}[b]{0.489\columnwidth}
                 \resizebox{\columnwidth}{!}{\input{graph/costYZ}}
                 \caption{Residual with respect to $B_y$ and $B_z$}
         \end{subfigure}
@@ -664,7 +664,7 @@ Indeed, considering frames that are too close to each other does not add signifi
 
 \begin{figure}
    \centering
-   \resizebox{0.7\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3opt-KF.tex}}
+   \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3opt-KF.tex}}
    \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{Forster2014}. The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.\label{fig:valid}}
 \end{figure}
 
@@ -724,5 +724,3 @@ The drone could therefore perform any motion right after the throw instead of ha
 \bibliography{library}
 
 \end{document}
-Status API Training Shop Blog About Help
-Â© 2015 GitHub, Inc. Terms Privacy Security Contact

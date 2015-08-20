@@ -97,9 +97,9 @@ Agency ANR through the project VIMAD}% <-this % stops a space
 \begin{abstract}
 State of the art approaches for visual-inertial sensor fusion use filter-based or optimization-based algorithms. Due to the nonlinearity of the system, a poor initialization can have a dramatic impact on the performance of these estimation methods.
 Recently, a closed-form solution providing such an initialization was derived in \cite{Martinelli2014}.
-That solution determines in a short time interval (around 2s) the linear velocity and orientation of a monocular camera in metric units by only using inertial measurements and image features.
-In this paper, we study the impact of noisy sensors on the performance of this closed-form solution and show that the gyroscope bias significantly affects the performance of the method.
-Therefore, we introduce a new method to automatically estimate this bias in closed form.
+That solution determines the velocity (angular and linear) of a monocular camera in metric units by only using inertial measurements and image features acquired in a short time interval.
+In this paper, we study the impact of noisy sensors on the performance of this closed-form solution. We show that the gyroscope bias, not accounted for in \cite{Martinelli2014}, significantly affects the performance of the method.
+Therefore, we introduce a new method to automatically estimate this bias.
 Compared to the original method, the new approach now models the gyroscope bias and is robust to it.
 The performance of the proposed approach is successfully demonstrated on both simulated and real data from a quadrotor MAV.
 \end{abstract}

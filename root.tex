@@ -152,14 +152,13 @@ Compared to the original method, the new method is now robust to the gyroscope b
 The problem of fusing vision and inertial data has been extensively investigated in the past.
 However, most of the proposed methods require a state initialization.
 Because of the system nonlinearities, lack of precise initialization can irreparably damage the entire estimation process.
-In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been addressed by using optimization-based approaches \cite{Leute2014}\cite{Forster2015}. These methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearize past states. On the other hand, the optimization process can be affected by the presence of local minima.
-
+In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been addressed by using optimization-based approaches \cite{Leute2014}\cite{Forster2015}. These methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
 We are therefore interested in a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
 
 In computer vision, several deterministic solutions have been introduced.
 These techniques, known as {\it Structure from Motion}, can recover the relative rotation and translation up to scale between two camera poses \cite{Longuet-Higgins1981}\cite{Hartley1997}\cite{Nister2003}\cite{Hartley2004}\cite{Li2006}.
-Such methods are currently used in state-of-the-art visual navigation methods on MAV in order to initialize maps \cite{Weiss2012}\cite{Forster2014}.
-However, the knowledge of the absolute scale and at least the absolute roll and pitch angles are essential for many applications that range from autonomous navigation in GPS-denied environments, to 3D reconstruction, and augmented reality.
+Such methods are currently used in state-of-the-art visual navigation methods on MAVs in order to initialize maps \cite{Weiss2012}\cite{Forster2014}.
+However, the knowledge of the absolute scale and, at least, the absolute roll and pitch angles is essential for many applications ranging from autonomous navigation in GPS-denied environments to 3D reconstruction and augmented reality.
 It is required to take the inertial measurements into consideration to compute these values deterministically.
 
 %% Some visual inertial sensor fusion that works without initialization have been introduced.
@@ -170,32 +169,28 @@ It is required to take the inertial measurements into consideration to compute t
 %% However, their method is purely numerical and we can not analytically derive its properties.
 
 %, therefore no assumptions can be made about its properties.
-A closed-form method to estimate the scale of a monocular SLAM system from additional
-metric sensors is provided in \cite{Engel2014}.
-However, the metric sensor must measure the absolute scale directly, such as an altimeter or a GPS.
-This method is therefore not applicable for purely visual-inertial applications.
 
 A procedure to quickly re-initialize a MAV after a failure was presented in \cite{Faessler2015}.
-However, their method requires an altimeter to initialize the absolute scale.
+However, this method requires an altimeter to initialize the scale.
 
-A landmark of known dimension was used in \cite{Gemeiner2007} to recover the initial pose of the MAV.
-This method is therefore not suited to unknown environment.
+A landmark of known size was used in \cite{Gemeiner2007} to recover the initial pose of the MAV.
+This method is therefore not suitable for unknown environment.
 
 Recently, a closed-form solution has been introduced in \cite{Martinelli2012}.
-From integrating inertial and visual measurements over a short time-interval, this solution provides the absolute scale, roll and pitch angles, initial velocity and distance to features.
+From integrating inertial and visual measurements over a short time-interval, this solution provides the absolute scale, roll and pitch angles, initial velocity, and distance to features.
 Specifically, all the physical quantities are obtained by simply inverting a linear system.
 The solution of the linear system can be refined with a quadratic equation assuming the knowledge of the gravity magnitude.
 This closed-form was improved in \cite{Li2013} to work with unknown camera-IMU calibration.
-In this case, the problem cannot be solved by simply inverting a linear system. A suitable method able to also determine the six parameters that characterize the camera-IMU transformation was proposed.
-This method is therefore independent of external camera-IMU calibration, hence well suited for power-on-and-go systems.
+Since the problem cannot be solved by simply inverting a linear system, a method to determine the six parameters that characterize the camera-IMU transformation was proposed.
+This method is therefore independent of external camera-IMU calibration, hence suitable for power-on-and-go systems.
 
-A more intuitive expression of the same closed-form solution was derived in \cite{Martinelli2014}.
+A more intuitive expression of this closed-form solution was derived in \cite{Martinelli2014}.
 While being mathematically sound, this closed-form solution is not robust to noisy sensor data.
 For this reason, to the best of our knowledge, it has never been used in an actual application.
-In this paper we perform an analysis to find out its limitations. We start by reminding the reader the basic equations that characterize this solution (section \ref{SectionCFS}).
+In this paper, we perform an analysis to find out its limitations. We start by reminding the reader the basic equations that characterize this solution (section \ref{SectionCFS}).
 In section \ref{SectionBottlenecks}, we show that this solution is resilient to the accelerometer bias but strongly affected by the gyroscope bias.
 We then introduce a simple method that automatically estimates the gyroscope bias (section \ref{SectionCalibration}).
-By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
+By adding this new method for the bias estimation to the original method, we obtain results which are equivalent to the ones in absence of bias.
 Compared to the original method, the new method is now robust to the gyroscope bias and also calibrates the gyroscope.
 We validate our new method against real world data to prove its robustness against noisy sensors
 in section \ref{SectionPerformance}. Finally, we provide our conclusion in section \ref{SectionConclusion}.
@@ -246,10 +241,10 @@ We can write our system using matrix formulation.
 Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
 
 In \cite{Martinelli2014}, the author proceeded to one more step before expressing the underlying linear system.
-For a given frame $j$, the equation of the first point feature $i=1$ is subtracted from all other point features equations, $1<i<=N$ concerning frame $j$ (Equation 7).
+For a given frame $j$, the equation of the first point feature $i=1$ is subtracted from all other point feature equations $1<i<=N$ (Equation 7).
 This additional step, very useful to detect system singularities, has the effect to corrupt all measurements with the first measurement,
 hence worsening the performance of the closed-form solution. Therefore,
-in this paper we do not do this.
+in this paper we discard this additional step.
 
 The linear system in Equation \ref{eq:final1} can be written in the following compact format:
 
@@ -295,7 +290,7 @@ X \equiv [ G^T, V^T, \lambda_1^1, ..., \lambda_1^N, ..., \lambda_{n_i}^1, ..., \
 
 \noindent where $T_j \equiv - \frac{t^2_j}{2} I_3$, $S_j \equiv -t_j I_3$ and $I_3$ is the identity $3\times 3$ matrix; $0_3$ is the $3\times 1$ zero matrix.
 Note that matrix $\Xi$ and the vector $S$ are slightly different from the one proposed in \cite{Martinelli2014}.
-This is due to the additional step we did not take for numerical stability reasons (see \cite{Martinelli2014} section 3 for all the details).
+This is due to the additional step that, as we explained in the previous paragraph, we discarded for numerical stability reasons (see \cite{Martinelli2014} section 3 for further details).
 
 The sensor information is completely contained in the above linear system. Additionally, in \cite{Martinelli2014}, the author added a quadratic equation assuming the gravitational acceleration is a priori known.
 Let us denote the gravitational magnitude by $g$.
@@ -307,7 +302,7 @@ We have the extra constraint $|G| = g$. We can express this constraint in matrix
 \end{equation}
 
 \noindent with $\Pi \equiv [I_3, 0_3, ..., 0_3]$. We can therefore recover the initial velocity, the roll, and pitch angles and the distances to the point features
-by finding the vector $X$ that satisfies \ref{eq:mat1} and \ref{eq:mat2}.
+by finding the vector $X$ that satisfies (\ref{eq:mat1}) and (\ref{eq:mat2}).
 
 In the next sections, we will evaluate the performance of this method on real world data.
 This will allow us to identify its weaknesses and bring modifications to overcome them.

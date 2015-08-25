@@ -344,13 +344,15 @@ We measure our error on the absolute scale by computing the mean error over all 
     \includegraphics[width=\textwidth]{images/setupTestDroneError.png}
     \caption{Sketch of the experimental setup}
   \end{subfigure}
+  \vspace{0.5cm}
+
   \begin{subfigure}[t]{0.489\columnwidth}
   \includegraphics[width=\textwidth]{images/quadrotor_closeup.jpg}
   \caption{A closeup of our quadrotor: 1) down-looking camera,
 2) Odroid U3 quad-core computer, 3) PIXHAWK autopilot}
-  \end{subfigure}
+  \end{subfigure}~
   \begin{subfigure}[t]{0.489\columnwidth}
-  \includegraphics[width=\textwidth]{images/realExperiment.png}
+  \includegraphics[width=\textwidth, trim={0 2cm 0 4cm}, clip]{images/realExperiment.png}
   \caption{Our flying arena equipped with an OptiTrack motion-capture system (for ground-truth recording)}
   \end{subfigure}
   %% \begin{subfigure}[t]{0.489\columnwidth}
@@ -380,8 +382,8 @@ Our goal is to identify its performance limitations and introduce modifications 
 
 \subsection{Original closed-form solution performance}
 
-The original closed-form solution described in Equation \ref{eq:mat1} will be used as a basis for our work. In the sequel, this solution will be denoted by $CF$.
-Moreover, we can also use the knowledge of the gravity magnitude in order to refine our results with Equation \ref{eq:mat2}.
+The original closed-form solution described in Equation (\ref{eq:mat1}) will be used as a basis for our work. In the following, this closed-form solution will be denoted by $CF$.
+Moreover, we can also use the knowledge of the gravity magnitude to refine our results (Equation (\ref{eq:mat2})).
 In this case, we are minimizing a linear objective function with a quadratic constraint.
 In Fig. \ref{fig:original}, we display the performance of the  original closed-form solution in estimating speed, gravity in the local frame and distances to the features with and without this additional constraint.
 

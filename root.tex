@@ -320,24 +320,23 @@ This will allow us to identify its weaknesses and bring modifications to overcom
 
 
 
-\section{PERFORMANCE LIMITATIONS}\label{SectionBottlenecks}
+\section{LIMITATIONS OF \cite{Martinelli2014}}\label{SectionBottlenecks}
 
-The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014}. This is obtained by using both real and synthetic data. In particular, we will add to the real measurements delivered by the inertial sensors (both the accelerometers and the gyroscopes) an artificial bias. This allows us to evaluate the impact of the bias on the performance.
+The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014}.
+This is obtained by \textbf{combining both real and synthetic data}.
+In particular, we will add an artificial bias to the real measurements delivered by the inertial sensors (both the accelerometers and the gyroscopes).
+This will allow us to evaluate the impact of the bias on the performance.
 
 \subsection{Experimental setup}
 
-The MAV performs a motion while being tracked with an optical motion capture system.
-We can therefore compare our estimations with the ground truth.
+For our evaluation, we consider a \textbf{simulated} camera and a \textbf{real} IMU attached to a MAV flying in a room equipped with a \textbf{motion-capture system}.
+This allows us to compare the estimations with the ground truth.
+
+
+We represent this setup in Fig. \ref{fig:testsetup}.
 We define the relative error as the euclidean distance between the estimation and the ground truth,
 normalized by the ground truth.
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
-
-To identify the performance limitations, we used IMU data obtained from terrain acquisitions
-while we simulated the visual measurements.
-This separation allowed us to know the ground truth for the distance to the point features
-and also better understand the weaknesses of our method. %Note that in the final experiment (see section \ref{SectionPerformance}) we use real visual measurements.
-
-We represent this setup in Fig. \ref{fig:testsetup}.
 
 \begin{figure}
   \centering
@@ -363,16 +362,17 @@ We represent this setup in Fig. \ref{fig:testsetup}.
     \label{fig:testsetup}}
 \end{figure}
 
-In general, we use one frame every 0.1 seconds, even if the camera provides significantly more frames.
-If two consecutive frames are seperated by less than 0.1 seconds, their respective equations in our linear system will be similar, thus not bring much information.
+We set the frame rate of the simulated camera at 10Hz.
+If the frame rate is too high (above 30Hz), the interval of time between two frames becomes too small for the integrations we perform in \ref{eq:final1}, thus yielding numerical instability.
+When using a real high-frequency camera, we can force the frame rate to 10Hz by discarding most of the provided frames.
 
-Reducing the number of considered frames reduces the size of the matrices, thus speeds up the computations.
+Reducing the number of considered frames also reduces the size of the matrices, and thus, speeds up the computations.
 As an example, over a time interval of 3 seconds, we obtain $31$ distinct frames.
-When observing 7 features, it yields a system of $3\times 30\times 7 = 630$ equations and $6+7\times 31=223$ unknowns.
+When observing 7 features, solving the closed-form solution is equivalent to inverting a linear system of $3\times 30\times 7 = 630$ equations and $6+7\times 31=223$ unknowns (see section \ref{SectionCFS}).
 
 The method we use to solve the overconstrained linear system $\Xi X = S$ is a Singular Value Decomposition (SVD) since it yields numerically robust solutions.
 
-In the next section, we will present the results obtained with the original closed-form solution on terrain IMU data.
+In the next section, we will present the results obtained with the original closed-form solution on real IMU data, with simulated camera measurements.
 Our goal is to identify its performance limitations and introduce modifications to overcome them.
 
 %% The case of a biased gyroscope is addressed in chapter \ref{ch:gyro}.

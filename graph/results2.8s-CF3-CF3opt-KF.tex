@@ -127,9 +127,9 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 19.8	0.0704067774626823\\
 20	0.0853410307531289\\
 };
-\addlegendentry{Original CF};
+\addlegendentry{Speed (Original CF)};
 
-\addplot [color=red,dashed, forget plot]
+\addplot [color=red,dashed]
   table[row sep=crcr]{%
 0	0.0224522316325104\\
 0.2	0.0238793513422661\\
@@ -233,6 +233,7 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 19.8	0.0128793465807755\\
 20	0.0117006682135523\\
 };
+\addlegendentry{Gravity (Original CF)};
 
 \addplot [color=blue,solid]
   table[row sep=crcr]{%
@@ -338,9 +339,9 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 19.8	0.0731645368028471\\
 20	0.0979004456052727\\
 };
-\addlegendentry{Optimized CF};
+\addlegendentry{Speed (Optimized CF)};
 
-\addplot [color=blue,dashed,forget plot]
+\addplot [color=blue,dashed]
   table[row sep=crcr]{%
 0	0.0153517220326564\\
 0.2	0.0123829464948137\\
@@ -444,6 +445,8 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 19.8	0.00529619279578721\\
 20	0.00984277151512819\\
 };
+\addlegendentry{Gravity (Optimized CF)};
+
 \addplot [color=mycolor1,solid]
   table[row sep=crcr]{%
 0	0.137956626108404\\
@@ -548,9 +551,9 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 19.8	0.12526629903758\\
 20	0.122127735738005\\
 };
-\addlegendentry{SVO + MSF};
+\addlegendentry{Speed (SVO + MSF)};
 
-\addplot [color=mycolor1,dashed,forget plot]
+\addplot [color=mycolor1,dashed]
   table[row sep=crcr]{%
 0	0.0013962050028321\\
 0.2	0.00155073683517682\\
@@ -654,5 +657,7 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 19.8	0.00160310817046663\\
 20	0.00357199070880664\\
 };
+\addlegendentry{Gravity (SVO + MSF)};
+
 \end{axis}
 \end{tikzpicture}%

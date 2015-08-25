@@ -25,6 +25,18 @@ ylabel={Relative Error},
 %ylabel style={rotate=-90},
 legend style={legend cell align=left,align=left,draw=white!15!black}
 ]
+\addlegendimage{line legend,blue} % or mark=none?
+\addlegendentry{Lambda (Original CF)}
+\addlegendimage{line legend,red}
+\addlegendentry{Speed (Original CF)}
+\addlegendimage{line legend,color=mycolor1}
+\addlegendentry{Gravity (Original CF)}
+\addlegendimage{line legend,blue, dashed} % or mark=none?
+\addlegendentry{Lambda (Optimized CF)}
+\addlegendimage{line legend,red, dashed}
+\addlegendentry{Speed (Optimized CF)}
+\addlegendimage{line legend,color=mycolor1, dashed}
+\addlegendentry{Gravity (Optimized CF)}
 
 \addplot [color=blue,solid]
   table[row sep=crcr]{%
@@ -74,7 +86,6 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 4.9	0.168709570135257\\
 5	0.164582550274127\\
 };
-\addlegendentry{Lambda};
 
 \addplot [color=red,solid]
   table[row sep=crcr]{%
@@ -119,7 +130,6 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 4.9	0.283919927648645\\
 5	0.276533357419024\\
 };
-\addlegendentry{Speed};
 
 \addplot [color=mycolor1,solid]
   table[row sep=crcr]{%
@@ -170,7 +180,6 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 4.9	0.0345066752245761\\
 5	0.0341432117728526\\
 };
-\addlegendentry{Gravity};
 
 \addplot [color=blue,dashed,forget plot]
   table[row sep=crcr]{%
@@ -312,10 +321,6 @@ nan	nan\\
 4.9	0.0330773684448924\\
 5	0.0334805870613155\\
 };
-\addlegendimage{line legend}
-\addlegendentry{Original CF}
-\addlegendimage{dashed}
-\addlegendentry{Optimized CF}
 
 \end{axis}
 \end{tikzpicture}%

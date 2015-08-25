@@ -25,15 +25,17 @@ ytick={0.1,0.2,...,1,1.1},
 legend style={legend cell align=left,align=left,draw=white!15!black}
 ]
 \addlegendimage{line legend,blue} % or mark=none?
-\addlegendentry{Lambda}
+\addlegendentry{Lambda (Original CF)}
 \addlegendimage{line legend,red}
-\addlegendentry{Speed}
+\addlegendentry{Speed (Original CF)}
 \addlegendimage{line legend,color=mycolor1}
-\addlegendentry{Gravity}
-\addlegendimage{line legend}
-\addlegendentry{Original CF}
-\addlegendimage{dashed}
-\addlegendentry{Refined CF}
+\addlegendentry{Gravity (Original CF)}
+\addlegendimage{line legend,blue, dashed} % or mark=none?
+\addlegendentry{Lambda (Refined CF)}
+\addlegendimage{line legend,red, dashed}
+\addlegendentry{Speed (Refined CF)}
+\addlegendimage{line legend,color=mycolor1, dashed}
+\addlegendentry{Gravity (Refined CF)}
 \addplot [color=blue,solid]
   table[row sep=crcr]{%
 0.6	1.00771150428191\\

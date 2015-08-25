@@ -228,7 +228,7 @@ and the vectors $S_j$ are determined by accelerometer and gyroscope measurements
 
 \begin{figure}
   \centering
-  \includegraphics[width=\columnwidth]{images/closedFormExplained}
+  \includegraphics[width=0.7\columnwidth, trim={0 2cm 0 0}, clip]{images/closedFormExplained}
   \caption{Visual representation of Equation \ref{eq:final1}.
   The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
 \end{figure}
@@ -390,14 +390,14 @@ In Fig. \ref{fig:original}, we display the performance of the  original closed-f
 
 \begin{figure}
   \centering
-    \resizebox{\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}
+    \resizebox{0.5\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}
     \caption{Motion performed by the drone in 5 seconds.}
 \end{figure}
 
 \begin{figure}
   \centering
-    \resizebox{\columnwidth}{!}{\input{graph/originalCF}}
-    \caption{Original closed-form solution estimations with and without gravity knowledge refinement. We are observing 12 features  over a variable duration of integration.\label{fig:original}}
+    \resizebox{0.7\columnwidth}{!}{\input{graph/originalCF}}
+    \caption{Original closed-form solution estimations with and without using the knowledge of the gravity (\ref{eq:mat2}). We are observing 12 features  over a variable duration of integration.\label{fig:original}}
 \end{figure}
 
 
@@ -407,11 +407,11 @@ Therefore, it requires a significant difference in the measurements over time to
 Also note that the gravity is robustly estimated (around 5\% error), whereas the speed and the distance to the features is more erroneous (above 10\% error).
 
 Since the gravity is well estimated with the original closed-form, it comes without surprise that constraining its magnitude does not improve the performance much.
-That is why the curves representing the performance with and without the gravity refinement are so close.
+That is why the curves representing the performance with and without using the gravity refinement (\ref{eq:mat2}) are so close.
 %% The distance to the features are slightly improved (around 1\% error decrease) at the expense of worsening the estimation of the speed (around 20\% error increase).
 
 %% In the following sections, we will introduce modifications to improve over these results.
-In the following sections, we will study the impact of biased inertial measurements on the performance of the closed-form solution without considering the gravity refinement.
+In the following sections, we will study the impact of biased inertial measurements on the performance of the closed-form solution without using the gravity refinement.
 
 \subsection{Impact of accelerometer bias on the performance}
 In order to visualize the impact of the accelerometer bias on the performance,
@@ -523,13 +523,13 @@ We can initialize the optimization process with $B = 0_3$ since the bias is usua
 
 \begin{figure}
   \centering
-  \resizebox{\columnwidth}{!}{\input{graph/biasEstimation12Ft}}
+  \resizebox{0.7\columnwidth}{!}{\input{graph/biasEstimation12Ft}}
   \caption{Gyroscope bias estimation from nonlinear minimization of the residual. We are observing 12 features  over a variable duration of integration. \label{fig:gBiasEstimate}}
 \end{figure}
 
 \begin{figure}
    \centering
-   \resizebox{\columnwidth}{!}{\input{graph/CF3vsOpt12Ft}}
+   \resizebox{0.7\columnwidth}{!}{\input{graph/CF3vsOpt12Ft}}
                 \caption{Estimation error of the original closed-form solution against the optimized closed-form solution.  We are observing 12 features  over a variable duration of integration. \label{fig:optEstimate}}
 \end{figure}
 
@@ -638,8 +638,7 @@ In this paper, we picked a value of $\lambda$ by experimentation.
 
 \section{EXPERIMENTS ON REAL DATA}\label{SectionPerformance}
 
-We validate our method against a different dataset than the one we used in the previous sections to draw our conclusions.
-Specifically, it contains IMU and camera measurements along with ground truth.
+We validate our method against a new dataset containing IMU and camera measurements along with the ground truth.
 Therefore, we are now only relying on fully real world data.
 However, since we are no longer simulating the point features, we do not have the ground truth for the distance to the point features anymore.
 We can therefore only compare the performance of the evaluation of the speed and the gravity.

@@ -35,12 +35,10 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
-
 \usepackage{pgfplots}
 %% \usepgfplotslibrary{external}
 %% \tikzexternalize
 
-% argument #1: any options
 \newenvironment{customlegend}[1][]{%
     \begingroup
     % inits/clears the lists (which might be populated from previous
@@ -152,7 +150,7 @@ Compared to the original method, the new method is now robust to the gyroscope b
 The problem of fusing vision and inertial data has been extensively investigated in the past.
 However, most of the proposed methods require a state initialization.
 Because of the system nonlinearities, lack of precise initialization can irreparably damage the entire estimation process.
-In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been addressed by using optimization-based approaches \cite{Leute2014}\cite{Forster2015}. These methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
+In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been addressed by using optimization-based approaches \cite{Leute2014}\cite{Forster2015}\cite{mourikis2008dual}\cite{lupton2012visual}\cite{huang2011observability}\cite{mourikis2007multi}\cite{leutenegger2013keyframe}. These methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
 We are therefore interested in a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
 
 In computer vision, several deterministic solutions have been introduced.
@@ -284,7 +282,7 @@ X &\equiv [ G^T, V^T, \lambda_1^1, ..., \lambda_1^N, ..., \lambda_{n_i}^1, ..., 
             ... & ... & ... & ... & ... & ... & ... & ... & ... & ... & ... \\
             T_{n_i} & S_{n_i} & 0_3 & 0_3 & \mu_1^N & 0_3 & 0_3 & 0_3 & 0_3 & 0_3 & -\mu_{n_i}^N
           \end{array}
-          \right],
+          \right]
       }
 \end{multline*}
 }
@@ -328,7 +326,7 @@ This is obtained by \textbf{combining both real and synthetic data}.
 In particular, we will add an artificial bias to the real measurements delivered by the inertial sensors (both the accelerometers and the gyroscopes).
 This will allow us to evaluate the impact of the bias on the performance.
 
-\subsection{Experimental setup}
+\subsection{Experimental setup}\label{SubsectionSetup}
 
 For our evaluation, we consider a \textbf{simulated} camera and a \textbf{real} IMU attached to a MAV flying in a room equipped with a \textbf{motion-capture system}.
 This allows us to compare the estimations with the ground truth.
@@ -364,6 +362,14 @@ We measure our error on the absolute scale by computing the mean error over all 
     The drone is equipped with an IMU, and the visual measurements are simulated.
     \label{fig:testsetup}}
 \end{figure}
+
+We use the same MAV as described in \cite{FaesslerICRA15}, section 3.1.
+Specifically, our quadrotor relies on the frame of the Parrot AR.Drone 2.01 including their motors, motor controllers, gears, and propellers.
+It is equipped by a PX4FMU autopilot and a PX4IOAR adapter board developed in the PIXHAWK Project \cite{meier2012pixhawk}.
+The PX4FMU includes a 200Hz IMU.
+The MAV is also equipped with a downward-looking MatrixVision mvBlueFOX-MLC200w ($752 \times 480$)-pixel monochrome camera with a 130-degree field-of-view lens.
+However, in this section, we simulate the camera measurements to have the ground truth for the distance to the point features.
+Real camera measurements are considered in section \ref{SectionPerformance}.
 
 We set the frame rate of the simulated camera at 10Hz.
 If the frame rate is too high (above 30Hz), the interval of time between two frames becomes too small for the integrations we perform in \ref{eq:final1}, thus yielding numerical instability.
@@ -640,6 +646,7 @@ In this paper, we picked a value of $\lambda$ by experimentation.
 \section{EXPERIMENTS ON REAL DATA}\label{SectionPerformance}
 
 We validate our method against a new dataset containing IMU and camera measurements along with the ground truth.
+The setup is identical to the one described in section \ref{SubsectionSetup}, except that we are now using the MAV's camera instead of simulating the visual measurements.
 Therefore, we are now only relying on fully real world data.
 However, since we are no longer simulating the point features, we do not have the ground truth for the distance to the point features anymore.
 We can therefore only compare the performance of the evaluation of the speed and the gravity.

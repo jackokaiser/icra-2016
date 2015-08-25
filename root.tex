@@ -68,7 +68,7 @@
 \pgfplotsset{plot coordinates/math parser=false}
 
 \title{\LARGE \bf
-Simultaneous State Initialization and gyroscope bias calibration in Visual Inertial aided Navigation
+Simultaneous State Initialization and Gyroscope Bias Calibration in Visual Inertial aided Navigation
 }
 
 
@@ -130,10 +130,11 @@ By nature, a closed-form solution is deterministic and, thus, does not require a
 %% It is assumed that the camera is calibrated and the transformation between the IMU and the camera is known.
 %% This is a fair assumption for industrial drones to come pre-calibrated.
 
-We implement this method in order to test it with real field's data.
+We implement this method in order to test it with real world data.
 This allow us to identify its limitations and bring modifications to overcome them.
 Specifically, we investigate the impact of biased inertial measurements.
-Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, we show that its low impact on the system makes it hard to estimate. One major limitation of this method is the impact of biased gyroscope measurements.
+Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, we show that a large bias does not significantly worsen the performance.
+One major limitation of this method is the impact of biased gyroscope measurements.
 In other words, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method can only be successfully used with a very precise - and expensive - gyroscope.
 We then introduce a simple method that automatically estimates this bias. By adding this new method for the bias estimation to the original method, we obtain results that are equivalent to the ones in absence of bias.
 Compared to the original method, the new method is now robust to the gyroscope bias and automatically calibrates the gyroscope.
@@ -196,7 +197,7 @@ In section \ref{SectionBottlenecks}, we show that this solution is resilient to 
 We then introduce a simple method that automatically estimates the gyroscope bias (section \ref{SectionCalibration}).
 By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
 Compared to the original method, the new method is now robust to the gyroscope bias and also calibrates the gyroscope.
-We validate our new method against real field's data to prove its robustness against noisy sensors
+We validate our new method against real world data to prove its robustness against noisy sensors
 in section \ref{SectionPerformance}. Finally, we provide our conclusion in section \ref{SectionConclusion}.
 
 \section{CLOSED-FORM SOLUTION}\label{SectionCFS}
@@ -308,7 +309,7 @@ We have the extra constraint $|G| = g$. We can express this constraint in matrix
 \noindent with $\Pi \equiv [I_3, 0_3, ..., 0_3]$. We can therefore recover the initial velocity, the roll, and pitch angles and the distances to the point features
 by finding the vector $X$ that satisfies \ref{eq:mat1} and \ref{eq:mat2}.
 
-In the next sections, we will evaluate the performance of this method on real field's data.
+In the next sections, we will evaluate the performance of this method on real world data.
 This will allow us to identify its weaknesses and bring modifications to overcome them.
 
 %% The system therefore becomes:
@@ -604,7 +605,7 @@ As we can see in Fig. \ref{fig:cost}, the cost function admits a symmetry with r
 
 The symmetry in the cost function is induced by the strong weight of the gravity in the equation \ref{eq:final1}.
 In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when this direction $\vec{u}$ is collinear with the gravity throughout the motion.
-In the field's data we had, the motion satisfies this constraint.
+In the real world data we had, the motion satisfies this constraint.
 Specifically, the gyroscope was strapped on the MAV such that the vector $[0,0,1]$ in the gyroscope frame was pointing upwards when the MAV was hovering.
 That is why the residual varies only slightly for certain time sequences with respect to this vector.
 Indeed, in normal operations, a MAV will often have a pose close to its hovering stance in order to stay stable.
@@ -642,12 +643,12 @@ In this paper, we picked a value of $\lambda$ by experimentation.
 
 We validate our method against a different dataset than the one we used in the previous sections to draw our conclusions.
 Specifically, it contains IMU and camera measurements along with ground truth.
-Therefore, we are now only relying on fully real field's data.
+Therefore, we are now only relying on fully real world data.
 However, since we are no longer simulating the point features, we do not have the ground truth for the distance to the point features anymore.
 We can therefore only compare the performance of the evaluation of the speed and the gravity.
 
 The drone is flying indoor at low altitude.
-The feature extraction and matching is done with FAST corner algorithm as in \cite{Forster2014}.
+The feature extraction and matching is done with FAST corner algorithm \cite{Rosten2005}\cite{Rosten2006}.
 
 We compare the performance on the estimations of the gravity and the initial velocity obtained with three different methods:
 \begin{itemize}
@@ -696,7 +697,7 @@ We remind the reader that unlike SVO, the closed-form solution does not require 
 %Providing a reliable state initialization is critical for these algorithms to work correctly.
 
 In this paper, we studied the recent closed-form solution proposed by \cite{Martinelli2014} that performs visual-inertial sensor fusion without requiring an initialization.
-We implemented this method in order to test it with real field's data.
+We implemented this method in order to test it with real world data.
 This allowed us to identify its performance limitations and bring modifications to overcome them.
 
 We investigated the impact of biased inertial measurements.

@@ -203,7 +203,7 @@ Let us refer to a short interval of time (of the order of $3$ seconds). We assum
 The following equation holds (see \cite{Martinelli2014} for its derivation):
 
 
-\begin{equation} \tag{6} \label{eq:final1}
+\begin{equation} \label{eq:final1}
 S_j = \lambda_1^i\mu_1^i - V t_j - G \frac{t_j^2}{2} - \lambda^i_j \mu^i_j
 \end{equation}
 With:
@@ -249,19 +249,20 @@ in this paper we discard this additional step.
 The linear system in Equation \ref{eq:final1} can be written in the following compact format:
 
 \begin{equation}
-\label{eq:mat1} \tag{9}
+\label{eq:mat1}
 \Xi X = S
 \end{equation}
 
 \noindent Matrix $\Xi$ and vector $S$ are fully determined by the measurements, while $X$ is the unknown vector.
 We have:
 
-\[
-S \equiv [S_2^T, ...,S_2^T, S_3^T,...,S_3^T,...,S_{n_i}^T,...,S_{n_i}^T]^T
-\]
-\[
-X \equiv [ G^T, V^T, \lambda_1^1, ..., \lambda_1^N, ..., \lambda_{n_i}^1, ..., \lambda_{n_i}^N]^T \\
-\]
+\begin{equation*}
+  \begin{aligned}
+S &\equiv [S_2^T, ...,S_2^T, S_3^T,...,S_3^T,...,S_{n_i}^T,...,S_{n_i}^T]^T \\
+X &\equiv [ G^T, V^T, \lambda_1^1, ..., \lambda_1^N, ..., \lambda_{n_i}^1, ..., \lambda_{n_i}^N]^T
+  \end{aligned}
+\end{equation*}
+\vspace{-1cm}
 
 {
 \arraycolsep=3pt % default: 5pt
@@ -297,7 +298,7 @@ Let us denote the gravitational magnitude by $g$.
 We have the extra constraint $|G| = g$. We can express this constraint in matrix formulation:
 
 \begin{equation}
-\label{eq:mat2} \tag{10}
+\label{eq:mat2}
 | \Pi X | ^2 = g^2,
 \end{equation}
 

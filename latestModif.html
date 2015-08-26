@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- This file was created with the aha Ansi HTML Adapter. http://ziz.delphigl.com/tool_aha.php -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="application/xml+xhtml; charset=UTF-8" />
+<title>stdin</title>
+</head>
+<body>
+<pre>
+<span style="color:olive;font-weight:bold;">diff --git a/root.tex b/root.tex</span>
+<span style="color:olive;font-weight:bold;">index 48d3bed..2c500fa 100644</span>
+<span style="color:olive;font-weight:bold;">--- a/root.tex</span>
+<span style="color:olive;font-weight:bold;">+++ b/root.tex</span>
+<span style="color:purple;font-weight:bold;">@@ -35,12 +35,10 @@</span>
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+<span style="color:red;font-weight:bold;"></span>
+\usepackage{pgfplots}
+%% \usepgfplotslibrary{external}
+%% \tikzexternalize
+
+<span style="color:red;font-weight:bold;">% argument #1: any options</span>
+\newenvironment{customlegend}[1][]{%
+    \begingroup
+    % inits/clears the lists (which might be populated from previous
+<span style="color:purple;font-weight:bold;">@@ -68,7 +66,7 @@</span>
+\pgfplotsset{plot coordinates/math parser=false}
+
+\title{\LARGE \bf
+Simultaneous State Initialization and <span style="color:red;font-weight:bold;">gyroscope bias calibration</span><span style="color:green;font-weight:bold;">Gyroscope Bias Calibration</span> in Visual Inertial aided Navigation
+}
+
+
+<span style="color:purple;font-weight:bold;">@@ -130,10 +128,11 @@</span> By nature, a closed-form solution is deterministic and, thus, does not require a
+%% It is assumed that the camera is calibrated and the transformation between the IMU and the camera is known.
+%% This is a fair assumption for industrial drones to come pre-calibrated.
+
+We implement this method in order to test it with real <span style="color:red;font-weight:bold;">field's</span><span style="color:green;font-weight:bold;">world</span> data.
+This allow us to identify its limitations and bring modifications to overcome them.
+Specifically, we investigate the impact of biased inertial measurements.
+Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, we show that <span style="color:red;font-weight:bold;">its low impact on</span><span style="color:green;font-weight:bold;">a large bias does not significantly worsen</span> the <span style="color:red;font-weight:bold;">system makes it hard to estimate.</span><span style="color:green;font-weight:bold;">performance.</span>
+One major limitation of this method is the impact of biased gyroscope measurements.
+In other words, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method can only be successfully used with a very precise - and expensive - gyroscope.
+We then introduce a simple method that automatically estimates this bias. By adding this new method for the bias estimation to the original method, we obtain results that are equivalent to the ones in absence of bias.
+Compared to the original method, the new method is now robust to the gyroscope bias and automatically calibrates the gyroscope.
+<span style="color:purple;font-weight:bold;">@@ -151,14 +150,13 @@</span> Compared to the original method, the new method is now robust to the gyroscope b
+The problem of fusing vision and inertial data has been extensively investigated in the past.
+However, most of the proposed methods require a state initialization.
+Because of the system nonlinearities, lack of precise initialization can irreparably damage the entire estimation process.
+In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been addressed by using optimization-based approaches <span style="color:red;font-weight:bold;">\cite{Leute2014}\cite{Forster2015}.</span><span style="color:green;font-weight:bold;">\cite{Leute2014}\cite{Forster2015}\cite{mourikis2008dual}\cite{lupton2012visual}\cite{huang2011observability}\cite{mourikis2007multi}\cite{leutenegger2013keyframe}.</span> These methods outperform filter-based algorithms in terms of accuracy due to their capability of <span style="color:red;font-weight:bold;">relinearize</span><span style="color:green;font-weight:bold;">relinearizing</span> past states. On the other hand, the optimization process can be affected by the presence of local minima.
+We are therefore interested in a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
+
+In computer vision, several deterministic solutions have been introduced.
+These techniques, known as {\it Structure from Motion}, can recover the relative rotation and translation up to scale between two camera poses \cite{Longuet-Higgins1981}\cite{Hartley1997}\cite{Nister2003}\cite{Hartley2004}\cite{Li2006}.
+Such methods are currently used in state-of-the-art visual navigation methods on <span style="color:red;font-weight:bold;">MAV</span><span style="color:green;font-weight:bold;">MAVs</span> in order to initialize maps \cite{Weiss2012}\cite{Forster2014}.
+However, the knowledge of the absolute scale <span style="color:red;font-weight:bold;">and</span><span style="color:green;font-weight:bold;">and,</span> at <span style="color:red;font-weight:bold;">least</span><span style="color:green;font-weight:bold;">least,</span> the absolute roll and pitch angles <span style="color:red;font-weight:bold;">are</span><span style="color:green;font-weight:bold;">is</span> essential for many applications <span style="color:red;font-weight:bold;">that range</span><span style="color:green;font-weight:bold;">ranging</span> from autonomous navigation in GPS-denied <span style="color:red;font-weight:bold;">environments,</span><span style="color:green;font-weight:bold;">environments</span> to 3D <span style="color:red;font-weight:bold;">reconstruction,</span><span style="color:green;font-weight:bold;">reconstruction</span> and augmented reality.
+It is required to take the inertial measurements into consideration to compute these values deterministically.
+
+%% Some visual inertial sensor fusion that works without initialization have been introduced.
+<span style="color:purple;font-weight:bold;">@@ -169,34 +167,30 @@</span> It is required to take the inertial measurements into consideration to compute t
+%% However, their method is purely numerical and we can not analytically derive its properties.
+
+%, therefore no assumptions can be made about its properties.
+<span style="color:red;font-weight:bold;">A closed-form method to estimate the scale of a monocular SLAM system from additional</span>
+<span style="color:red;font-weight:bold;">metric sensors is provided in \cite{Engel2014}.</span>
+<span style="color:red;font-weight:bold;">However, the metric sensor must measure the absolute scale directly, such as an altimeter or a GPS.</span>
+<span style="color:red;font-weight:bold;">This method is therefore not applicable for purely visual-inertial applications.</span>
+
+A procedure to quickly re-initialize a MAV after a failure was presented in \cite{Faessler2015}.
+However, <span style="color:red;font-weight:bold;">their</span><span style="color:green;font-weight:bold;">this</span> method requires an altimeter to initialize the<span style="color:red;font-weight:bold;">absolute</span> scale.
+
+A landmark of known <span style="color:red;font-weight:bold;">dimension</span><span style="color:green;font-weight:bold;">size</span> was used in \cite{Gemeiner2007} to recover the initial pose of the MAV.
+This method is therefore not <span style="color:red;font-weight:bold;">suited to</span><span style="color:green;font-weight:bold;">suitable for</span> unknown environment.
+
+Recently, a closed-form solution has been introduced in \cite{Martinelli2012}.
+From integrating inertial and visual measurements over a short time-interval, this solution provides the absolute scale, roll and pitch angles, initial <span style="color:red;font-weight:bold;">velocity</span><span style="color:green;font-weight:bold;">velocity,</span> and distance to features.
+Specifically, all the physical quantities are obtained by simply inverting a linear system.
+The solution of the linear system can be refined with a quadratic equation assuming the knowledge of the gravity magnitude.
+This closed-form was improved in \cite{Li2013} to work with unknown camera-IMU calibration.
+<span style="color:red;font-weight:bold;">In this case,</span><span style="color:green;font-weight:bold;">Since</span> the problem cannot be solved by simply inverting a linear <span style="color:red;font-weight:bold;">system. A suitable</span><span style="color:green;font-weight:bold;">system, a</span> method<span style="color:red;font-weight:bold;">able</span> to<span style="color:red;font-weight:bold;">also</span> determine the six parameters that characterize the camera-IMU transformation was proposed.
+This method is therefore independent of external camera-IMU calibration, hence <span style="color:red;font-weight:bold;">well suited</span><span style="color:green;font-weight:bold;">suitable</span> for power-on-and-go systems.
+
+A more intuitive expression of <span style="color:red;font-weight:bold;">the same</span><span style="color:green;font-weight:bold;">this</span> closed-form solution was derived in \cite{Martinelli2014}.
+While being mathematically sound, this closed-form solution is not robust to noisy sensor data.
+For this reason, to the best of our knowledge, it has never been used in an actual application.
+In this <span style="color:red;font-weight:bold;">paper</span><span style="color:green;font-weight:bold;">paper,</span> we perform an analysis to find out its limitations. We start by reminding the reader the basic equations that characterize this solution (section \ref{SectionCFS}).
+In section \ref{SectionBottlenecks}, we show that this solution is resilient to the accelerometer bias but strongly affected by the gyroscope bias.
+We then introduce a simple method that automatically estimates the gyroscope bias (section \ref{SectionCalibration}).
+By adding this new method for the bias estimation to the original <span style="color:red;font-weight:bold;">method</span><span style="color:green;font-weight:bold;">method,</span> we obtain results which are equivalent to the ones in absence of bias.
+Compared to the original method, the new method is now robust to the gyroscope bias and also calibrates the gyroscope.
+We validate our new method against real <span style="color:red;font-weight:bold;">field's</span><span style="color:green;font-weight:bold;">world</span> data to prove its robustness against noisy sensors
+in section \ref{SectionPerformance}. Finally, we provide our conclusion in section \ref{SectionConclusion}.
+
+\section{CLOSED-FORM SOLUTION}\label{SectionCFS}
+<span style="color:purple;font-weight:bold;">@@ -207,7 +201,7 @@</span> Let us refer to a short interval of time (of the order of $3$ seconds). We assum
+The following equation holds (see \cite{Martinelli2014} for its derivation):
+
+
+\begin{equation}<span style="color:red;font-weight:bold;">\tag{6}</span> \label{eq:final1}
+S_j = \lambda_1^i\mu_1^i - V t_j - G \frac{t_j^2}{2} - \lambda^i_j \mu^i_j
+\end{equation}
+With:
+<span style="color:purple;font-weight:bold;">@@ -232,7 +226,7 @@</span> and the vectors $S_j$ are determined by accelerometer and gyroscope measurements
+
+\begin{figure}
+  \centering
+  <span style="color:red;font-weight:bold;">\includegraphics[width=\columnwidth]{images/closedFormExplained}</span><span style="color:green;font-weight:bold;">\includegraphics[width=0.7\columnwidth, trim={0 2cm 0 0}, clip]{images/closedFormExplained}</span>
+  \caption{Visual representation of Equation \ref{eq:final1}.
+  The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
+\end{figure}
+<span style="color:purple;font-weight:bold;">@@ -245,27 +239,28 @@</span> We can write our system using matrix formulation.
+Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
+
+In \cite{Martinelli2014}, the author proceeded to one more step before expressing the underlying linear system.
+For a given frame $j$, the equation of the first point feature $i=1$ is subtracted from all other point <span style="color:red;font-weight:bold;">features equations,</span><span style="color:green;font-weight:bold;">feature equations</span> $1&lt;i&lt;=N$<span style="color:red;font-weight:bold;">concerning frame $j$</span> (Equation 7).
+This additional step, very useful to detect system singularities, has the effect to corrupt all measurements with the first measurement,
+hence worsening the performance of the closed-form solution. Therefore,
+in this paper we <span style="color:red;font-weight:bold;">do not do this.</span><span style="color:green;font-weight:bold;">discard this additional step.</span>
+
+The linear system in Equation \ref{eq:final1} can be written in the following compact format:
+
+\begin{equation}
+\label{eq:mat1}<span style="color:red;font-weight:bold;">\tag{9}</span>
+\Xi X = S
+\end{equation}
+
+\noindent Matrix $\Xi$ and vector $S$ are fully determined by the measurements, while $X$ is the unknown vector.
+We have:
+
+<span style="color:red;font-weight:bold;">\[</span><span style="color:green;font-weight:bold;">\begin{equation*}</span>
+<span style="color:green;font-weight:bold;">  \begin{aligned}</span>
+S <span style="color:red;font-weight:bold;">\equiv</span><span style="color:green;font-weight:bold;">&amp;\equiv</span> [S_2^T, ...,S_2^T, S_3^T,...,S_3^T,...,S_{n_i}^T,...,S_{n_i}^T]^T <span style="color:red;font-weight:bold;">\]</span>
+<span style="color:red;font-weight:bold;">\[</span><span style="color:green;font-weight:bold;">\\</span>
+X <span style="color:red;font-weight:bold;">\equiv</span><span style="color:green;font-weight:bold;">&amp;\equiv</span> [ G^T, V^T, \lambda_1^1, ..., \lambda_1^N, ..., \lambda_{n_i}^1, ..., \lambda_{n_i}^N]^T
+  <span style="color:red;font-weight:bold;">\\</span>
+<span style="color:red;font-weight:bold;">\]</span><span style="color:green;font-weight:bold;">\end{aligned}</span>
+<span style="color:green;font-weight:bold;">\end{equation*}</span>
+<span style="color:green;font-weight:bold;">\vspace{-1cm}</span>
+
+{
+\arraycolsep=3pt % default: 5pt
+<span style="color:purple;font-weight:bold;">@@ -287,28 +282,28 @@</span> X \equiv [ G^T, V^T, \lambda_1^1, ..., \lambda_1^N, ..., \lambda_{n_i}^1, ..., \
+            ... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ... \\
+            T_{n_i} &amp; S_{n_i} &amp; 0_3 &amp; 0_3 &amp; \mu_1^N &amp; 0_3 &amp; 0_3 &amp; 0_3 &amp; 0_3 &amp; 0_3 &amp; -\mu_{n_i}^N
+          \end{array}
+          <span style="color:red;font-weight:bold;">\right],</span><span style="color:green;font-weight:bold;">\right]</span>
+      }
+\end{multline*}
+}
+
+\noindent where $T_j \equiv - \frac{t^2_j}{2} I_3$, $S_j \equiv -t_j I_3$ and $I_3$ is the identity $3\times 3$ matrix; $0_3$ is the $3\times 1$ zero matrix.
+Note that matrix $\Xi$ and the vector $S$ are slightly different from the one proposed in \cite{Martinelli2014}.
+This is due to the additional step <span style="color:green;font-weight:bold;">that, as</span> we <span style="color:red;font-weight:bold;">did not take</span><span style="color:green;font-weight:bold;">explained in the previous paragraph, we discarded</span> for numerical stability reasons (see \cite{Martinelli2014} section 3 for <span style="color:red;font-weight:bold;">all the</span><span style="color:green;font-weight:bold;">further</span> details).
+
+The sensor information is completely contained in the above linear system. Additionally, in \cite{Martinelli2014}, the author added a quadratic equation assuming the gravitational acceleration is a priori known.
+Let us denote the gravitational magnitude by $g$.
+We have the extra constraint $|G| = g$. We can express this constraint in matrix formulation:
+
+\begin{equation}
+\label{eq:mat2}<span style="color:red;font-weight:bold;">\tag{10}</span>
+| \Pi X | ^2 = g^2,
+\end{equation}
+
+\noindent with $\Pi \equiv [I_3, 0_3, ..., 0_3]$. We can therefore recover the initial velocity, the roll, and pitch angles and the distances to the point features
+by finding the vector $X$ that satisfies <span style="color:red;font-weight:bold;">\ref{eq:mat1}</span><span style="color:green;font-weight:bold;">(\ref{eq:mat1})</span> and <span style="color:red;font-weight:bold;">\ref{eq:mat2}.</span><span style="color:green;font-weight:bold;">(\ref{eq:mat2}).</span>
+
+In the next sections, we will evaluate the performance of this method on real <span style="color:red;font-weight:bold;">field's</span><span style="color:green;font-weight:bold;">world</span> data.
+This will allow us to identify its weaknesses and bring modifications to overcome them.
+
+%% The system therefore becomes:
+<span style="color:purple;font-weight:bold;">@@ -324,24 +319,23 @@</span> This will allow us to identify its weaknesses and bring modifications to overcom
+
+
+
+<span style="color:red;font-weight:bold;">\section{PERFORMANCE LIMITATIONS}\label{SectionBottlenecks}</span><span style="color:green;font-weight:bold;">\section{LIMITATIONS OF \cite{Martinelli2014}}\label{SectionBottlenecks}</span>
+
+The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014}.
+This is obtained by <span style="color:red;font-weight:bold;">using</span><span style="color:green;font-weight:bold;">\textbf{combining</span> both real and synthetic <span style="color:red;font-weight:bold;">data.</span><span style="color:green;font-weight:bold;">data}.</span>
+In particular, we will add <span style="color:green;font-weight:bold;">an artificial bias</span> to the real measurements delivered by the inertial sensors (both the accelerometers and the <span style="color:red;font-weight:bold;">gyroscopes) an artificial bias.</span><span style="color:green;font-weight:bold;">gyroscopes).</span>
+This <span style="color:red;font-weight:bold;">allows</span><span style="color:green;font-weight:bold;">will allow</span> us to evaluate the impact of the bias on the performance.
+
+\subsection{Experimental <span style="color:red;font-weight:bold;">setup}</span><span style="color:green;font-weight:bold;">setup}\label{SubsectionSetup}</span>
+
+<span style="color:red;font-weight:bold;">The</span><span style="color:green;font-weight:bold;">For our evaluation, we consider a \textbf{simulated} camera and a \textbf{real} IMU attached to a</span> MAV <span style="color:red;font-weight:bold;">performs</span><span style="color:green;font-weight:bold;">flying in</span> a <span style="color:red;font-weight:bold;">motion while being tracked</span><span style="color:green;font-weight:bold;">room equipped</span> with <span style="color:red;font-weight:bold;">an optical motion capture system.</span>
+<span style="color:red;font-weight:bold;">We can therefore</span><span style="color:green;font-weight:bold;">a \textbf{motion-capture system}.</span>
+<span style="color:green;font-weight:bold;">This allows us to</span> compare <span style="color:red;font-weight:bold;">our</span><span style="color:green;font-weight:bold;">the</span> estimations with the ground truth.<span style="color:red;font-weight:bold;">We define the relative error as the euclidean distance between the estimation and the ground truth,</span>
+<span style="color:red;font-weight:bold;">normalized by the ground truth.</span>
+<span style="color:red;font-weight:bold;">We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.</span>
+
+<span style="color:red;font-weight:bold;">To identify the performance limitations, we used IMU data obtained from terrain acquisitions</span>
+<span style="color:red;font-weight:bold;">while we simulated the visual measurements.</span>
+<span style="color:red;font-weight:bold;">This separation allowed us to know the ground truth for the distance to the point features</span>
+<span style="color:red;font-weight:bold;">and also better understand the weaknesses of our method. %Note that in the final experiment (see section \ref{SectionPerformance}) we use real visual measurements.</span>
+
+We represent this setup in Fig. \ref{fig:testsetup}.
+<span style="color:green;font-weight:bold;">We define the relative error as the euclidean distance between the estimation and the ground truth,</span>
+<span style="color:green;font-weight:bold;">normalized by the ground truth.</span>
+<span style="color:green;font-weight:bold;">We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.</span>
+
+\begin{figure}
+  \centering
+<span style="color:purple;font-weight:bold;">@@ -349,13 +343,15 @@</span> We represent this setup in Fig. \ref{fig:testsetup}.
+    \includegraphics[width=\textwidth]{images/setupTestDroneError.png}
+    \caption{Sketch of the experimental setup}
+  \end{subfigure}
+  <span style="color:green;font-weight:bold;">\vspace{0.5cm}</span>
+
+  \begin{subfigure}[t]{0.489\columnwidth}
+  \includegraphics[width=\textwidth]{images/quadrotor_closeup.jpg}
+  \caption{A closeup of our quadrotor: 1) down-looking camera,
+2) Odroid U3 quad-core computer, 3) PIXHAWK autopilot}
+  <span style="color:red;font-weight:bold;">\end{subfigure}</span><span style="color:green;font-weight:bold;">\end{subfigure}~</span>
+  \begin{subfigure}[t]{0.489\columnwidth}
+  <span style="color:red;font-weight:bold;">\includegraphics[width=\textwidth]{images/realExperiment.png}</span><span style="color:green;font-weight:bold;">\includegraphics[width=\textwidth, trim={0 2cm 0 4cm}, clip]{images/realExperiment.png}</span>
+  \caption{Our flying arena equipped with an OptiTrack motion-capture system (for ground-truth recording)}
+  \end{subfigure}
+  %% \begin{subfigure}[t]{0.489\columnwidth}
+<span style="color:purple;font-weight:bold;">@@ -367,16 +363,25 @@</span> We represent this setup in Fig. \ref{fig:testsetup}.
+    \label{fig:testsetup}}
+\end{figure}
+
+<span style="color:red;font-weight:bold;">In general, we</span><span style="color:green;font-weight:bold;">We</span> use <span style="color:red;font-weight:bold;">one</span><span style="color:green;font-weight:bold;">the same MAV as described in \cite{FaesslerICRA15}, section 3.1.</span>
+<span style="color:green;font-weight:bold;">Specifically, our quadrotor relies on the</span> frame <span style="color:red;font-weight:bold;">every 0.1 seconds, even if</span><span style="color:green;font-weight:bold;">of</span> the <span style="color:green;font-weight:bold;">Parrot AR.Drone 2.01 including their motors, motor controllers, gears, and propellers.</span>
+<span style="color:green;font-weight:bold;">It is equipped by a PX4FMU autopilot and a PX4IOAR adapter board developed in the PIXHAWK Project \cite{meier2012pixhawk}.</span>
+<span style="color:green;font-weight:bold;">The PX4FMU includes a 200Hz IMU.</span>
+<span style="color:green;font-weight:bold;">The MAV is also equipped with a downward-looking MatrixVision mvBlueFOX-MLC200w ($752 \times 480$)-pixel monochrome</span> camera <span style="color:red;font-weight:bold;">provides significantly more frames.</span><span style="color:green;font-weight:bold;">with a 130-degree field-of-view lens.</span>
+<span style="color:green;font-weight:bold;">However, in this section, we simulate the camera measurements to have the ground truth for the distance to the point features.</span>
+<span style="color:green;font-weight:bold;">Real camera measurements are considered in section \ref{SectionPerformance}.</span>
+<span style="color:green;font-weight:bold;"></span>
+<span style="color:green;font-weight:bold;">We set the frame rate of the simulated camera at 10Hz.</span>
+If <span style="color:green;font-weight:bold;">the frame rate is too high (above 30Hz), the interval of time between</span> two<span style="color:red;font-weight:bold;">consecutive</span> frames <span style="color:red;font-weight:bold;">are seperated by less than 0.1 seconds, their respective equations</span><span style="color:green;font-weight:bold;">becomes too small for the integrations we perform</span> in <span style="color:red;font-weight:bold;">our linear system will be similar,</span><span style="color:green;font-weight:bold;">\ref{eq:final1},</span> thus <span style="color:red;font-weight:bold;">not bring much information.</span><span style="color:green;font-weight:bold;">yielding numerical instability.</span>
+<span style="color:green;font-weight:bold;">When using a real high-frequency camera, we can force the frame rate to 10Hz by discarding most of the provided frames.</span>
+
+Reducing the number of considered frames <span style="color:green;font-weight:bold;">also</span> reduces the size of the matrices, <span style="color:red;font-weight:bold;">thus</span><span style="color:green;font-weight:bold;">and thus,</span> speeds up the computations.
+As an example, over a time interval of 3 seconds, we obtain $31$ distinct frames.
+When observing 7 features, <span style="color:red;font-weight:bold;">it yields</span><span style="color:green;font-weight:bold;">solving the closed-form solution is equivalent to inverting</span> a <span style="color:green;font-weight:bold;">linear</span> system of $3\times 30\times 7 = 630$ equations and $6+7\times 31=223$ <span style="color:red;font-weight:bold;">unknowns.</span><span style="color:green;font-weight:bold;">unknowns (see section \ref{SectionCFS}).</span>
+
+The method we use to solve the overconstrained linear system $\Xi X = S$ is a Singular Value Decomposition (SVD) since it yields numerically robust solutions.
+
+In the next section, we will present the results obtained with the original closed-form solution on <span style="color:red;font-weight:bold;">terrain</span><span style="color:green;font-weight:bold;">real</span> IMU <span style="color:red;font-weight:bold;">data.</span><span style="color:green;font-weight:bold;">data, with simulated camera measurements.</span>
+Our goal is to identify its performance limitations and introduce modifications to overcome them.
+
+%% The case of a biased gyroscope is addressed in chapter \ref{ch:gyro}.
+<span style="color:purple;font-weight:bold;">@@ -384,22 +389,22 @@</span> Our goal is to identify its performance limitations and introduce modifications
+
+\subsection{Original closed-form solution performance}
+
+The original closed-form solution described in Equation <span style="color:red;font-weight:bold;">\ref{eq:mat1}</span><span style="color:green;font-weight:bold;">(\ref{eq:mat1})</span> will be used as a basis for our work. In the <span style="color:red;font-weight:bold;">sequel,</span><span style="color:green;font-weight:bold;">following,</span> this <span style="color:green;font-weight:bold;">closed-form</span> solution will be denoted by $CF$.
+Moreover, we can also use the knowledge of the gravity magnitude<span style="color:red;font-weight:bold;">in order</span> to refine our results <span style="color:red;font-weight:bold;">with Equation \ref{eq:mat2}.</span><span style="color:green;font-weight:bold;">(Equation (\ref{eq:mat2})).</span>
+In this case, we are minimizing a linear objective function with a quadratic constraint.
+In Fig. \ref{fig:original}, we display the performance of the  original closed-form solution in estimating speed, gravity in the local frame and distances to the features with and without this additional constraint.
+
+
+\begin{figure}
+  \centering
+    <span style="color:red;font-weight:bold;">\resizebox{\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}</span><span style="color:green;font-weight:bold;">\resizebox{0.5\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}</span>
+    \caption{Motion performed by the drone in 5 seconds.}
+\end{figure}
+
+\begin{figure}
+  \centering
+    <span style="color:red;font-weight:bold;">\resizebox{\columnwidth}{!}{\input{graph/originalCF}}</span><span style="color:green;font-weight:bold;">\resizebox{0.7\columnwidth}{!}{\input{graph/originalCF}}</span>
+    \caption{Original closed-form solution estimations with and without <span style="color:red;font-weight:bold;">gravity</span><span style="color:green;font-weight:bold;">using the</span> knowledge <span style="color:red;font-weight:bold;">refinement.</span><span style="color:green;font-weight:bold;">of the gravity (\ref{eq:mat2}).</span> We are observing 12 features  over a variable duration of integration.\label{fig:original}}
+\end{figure}
+
+
+<span style="color:purple;font-weight:bold;">@@ -409,11 +414,11 @@</span> Therefore, it requires a significant difference in the measurements over time to
+Also note that the gravity is robustly estimated (around 5\% error), whereas the speed and the distance to the features is more erroneous (above 10\% error).
+
+Since the gravity is well estimated with the original closed-form, it comes without surprise that constraining its magnitude does not improve the performance much.
+That is why the curves representing the performance with and without <span style="color:green;font-weight:bold;">using</span> the gravity refinement <span style="color:green;font-weight:bold;">(\ref{eq:mat2})</span> are so close.
+%% The distance to the features are slightly improved (around 1\% error decrease) at the expense of worsening the estimation of the speed (around 20\% error increase).
+
+%% In the following sections, we will introduce modifications to improve over these results.
+In the following sections, we will study the impact of biased inertial measurements on the performance of the closed-form solution without <span style="color:red;font-weight:bold;">considering</span><span style="color:green;font-weight:bold;">using</span> the gravity refinement.
+
+\subsection{Impact of accelerometer bias on the performance}
+In order to visualize the impact of the accelerometer bias on the performance,
+<span style="color:purple;font-weight:bold;">@@ -525,13 +530,13 @@</span> We can initialize the optimization process with $B = 0_3$ since the bias is usua
+
+\begin{figure}
+  \centering
+  <span style="color:red;font-weight:bold;">\resizebox{\columnwidth}{!}{\input{graph/biasEstimation12Ft}}</span><span style="color:green;font-weight:bold;">\resizebox{0.7\columnwidth}{!}{\input{graph/biasEstimation12Ft}}</span>
+  \caption{Gyroscope bias estimation from nonlinear minimization of the residual. We are observing 12 features  over a variable duration of integration. \label{fig:gBiasEstimate}}
+\end{figure}
+
+\begin{figure}
+   \centering
+   <span style="color:red;font-weight:bold;">\resizebox{\columnwidth}{!}{\input{graph/CF3vsOpt12Ft}}</span><span style="color:green;font-weight:bold;">\resizebox{0.7\columnwidth}{!}{\input{graph/CF3vsOpt12Ft}}</span>
+                \caption{Estimation error of the original closed-form solution against the optimized closed-form solution.  We are observing 12 features  over a variable duration of integration. \label{fig:optEstimate}}
+\end{figure}
+
+<span style="color:purple;font-weight:bold;">@@ -604,7 +609,7 @@</span> As we can see in Fig. \ref{fig:cost}, the cost function admits a symmetry with r
+
+The symmetry in the cost function is induced by the strong weight of the gravity in the equation \ref{eq:final1}.
+In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when this direction $\vec{u}$ is collinear with the gravity throughout the motion.
+In the <span style="color:red;font-weight:bold;">field's</span><span style="color:green;font-weight:bold;">real world</span> data we had, the motion satisfies this constraint.
+Specifically, the gyroscope was strapped on the MAV such that the vector $[0,0,1]$ in the gyroscope frame was pointing upwards when the MAV was hovering.
+That is why the residual varies only slightly for certain time sequences with respect to this vector.
+Indeed, in normal operations, a MAV will often have a pose close to its hovering stance in order to stay stable.
+<span style="color:purple;font-weight:bold;">@@ -640,14 +645,14 @@</span> In this paper, we picked a value of $\lambda$ by experimentation.
+
+\section{EXPERIMENTS ON REAL DATA}\label{SectionPerformance}
+
+We validate our method against a <span style="color:red;font-weight:bold;">different</span><span style="color:green;font-weight:bold;">new</span> dataset <span style="color:red;font-weight:bold;">than the one we used in the previous sections to draw our conclusions.</span>
+<span style="color:red;font-weight:bold;">Specifically, it contains</span><span style="color:green;font-weight:bold;">containing</span> IMU and camera measurements along with <span style="color:green;font-weight:bold;">the</span> ground truth.
+<span style="color:green;font-weight:bold;">The setup is identical to the one described in section \ref{SubsectionSetup}, except that we are now using the MAV's camera instead of simulating the visual measurements.</span>
+Therefore, we are now only relying on fully real <span style="color:red;font-weight:bold;">field's</span><span style="color:green;font-weight:bold;">world</span> data.
+However, since we are no longer simulating the point features, we do not have the ground truth for the distance to the point features anymore.
+We can therefore only compare the performance of the evaluation of the speed and the gravity.
+
+The drone is flying indoor at low altitude.
+The feature extraction and matching is done with FAST corner algorithm <span style="color:red;font-weight:bold;">as in \cite{Forster2014}.</span><span style="color:green;font-weight:bold;">\cite{Rosten2005}\cite{Rosten2006}.</span>
+
+We compare the performance on the estimations of the gravity and the initial velocity obtained with three different methods:
+\begin{itemize}
+<span style="color:purple;font-weight:bold;">@@ -696,7 +701,7 @@</span> We remind the reader that unlike SVO, the closed-form solution does not require
+%Providing a reliable state initialization is critical for these algorithms to work correctly.
+
+In this paper, we studied the recent closed-form solution proposed by \cite{Martinelli2014} that performs visual-inertial sensor fusion without requiring an initialization.
+We implemented this method in order to test it with real <span style="color:red;font-weight:bold;">field's</span><span style="color:green;font-weight:bold;">world</span> data.
+This allowed us to identify its performance limitations and bring modifications to overcome them.
+
+We investigated the impact of biased inertial measurements.
+</pre>
+</body>
+</html>

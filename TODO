@@ -1,7 +1,5 @@
-get standard IEEE template
-Latex full stop?
-Cite a section in a paper [4, section 3.1]
-crop figure on left an make it the same size (experimental setup)
-replace my matlab figure with Davide's ROS figure
-numerical stability optical flow
-faster : real high frequency not changed -> tell why
+To mention in e-mail:
+* get standard IEEE template
+* latex compiler
+* reformating
+* moving experimental setup around

@@ -36,6 +36,8 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{pgfplots}
+
+
 %% \usepgfplotslibrary{external}
 %% \tikzexternalize
 
@@ -338,7 +340,7 @@ normalized by the ground truth.
 
 We set the simulated 3D-landmarks about $3m$ away from the MAV and the drone flies at a speed of around $1m/s$.
 We found that setting the frame rate of the simulated camera at 10Hz provides a sufficient optical flow length with the following setup.
-Increasing the frame rate above 30Hz decreases the optical flow length and introduce numerical instability.
+Increasing the frame rate above 30Hz decreases the optical flow length and introduce numerical instability for this setup.
 
 Reducing the number of considered frames also reduces the size of the matrices, and thus, speeds up the computations.
 As an example, over a time interval of 3 seconds, we obtain $31$ distinct frames.

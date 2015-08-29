@@ -329,16 +329,16 @@ This will allow us to evaluate the impact of the bias on the performance.
 \subsection{Considered data}
 
 The setup is similar to the one we use in the experiments on real data described in Section \ref{SubsectionSetup}.
-However, unlike Section \ref{SectionPerformance}, we simulate the camera measurements by creating artificial point-features and computing the bearings ($\mu_j^i$ in Equation (\label{eq:final1})) from the MAV to these points at a given frame rate.
-By simulating the camera measurements this way, we can compare our estimations of the distances to the features ($\lambda_j^i$ in Equation (\label{eq:final1})) with the ground truth.
+However, unlike Section \ref{SectionPerformance}, we simulate the camera measurements by creating artificial 3D-landmarks, and re-projecting these landmarks into the camera views ($\mu_j^i$ in Equation (\ref{eq:final1})).
+Simulating the camera measurements allows us to compare our estimations of the distances to the features ($\lambda_j^i$ in Equation (\ref{eq:final1})) with the ground truth.
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
 
 We define the relative error as the euclidean distance between the estimation and the ground truth,
 normalized by the ground truth.
 
-We set the frame rate of the simulated camera at 10Hz.
-If the frame rate is too high (above 30Hz), the interval of time between two frames becomes too small for the integrations we perform in \ref{eq:final1}, thus yielding numerical instability.
-When using a real high-frequency camera, we can force the frame rate at 10Hz by discarding most of the provided frames.
+We set the simulated 3D-landmarks about $3m$ away from the MAV and the drone flies at a speed of around $1m/s$.
+We found that setting the frame rate of the simulated camera at 10Hz provides a sufficient optical flow length with the following setup.
+Increasing the frame rate above 30Hz decreases the optical flow length and introduce numerical instability.
 
 Reducing the number of considered frames also reduces the size of the matrices, and thus, speeds up the computations.
 As an example, over a time interval of 3 seconds, we obtain $31$ distinct frames.
@@ -363,7 +363,7 @@ In Fig. \ref{fig:original}, we display the performance of the  original closed-f
 
 \begin{figure}
   \centering
-  \includegraphics[width=\columnwidth, trim={0 2cm 0 4cm}, clip]{images/virtualExperiment.png}
+  \resizebox{\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}
     \caption{Motion performed by the drone in 5 seconds.}
 \end{figure}
 
@@ -616,8 +616,8 @@ Therefore, we are now only relying on fully real world data.
 
 \subsection{Experimental setup}\label{SubsectionSetup}
 
-For our evaluation, we consider a MAV flying in a room equipped with a \textbf{motion-capture system}.
-This allows us to compare the estimations with the ground truth.
+For our evaluation, we consider a MAV flying in a room equipped with a motion-capture system.
+This allows us to compare the estimations of the velocity along with the roll and pitch angles against ground truth.
 
 \begin{figure}
   \centering
@@ -633,7 +633,7 @@ This allows us to compare the estimations with the ground truth.
 2) Odroid U3 quad-core computer, 3) PIXHAWK autopilot}
   \end{subfigure}~
   \begin{subfigure}[t]{0.489\columnwidth}
-  \includegraphics[width=\textwidth, trim={0 2cm 0 4cm}, clip]{images/realExperiment.png}
+  \includegraphics[width=\textwidth, trim={13.2cm 2cm 0 4cm}, clip]{images/realExperiment.png}
   \caption{Our flying arena equipped with an OptiTrack motion-capture system (for ground-truth recording)}
   \end{subfigure}
   %% \begin{subfigure}[t]{0.489\columnwidth}

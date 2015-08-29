@@ -150,13 +150,13 @@ Compared to the original method, the new method is now robust to the gyroscope b
 The problem of fusing vision and inertial data has been extensively investigated in the past.
 However, most of the proposed methods require a state initialization.
 Because of the system nonlinearities, lack of precise initialization can irreparably damage the entire estimation process.
-In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been addressed by using optimization-based approaches \cite{Leute2014}\cite{Forster2015}\cite{mourikis2008dual}\cite{lupton2012visual}\cite{huang2011observability}\cite{mourikis2007multi}\cite{leutenegger2013keyframe}. These methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
+In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been addressed by using optimization-based approaches \cite{Leute2014}\cite{Forster2015}\cite{mourikis2008dual}\cite{lupton2012visual}\cite{huang2011observability}\cite{mourikis2007multi}. These methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
 We are therefore interested in a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
 
 In computer vision, several deterministic solutions have been introduced.
 These techniques, known as {\it Structure from Motion}, can recover the relative rotation and translation up to scale between two camera poses \cite{Longuet-Higgins1981}\cite{Hartley1997}\cite{Nister2003}\cite{Hartley2004}\cite{Li2006}.
 Such methods are currently used in state-of-the-art visual navigation methods on MAVs in order to initialize maps \cite{Weiss2012}\cite{Forster2014}.
-However, the knowledge of the absolute scale and, at least, the absolute roll and pitch angles is essential for many applications ranging from autonomous navigation in GPS-denied environments to 3D reconstruction and augmented reality.
+However, the knowledge of the absolute scale and, at least, of the absolute roll and pitch angles is essential for many applications ranging from autonomous navigation in GPS-denied environments to 3D reconstruction and augmented reality.
 It is required to take the inertial measurements into consideration to compute these values deterministically.
 
 %% Some visual inertial sensor fusion that works without initialization have been introduced.
@@ -180,7 +180,7 @@ Specifically, all the physical quantities are obtained by simply inverting a lin
 The solution of the linear system can be refined with a quadratic equation assuming the knowledge of the gravity magnitude.
 This closed-form was improved in \cite{Li2013} to work with unknown camera-IMU calibration.
 Since the problem cannot be solved by simply inverting a linear system, a method to determine the six parameters that characterize the camera-IMU transformation was proposed.
-This method is therefore independent of external camera-IMU calibration, hence suitable for power-on-and-go systems.
+This method is therefore independent of external camera-IMU calibration, hence, suitable for power-on-and-go systems.
 
 A more intuitive expression of this closed-form solution was derived in \cite{Martinelli2014}.
 While being mathematically sound, this closed-form solution is not robust to noisy sensor data.
@@ -239,7 +239,7 @@ We can write our system using matrix formulation.
 Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
 
 In \cite{Martinelli2014}, the author proceeded to one more step before expressing the underlying linear system.
-For a given frame $j$, the equation of the first point feature $i=1$ is subtracted from all other point feature equations $1<i<=N$ (Equation 7).
+For a given frame $j$, the equation of the first point feature $i=1$ is subtracted from all other point feature equations $1<i<=N$ (Equation (7)).
 This additional step, very useful to detect system singularities, has the effect to corrupt all measurements with the first measurement,
 hence worsening the performance of the closed-form solution. Therefore,
 in this paper we discard this additional step.
@@ -248,7 +248,7 @@ The linear system in Equation \ref{eq:final1} can be written in the following co
 
 \begin{equation}
 \label{eq:mat1}
-\Xi X = S
+\Xi X = S.
 \end{equation}
 
 \noindent Matrix $\Xi$ and vector $S$ are fully determined by the measurements, while $X$ is the unknown vector.
@@ -322,7 +322,9 @@ This will allow us to identify its weaknesses and bring modifications to overcom
 \section{LIMITATIONS OF \cite{Martinelli2014}}\label{SectionBottlenecks}
 
 The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014}.
-This is obtained by \textbf{combining both real and synthetic data}.
+This is obtained by running the closed-form solution on a combination of both real and synthetic data.
+The setup is similar to the one we use in the experiments on real data described in Section \ref{SubsectionSetup}.
+However, unlike Section \ref{SectionPerformance}, we simulate the camera measurements by creating artificial point-features and computing the bearings ($\mu_j^i$ in Equation (\label{eq:final1})) from the MAV to these points at a given frame rate.
 In particular, we will add an artificial bias to the real measurements delivered by the inertial sensors (both the accelerometers and the gyroscopes).
 This will allow us to evaluate the impact of the bias on the performance.
 

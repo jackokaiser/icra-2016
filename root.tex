@@ -235,8 +235,8 @@ and the vectors $S_j$ are determined by accelerometer and gyroscope measurements
 
 Equation \ref{eq:final1} provides three scalar equations for each point feature $i=1,...,N$ and each frame starting from the second one $j=2,...n_i$.
 We therefore have a linear system consisting of $3(n_i-1)N$ equations in $6 + Nn_i$ unknowns.
-Indeed, note that when the first frame occurs, at $t_1 = 0$,
-Equation \ref{eq:final1} is always satisfied thus does not provide information.
+Indeed, note that, when the first frame is taken at $t_1 = 0$,
+Equation (\ref{eq:final1}) is always satisfied; thus does not provide information.
 We can write our system using matrix formulation.
 Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
 
@@ -246,7 +246,7 @@ This additional step, very useful to detect system singularities, has the effect
 hence worsening the performance of the closed-form solution. Therefore,
 in this paper we discard this additional step.
 
-The linear system in Equation \ref{eq:final1} can be written in the following compact format:
+The linear system in Equation (\ref{eq:final1}) can be written in the following compact form:
 
 \begin{equation}
 \label{eq:mat1}
@@ -284,13 +284,13 @@ X &\equiv [ G^T, V^T, \lambda_1^1, ..., \lambda_1^N, ..., \lambda_{n_i}^1, ..., 
             ... & ... & ... & ... & ... & ... & ... & ... & ... & ... & ... \\
             T_{n_i} & S_{n_i} & 0_3 & 0_3 & \mu_1^N & 0_3 & 0_3 & 0_3 & 0_3 & 0_3 & -\mu_{n_i}^N
           \end{array}
-          \right]
+          \right],
       }
 \end{multline*}
 }
 
-\noindent where $T_j \equiv - \frac{t^2_j}{2} I_3$, $S_j \equiv -t_j I_3$ and $I_3$ is the identity $3\times 3$ matrix; $0_3$ is the $3\times 1$ zero matrix.
-Note that matrix $\Xi$ and the vector $S$ are slightly different from the one proposed in \cite{Martinelli2014}.
+\noindent where $T_j \equiv - \frac{t^2_j}{2} I_3$, $S_j \equiv -t_j I_3$ and $I_3$ is the identity $3\times 3$ matrix, $0_3$ is the $3\times 1$ zero matrix.
+Note that matrix $\Xi$ and vector $S$ are slightly different from the ones proposed in \cite{Martinelli2014}.
 This is due to the additional step that, as we explained in the previous paragraph, we discarded for numerical stability reasons (see \cite{Martinelli2014} section 3 for further details).
 
 The sensor information is completely contained in the above linear system. Additionally, in \cite{Martinelli2014}, the author added a quadratic equation assuming the gravitational acceleration is a priori known.
@@ -302,10 +302,10 @@ We have the extra constraint $|G| = g$. We can express this constraint in matrix
 | \Pi X | ^2 = g^2,
 \end{equation}
 
-\noindent with $\Pi \equiv [I_3, 0_3, ..., 0_3]$. We can therefore recover the initial velocity, the roll, and pitch angles and the distances to the point features
+\noindent with $\Pi \equiv [I_3, 0_3, ..., 0_3]$. We can therefore recover the initial velocity, the roll and pitch angles, and the distances to the point features
 by finding the vector $X$ that satisfies (\ref{eq:mat1}) and (\ref{eq:mat2}).
 
-In the next sections, we will evaluate the performance of this method on real world data.
+In the next sections, we will evaluate the performance of this method on real-world data.
 This will allow us to identify its weaknesses and bring modifications to overcome them.
 
 %% The system therefore becomes:
@@ -335,20 +335,22 @@ However, unlike Section \ref{SectionPerformance}, we simulate the camera measure
 Simulating the camera measurements allows us to compare our estimations of the distances to the features ($\lambda_j^i$ in Equation (\ref{eq:final1})) with the ground truth.
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
 
+Inertial data were recorded from a quadrotor MAV while executing a circular trajectory of around $1$m radius (see Fig. \ref{fig:trajectory}).
+
 We define the relative error as the euclidean distance between the estimation and the ground truth,
 normalized by the ground truth.
 
-We set the simulated 3D-landmarks about $3m$ away from the MAV and the drone flies at a speed of around $1m/s$.
-We found that setting the frame rate of the simulated camera at 10Hz provides a sufficient optical flow length with the following setup.
-Increasing the frame rate above 30Hz decreases the optical flow length and introduce numerical instability for this setup.
-
-Reducing the number of considered frames also reduces the size of the matrices, and thus, speeds up the computations.
+We set the simulated 3D-landmarks about $3$m away from the MAV and the drone flies at a speed of around $1$m/s.
+We found that setting the frame rate of the simulated camera at 10Hz provides a sufficient pixel disparity with the following setup.
+In practice, increasing the frame rate above 30Hz decreases the pixel disparity and introduces numerical instability for this setup.
+The theoritical cases in which our system admits singularities are provided in \cite{Martinelli2012}\cite{Martinelli2014}.
+Reducing the number of considered frames also reduces the size of the matrices and, thus, speeds up the computations.
 As an example, over a time interval of 3 seconds, we obtain $31$ distinct frames.
 When observing 7 features, solving the closed-form solution is equivalent to inverting a linear system of $3\times 30\times 7 = 630$ equations and $6+7\times 31=223$ unknowns (see section \ref{SectionCFS}).
 
 The method we use to solve the overconstrained linear system $\Xi X = S$ is a Singular Value Decomposition (SVD) since it yields numerically robust solutions.
 
-In the next section, we will present the results obtained with the original closed-form solution on real IMU data, with simulated camera measurements.
+In section \ref{SectionBottlenecks}, we will present the results obtained with the original closed-form solution on real IMU data with simulated camera measurements.
 Our goal is to identify its performance limitations and introduce modifications to overcome them.
 
 
@@ -357,16 +359,16 @@ Our goal is to identify its performance limitations and introduce modifications 
 
 \subsection{Original closed-form solution performance}
 
-The original closed-form solution described in Equation (\ref{eq:mat1}) will be used as a basis for our work. In the following, this closed-form solution will be denoted by $CF$.
+The original closed-form solution described in Equation (\ref{eq:mat1}) will be used as a basis for our work.
 Moreover, we can also use the knowledge of the gravity magnitude to refine our results (Equation (\ref{eq:mat2})).
 In this case, we are minimizing a linear objective function with a quadratic constraint.
-In Fig. \ref{fig:original}, we display the performance of the  original closed-form solution in estimating speed, gravity in the local frame and distances to the features with and without this additional constraint.
+In Fig. \ref{fig:original}, we display the performance of the original Closed-Form (CF) solution in estimating speed, gravity in the local frame, and distances to the features with and without this additional constraint.
 
 
 \begin{figure}
   \centering
   \resizebox{\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}
-    \caption{Motion performed by the drone in 5 seconds.}
+    \caption{Motion performed by the drone during 5 seconds.\label{fig:trajectory}}
 \end{figure}
 
 \begin{figure}
@@ -379,7 +381,7 @@ In Fig. \ref{fig:original}, we display the performance of the  original closed-f
 Note how the evaluations get better as we increase the integration time.
 Indeed, our equations come from an extended triangulation \cite{Martinelli2012}.
 Therefore, it requires a significant difference in the measurements over time to robustly estimate the state.
-Also note that the gravity is robustly estimated (around 5\% error), whereas the speed and the distance to the features is more erroneous (above 10\% error).
+Also, note that the gravity is robustly estimated (around 5\% error), whereas the speed and the distance to the features is more erroneous (above 10\% error).
 
 Since the gravity is well estimated with the original closed-form, it comes without surprise that constraining its magnitude does not improve the performance much.
 That is why the curves representing the performance with and without using the gravity refinement (\ref{eq:mat2}) are so close.
@@ -391,10 +393,10 @@ In the following sections, we will study the impact of biased inertial measureme
 \subsection{Impact of accelerometer bias on the performance}
 In order to visualize the impact of the accelerometer bias on the performance,
 we corrupt the accelerometer measurements provided by the IMU by an artificial bias (Fig. \ref{fig:biasAccCF}).
-Despite a high accelerometer bias the closed-form solution still provides robust results.
-As seen on the Fig. \ref{fig:biasAccCF}, neither the estimation of the gravity, the velocity or the lambdas are impacted by the accelerometer bias.
+Despite a high accelerometer bias, the closed-form solution still provides robust results.
+As seen in Fig. \ref{fig:biasAccCF}, neither the estimation of the gravity, the velocity or the lambdas is impacted by the accelerometer bias.
 In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
-However, the estimation of the accelerometer bias with this method is not robust since our system is only slightly affected by it.
+However, the estimation of the accelerometer bias with that method is not robust since our system is only slightly affected by it.
 This is a counterintuitive result. Since our equations contain an integration of the acceleration, we also perform an integration of the accelerometer bias.
 We would have expected the accelerometer bias to have a greater impact on the solutions yielded by the system.
 
@@ -484,17 +486,18 @@ we define the following cost function:
 
 \begin{equation}
   \label{eq:cost}
-  cost(B) = ||\Xi X - S||^2
+  cost(B) = ||\Xi X - S||^2,
 \end{equation}
 
-With:
+\noindent with:
 \begin{itemize}
 \item $B$ the gyroscope bias;
 \item $\Xi$ and $S$ computed with respect to $B$.
 \end{itemize}
 
-By minimizing this cost function, we recover the gyroscope bias $B$ and the unknown vector $X$ which compensated for the gyroscope bias $B$.
-We can initialize the optimization process with $B = 0_3$ since the bias is usually a rather small quantity. Figure \ref{fig:gBiasEstimate} displays the three components of the bias estimated by this minimization.
+By minimizing this cost function, we recover the gyroscope bias $B$ and the unknown vector $X$.
+%which has accounted for the gyroscope bias $B$.
+We can initialize the optimization process with $B = 0_3$ since the bias is usually rather small. Fig. \ref{fig:gBiasEstimate} displays the three components of the bias estimated by this minimization.
 
 \begin{figure}
   \centering
@@ -546,14 +549,14 @@ The optimized closed-form solution provides better results than the standard clo
 
 
 Moreover, this method is robust even for high values of the gyroscope bias.
-Fig. \ref{fig:biasGyroOpt} displays the performance of the proposed method in estimating speed, gravity in the local frame and distances to the features in presence of the same artificial gyroscope bias from Fig. \ref{fig:biasGyroCF}.
+Fig. \ref{fig:biasGyroOpt} displays the performance of the proposed method in estimating speed, gravity in the local frame, and distances to the features in presence of the same artificial gyroscope bias from Fig. \ref{fig:biasGyroCF}.
 
 As seen in Fig. \ref{fig:biasGyroOpt}, after a certain integration duration, the estimations agree no matter how high the bias is.
 In other words, given that the integration duration is long enough, this method is unaffected by the gyroscope bias.
 %% This method can therefore fully compensate for high values of the gyroscope bias.
 %% Moreover, the values on which these evaluations agree are equals to the ones for the curve that has a gyroscope bias set to $0_3$.
 
-However, for very short time of integration ($<1.7$ seconds), the proposed method can fail by providing a gyroscope bias much larger than the correct one.
+However, for very short time of integration ($<2.25$ seconds), the proposed method can fail by providing a gyroscope bias much larger than the correct one.
 To understand this misestimation, in Fig. \ref{fig:cost} we plot the residual with respect to the bias, which is the cost function we are minimizing.
 We highlight a misestimation of the gyroscope bias by setting the duration of integration to 2 seconds while observing 7 features.
 We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
@@ -575,17 +578,17 @@ As we can see in Fig. \ref{fig:cost}, the cost function admits a symmetry with r
 
 \subsection{Removing the symmetry in the cost function}
 
-The symmetry in the cost function is induced by the strong weight of the gravity in the equation \ref{eq:final1}.
-In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when this direction $\vec{u}$ is collinear with the gravity throughout the motion.
-In the real world data we had, the motion satisfies this constraint.
-Specifically, the gyroscope was strapped on the MAV such that the vector $[0,0,1]$ in the gyroscope frame was pointing upwards when the MAV was hovering.
+The symmetry in the cost function is induced by the strong weight of the gravity in the Equation (\ref{eq:final1}).
+In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when $\vec{u}$ is collinear with the gravity throughout the motion.
+In the real-world data we used, the motion satisfies this constraint.
+Specifically, the gyroscope was mounted on the MAV such that the vector $[0,0,1]$ in the gyroscope frame was pointed upwards during hovering.
 That is why the residual varies only slightly for certain time sequences with respect to this vector.
 Indeed, in normal operations, a MAV will often have a pose close to its hovering stance in order to stay stable.
 
-If the MAV rotates such that the vector $\vec{u}$ becomes noncollinear with the gravity, the cost function does not exhibit this symmetry anymore.
-In this case the gyroscope bias is well estimated.
+If the MAV rotates such that $\vec{u}$ becomes noncollinear with the gravity, the cost function does not exhibit this symmetry anymore.
+In this case, the gyroscope bias is well estimated.
 
-A simple solution to avoid having that symmetry in our system would be to constrain the motion of our MAV while it is operating.
+A simple solution to avoid having that symmetry in our system would be to enforce that there is no such $\vec{u}$ by forcing our MAV to perform rotations while it is operating.
 Another way to artificially get rid of this symmetry is to tweak the cost function.
 Specifically, we can add a regularization term that penalizes high estimations of the gyroscope bias:
 
@@ -599,17 +602,17 @@ For high values of $\lambda$, the estimations provided by the optimized closed-f
 Indeed, high values of $\lambda$ force the estimation of the bias to $0_3$.
 
 Note that, instead of forcing the gyroscope bias to be close to $0_3$, we can easily force it to be close to any value.
-Therefore, if we have the knowledge of an approximately known gyroscope bias, we can use it to provide a better estimation of the gyroscope bias.
+Therefore, if we have the knowledge of an approximately-known gyroscope bias, we can use it to provide a better estimation of the gyroscope bias.
 
 \[
-cost(B) = ||\Xi X - S||^2 + \lambda ||B - B^{approx}||
+cost(B) = ||\Xi X - S||^2 + \lambda ||B - B^{approx}||,
 \]
 
-With $B^{approx}$ the known approximate gyroscope bias.
-This methods allow us to reuse previously computed gyroscope bias since it is known to slowly vary over time.
+\noindent with $B^{approx}$ being the known approximate gyroscope bias.
+This methods allow us to reuse previously-computed gyroscope bias since it is known to slowly vary over time.
 
 Selecting a reliable and safe value for the regularization parameter $\lambda$ is complicated.
-In this paper, we picked a value of $\lambda$ by experimentation.
+In this paper, we picked the value of $\lambda$ empirically.
 
 \section{EXPERIMENTS ON REAL DATA}\label{SectionPerformance}
 

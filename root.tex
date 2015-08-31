@@ -114,30 +114,30 @@ Autonomous mobile robots navigating in unknown environments have an intrinsic ne
 Concerning Micro Aerial Vehicles (MAV), a critical issue is to limit the number of on-board sensors to reduce weight and power consumption.
 Therefore, a common setup is to combine a monocular camera with an inertial measurements unit (IMU).
 On top of being cheap, these sensors have very interesting complementarities.
-Additionally, they can operate in indoor environments where Global Positioning System (GPS) signals are shadowed.
+Additionally, they can operate in indoor environments, where Global Positioning System (GPS) signals are shadowed.
 An open question is how to optimally fuse the information provided by these sensors.
 
 Currently, most sensor-fusion algorithms are either filter-based or iterative. That is, given a current state and measurements, they return an updated state.
-While working well in practice, these algorithms need to be provided by an initial state.
-
-The initialization of a filter based method is critical.
+While working well in practice, these algorithms need to be provided with an initial state.
+The initialization of these methods is critical.
 Due to nonlinearities of the system, a poor initialization can result into converging towards local minima and  providing faulty states with high confidence.
 %% Indeed, another shortcoming of filters is that they can silently fail.
 
-In this paper, we demonstrate the efficiency of a recent closed-form solution introduced in \cite{Martinelli2012}\cite{Martinelli2014} that fuses visual and inertial data to obtain the structure of the environment at the global scale along with the attitude and the speed of the robot.
+In this paper, we demonstrate the efficiency of a recent closed-form solution introduced in \cite{Martinelli2012}\cite{Martinelli2014}, which fuses visual and inertial data to obtain the structure of the environment at the global scale along with the attitude and the speed of the robot.
 By nature, a closed-form solution is deterministic and, thus, does not require any initialization.
 
 %% It is assumed that the camera is calibrated and the transformation between the IMU and the camera is known.
 %% This is a fair assumption for industrial drones to come pre-calibrated.
 
-We implement this method in order to test it with real world data.
+The method introduced in \cite{Martinelli2012}\cite{Martinelli2014} was only described in theory and demonstrated in simulations.
+In this paper, we implement this method in order to test it with real world data.
 This allow us to identify its limitations and bring modifications to overcome them.
 Specifically, we investigate the impact of biased inertial measurements.
-Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, we show that a large bias does not significantly worsen the performance.
-One major limitation of this method is the impact of biased gyroscope measurements.
+Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, here we show that a large bias on the accelerometer does not significantly worsen the performance.
+One major limitation of \cite{Martinelli2014} is the impact of biased gyroscope measurements.
 In other words, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method can only be successfully used with a very precise - and expensive - gyroscope.
-We then introduce a simple method that automatically estimates this bias. By adding this new method for the bias estimation to the original method, we obtain results that are equivalent to the ones in absence of bias.
-Compared to the original method, the new method is now robust to the gyroscope bias and automatically calibrates the gyroscope.
+Here, we introduce a simple method that automatically estimates this bias. By adding this new method for the bias estimation to the original method \cite{Martinelli2014}, we obtain results that are equivalent to the ones in absence of bias.
+Compared to \cite{Martinelli2014}, the new method is now robust to the gyroscope bias and automatically calibrates the gyroscope.
 %% Specifically, this method can accurately estimate the initial speed, the gravity, the distance to the features and the gyroscope bias for very short time of integration (around 2 seconds) and low amount of observed point features (around 5).
 
 

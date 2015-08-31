@@ -4,13 +4,11 @@
 %2345678901234567890123456789012345678901234567890123456789012345678901234567890
 %        1         2         3         4         5         6         7         8
 
-\documentclass[letterpaper, 10 pt, journal, final]{ieeeconf}  % Comment this line out if you need a4paper
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
 
 %\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
 
-%% \IEEEoverridecommandlockouts                              % This command is only needed if
-                                                          % you want to use the \thanks command
-
+\IEEEoverridecommandlockouts % This command is only needed if you want to use the \thanks command
 \overrideIEEEmargins                                      % Needed to meet printer requirements.
 
 % See the \addtolength command later in the file to balance the column lengths
@@ -37,6 +35,11 @@
 \usepackage{subcaption}
 \usepackage{pgfplots}
 
+%% \setlength{\belowdisplayskip}{1.5pt} \setlength{\belowdisplayshortskip}{1.5pt}
+\setlength{\abovedisplayskip}{1.5pt} \setlength{\abovedisplayshortskip}{1.5pt}
+\setlength{\textfloatsep}{8pt plus 1.0pt minus 2.0pt}
+\setlength{\floatsep}{8pt plus 1.0pt minus 2.0pt}
+\setlength{\intextsep}{8pt plus 1.0pt minus 2.0pt}
 
 %% \usepgfplotslibrary{external}
 %% \tikzexternalize
@@ -156,7 +159,7 @@ In literature, this initialization is often guessed or assumed to be known \cite
 We are therefore interested in a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
 
 In computer vision, several deterministic solutions have been introduced.
-These techniques, known as {\it Structure from Motion}, can recover the relative rotation and translation up to an unknown scale factor between two camera poses \cite{Longuet-Higgins1981}\cite{Nister2003}\cite{Hartley2004}\cite{Li2006}.
+These techniques, known as {\it Structure from Motion}, can recover the relative rotation and translation up to an unknown scale factor between two camera poses \cite{Hartley2004}.
 Such methods are currently used in state-of-the-art visual navigation methods for MAVs to initialize maps \cite{Weiss2012}\cite{Forster2014}\cite{FaesslerICRA15}.
 However, the knowledge of the absolute scale, and, at least, of the absolute roll and pitch angles, is essential for many applications ranging from autonomous navigation in GPS-denied environments to 3D reconstruction and augmented reality.
 For these applications, it is crucial to take the inertial measurements into consideration to compute these values deterministically.
@@ -172,9 +175,6 @@ For these applications, it is crucial to take the inertial measurements into con
 
 A procedure to quickly re-initialize a MAV after a failure was presented in \cite{Faessler2015}.
 However, this method requires an altimeter to initialize the scale.
-
-A landmark of known size was used in \cite{Gemeiner2007} to recover the initial pose of the MAV.
-This method is therefore not suitable for unknown environment.
 
 Recently, a closed-form solution has been introduced in \cite{Martinelli2012}.
 From integrating inertial and visual measurements over a short time-interval, this solution provides the absolute scale, roll and pitch angles, initial velocity, and distance to 3D features.
@@ -233,7 +233,7 @@ and the vectors $S_j$ are determined by accelerometer and gyroscope measurements
   The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
 \end{figure}
 
-Equation \ref{eq:final1} provides three scalar equations for each point feature $i=1,...,N$ and each frame starting from the second one $j=2,...n_i$.
+Equation (\ref{eq:final1}) provides three scalar equations for each point feature $i=1,...,N$ and each frame starting from the second one $j=2,...n_i$.
 We therefore have a linear system consisting of $3(n_i-1)N$ equations in $6 + Nn_i$ unknowns.
 Indeed, note that, when the first frame is taken at $t_1 = 0$,
 Equation (\ref{eq:final1}) is always satisfied; thus does not provide information.
@@ -252,7 +252,6 @@ The linear system in Equation (\ref{eq:final1}) can be written in the following 
 \label{eq:mat1}
 \Xi X = S.
 \end{equation}
-
 \noindent Matrix $\Xi$ and vector $S$ are fully determined by the measurements, while $X$ is the unknown vector.
 We have:
 
@@ -288,7 +287,6 @@ X &\equiv [ G^T, V^T, \lambda_1^1, ..., \lambda_1^N, ..., \lambda_{n_i}^1, ..., 
       }
 \end{multline*}
 }
-
 \noindent where $T_j \equiv - \frac{t^2_j}{2} I_3$, $S_j \equiv -t_j I_3$ and $I_3$ is the identity $3\times 3$ matrix, $0_3$ is the $3\times 1$ zero matrix.
 Note that matrix $\Xi$ and vector $S$ are slightly different from the ones proposed in \cite{Martinelli2014}.
 This is due to the additional step that, as we explained in the previous paragraph, we discarded for numerical stability reasons (see \cite{Martinelli2014} section 3 for further details).
@@ -680,7 +678,6 @@ The camera provides 60fps, but we discard most of the frames and consider only 1
 
 As seen in Fig. \ref{fig:valid}, the original closed-form solution and the optimized closed-form solution have similar performance.
 Indeed, for this dataset the gyroscope bias was estimated to $B = [0.0003, 0.009, 0.001]$, which is very low $(||B|| = 0.0091)$.
-
 Moreover, the performance is also similar to the one obtained with a well-initialized MSF.
 We remind the reader that unlike MSF, the closed-form solution does not require the knowledge of the absolute scale to be provided.
 

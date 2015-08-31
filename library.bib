@@ -151,20 +151,7 @@ year = {2015}
   organization={IEEE}
 }
 
-@article{Gemeiner2007,
-abstract = {For mobile robotics, head gear in augmented reality (AR) applications or computer vision, it is essential to continuously estimate the egomotion and the structure of the environment. This paper presents the system developed in the SmartTracking project, which simultaneously integrates visual and inertial sensors in a combined estimation scheme. The sparse structure estimation is based on the detection of corner features in the environment. From a single known starting position, the system can move into an unknown environment. The vision and inertial data are fused, and the performance of both Unscented Kalman filter and Extended Kalman filter are compared for this task. The filters are designed to handle asynchronous input from visual and inertial sensors, which typically operate at different and possibly varying rates. Additionally, a bank of Extended Kalman filters, one per corner feature, is used to estimate the position and the quality of structure points and to include them into the structure estimation process. The system is demonstrated on a mobile robot executing known motions, such that the estimation of the egomotion in an unknown environment can be compared to ground truth.},
-author = {Gemeiner, P. and Einramhof, P. and Vincze, M.},
-doi = {10.1177/0278364907080058},
-file = {:home/jkaiser/Downloads/The International Journal of Robotics Research-2007-Gemeiner-591-605.pdf:pdf},
-issn = {0278-3649},
-journal = {The International Journal of Robotics Research},
-keywords = {localization,mapping,sensor fusion},
-number = {6},
-pages = {591--605},
-title = {{Simultaneous Motion and Structure Estimation by Fusion of Inertial and Vision Data}},
-volume = {26},
-year = {2007}
-}
+
 @article{Hamel2006,
 abstract = {This paper considers the question of obtaining high quality attitude estimates from typical low cost inertial measurement units for applications in control of unmanned aerial vehicles. A nonlinear complimentary filter exploiting the structure of special orthogonal group S0(3) is proposed. The filter is expressed explicitly in terms of direct and untreated measurements. For a typical low cost inertial measurement where two inertial directions are measured (gravitational and magnetic fields) along with angular velocity, it is shown that the filter is well conditioned. If only a single direction is available (typically the gravitational field) along with angular velocity, it is shown that the full gyro bias vector is correctly estimated and that the estimated orientation converges to a set consistent with the measurements. Experimental results, for flight data from the HoverEyecopy UAV, demonstrate the efficiency of the proposed filter},
 author = {Hamel, T. and Mahony, R.},
@@ -253,19 +240,6 @@ pages = {1595--1601},
 title = {{A 4-point algorithm for relative pose estimation of a calibrated camera with a known relative rotation angle}},
 year = {2013}
 }
-@article{Li2006,
-abstract = {Estimating relative camera motion from two calibrated views is a classical problem in computer vision. The minimal case for such problem is the so-called five-point problem, for which the state-of-the-art solution is Nister's algorithm (2003, 2004). However, due to the heuristic nature of the procedures it applies, to implement it needs much effort for non-expert user. This paper provides a simpler algorithm based on the hidden variable resultant technique. Instead of eliminating the unknown variables one by one (i.e, sequentially) using the Gauss elimination, our algorithm eliminates many unknowns at once. Moreover, in the equation solving stage, instead of back-substituting and solve all the unknowns sequentially, we compute the minimal singular vector of the coefficient matrix, by which all the unknown parameters can be estimated simultaneously. Experiments on both simulation and real images have validated the new algorithm},
-author = {Li, Hongdong and Hartley, Richard},
-doi = {10.1109/ICPR.2006.579},
-file = {:home/jkaiser/Downloads/new5pt\_cameraREady\_ver\_1.pdf:pdf},
-isbn = {0769525210},
-issn = {10514651},
-journal = {Proceedings - International Conference on Pattern Recognition},
-pages = {630--633},
-title = {{Five-point motion estimation made easy}},
-volume = {1},
-year = {2006}
-}
 @article{Li2013,
 author = {Li, M. and Mourikis, a. I.},
 doi = {10.1177/0278364913481251},
@@ -279,20 +253,6 @@ title = {{High-precision, consistent EKF-based visual-inertial odometry}},
 url = {http://ijr.sagepub.com/cgi/doi/10.1177/0278364913481251},
 volume = {32},
 year = {2013}
-}
-@misc{Longuet-Higgins1981,
-abstract = {A simple algorithm for computing the three-dimensional structure of a scene from a correlated pair of perspective projections is described here, when the spatial relationship between the two projections is unknown. This problem is relevant not only to photographic surveying1 but also to binocular vision2, where the non-visual information available to the observer about the orientation and focal length of each eye is much less accurate than the optical information supplied by the retinal images themselves. The problem also arises in monocular perception of motion3, where the two projections represent views which are separated in time as well as space. As Marr and Poggio4 have noted, the fusing of two images to produce a three-dimensional percept involves two distinct processes: the establishment of a 1:1 correspondence between image points in the two views—the ‘correspondence problem’—and the use of the associated disparities for determining the distances of visible elements in the scene. I shall assume that the correspondence problem has been solved; the problem of reconstructing the scene then reduces to that of finding the relative orientation of the two viewpoints.},
-author = {Longuet-Higgins, H. C.},
-booktitle = {Nature},
-doi = {10.1038/293133a0},
-file = {:home/jkaiser/Downloads/sceneRec2.pdf:pdf},
-isbn = {8880551515},
-issn = {0028-0836},
-number = {5828},
-pages = {133--135},
-title = {{A computer algorithm for reconstructing a scene from two projections}},
-volume = {293},
-year = {1981}
 }
 @article{Lupton2012,
 abstract = {In this paper, we present a novel method to fuse observations from an inertial measurement unit (IMU) and visual sensors, such that initial conditions of the inertial integration, including gravity estimation, can be recovered quickly and in a linear manner, thus removing any need for special initialization procedures. The algorithm is implemented using a graphical simultaneous localization and mapping like approach that guarantees constant time output. This paper discusses the technical aspects of the work, including observability and the ability for the system to estimate scale in real time. Results are presented of the system, estimating the platforms position, velocity, and attitude, as well as gravity vector and sensor alignment and calibration on-line in a built environment. This paper discusses the system setup, describing the real-time integration of the IMU data with either stereo or monocular vision data. We focus on human motion for the purposes of emulating high-dynamic motion, as well as to provide a localization system for future human-robot interaction.},
@@ -371,13 +331,6 @@ keywords = {Aerial robots,Inspection robots,Mobile robot navigation,Sensor fusio
 pages = {295--301},
 title = {{Attitude and gyro bias estimation for a flying UAV}},
 year = {2005}
-}
-@article{Nister2003,
-author = {Nister, D},
-file = {:home/jkaiser/Downloads/5pt.pdf:pdf},
-pages = {195--202},
-title = {{An efficient solution to the five point relative pose problem}},
-year = {2003}
 }
 @article{Rosten2006,
 abstract = {Where feature points are used in real-time frame-rate applications, a high-speed feature detector is necessary. Feature detectors such as SIFT (DoG), Harris and SUSAN are good methods which yield high quality features, however they are too computationally intensive for use in real-time applications of any complexity. Here we show that machine learning can be used to derive a feature detector which can fully process live PAL video using less than 7\% of the available processing time. By comparison neither the Harris detector (120\%) nor the detection stage of SIFT (300\%) can operate at full frame rate. Clearly a high-speed detector is of limited use if the features produced are unsuitable for downstream processing. In particular, the same scene viewed from two different positions should yield features which correspond to the same real-world 3D locations [1]. Hence the second contribution of this paper is a comparison corner detectors based on this criterion applied to 3D scenes. This comparison supports a number of claims made elsewhere concerning existing corner detectors. Further, contrary to our initial expectations, we show that despite being principally constructed for speed, our detector significantly outperforms existing feature detectors according to this criterion.},

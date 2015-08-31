@@ -156,7 +156,7 @@ In literature, this initialization is often guessed or assumed to be known \cite
 We are therefore interested in a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
 
 In computer vision, several deterministic solutions have been introduced.
-These techniques, known as {\it Structure from Motion}, can recover the relative rotation and translation up to an unknown scale factor between two camera poses \cite{Longuet-Higgins1981}\cite{Hartley1997}\cite{Nister2003}\cite{Hartley2004}\cite{Li2006}.
+These techniques, known as {\it Structure from Motion}, can recover the relative rotation and translation up to an unknown scale factor between two camera poses \cite{Longuet-Higgins1981}\cite{Nister2003}\cite{Hartley2004}\cite{Li2006}.
 Such methods are currently used in state-of-the-art visual navigation methods for MAVs to initialize maps \cite{Weiss2012}\cite{Forster2014}\cite{FaesslerICRA15}.
 However, the knowledge of the absolute scale, and, at least, of the absolute roll and pitch angles, is essential for many applications ranging from autonomous navigation in GPS-denied environments to 3D reconstruction and augmented reality.
 For these applications, it is crucial to take the inertial measurements into consideration to compute these values deterministically.
@@ -708,23 +708,12 @@ We remind the reader that unlike MSF, the closed-form solution does not require 
 In this paper, we studied the recent closed-form solution proposed by \cite{Martinelli2014} which performs visual-inertial sensor fusion without requiring an initialization.
 We implemented this method in order to test it with real-world data.
 This allowed us to identify its performance limitations and bring modifications to overcome them.
-
 We investigated the impact of biased inertial measurements.
 Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, we showed that the accelerometer bias does not significantly worsen the performance.
-
 One major performance limitation of this method was due to the impact of biased gyroscope measurements.
 In other words, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise (and expensive) gyroscope.
 We then introduced a simple method that automatically estimates this bias.
-
-%% However, this method requires a significant amount of data to provide correct estimates of the gyroscope bias (either many features or long integration duration).
-%% We were able to get rid of this limitation with a simple statistical trick by adding a regularization term to our cost function.
-%% %tweak in the cost function we are minimizing.
-
-%% By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
-%% Compared to the original method, the new method is now robust to the gyroscope bias, and also provides the gyroscope bias.
-
 We validated this method by comparing its performance against state-of-the-art pose estimation approach for MAV.
-
 For future work, we see this optimized closed-form solution being used on a MAV to provide accurate state initialization.
 This would allow aggressive take-off maneuvers, such as hand throwing the MAV in the air, as already demonstrated in \cite{Faessler2015} with a range sensor.
 With our technique, we could get rid of the range sensor.

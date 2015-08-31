@@ -328,7 +328,7 @@ This is obtained by running the closed-form solution on a combination of both re
 In particular, we will add an artificial bias to the real measurements delivered by the inertial sensors (both the accelerometers and the gyroscopes).
 This will allow us to evaluate the impact of the bias on the performance.
 
-\subsection{Considered data}
+\subsection{Considered data}\label{SubsectionConsidered}
 
 The setup is similar to the one we use in the experiments on real data described in Section \ref{SubsectionSetup}.
 However, unlike Section \ref{SectionPerformance}, we simulate the camera measurements by creating artificial 3D-landmarks, and re-projecting these landmarks into the camera views ($\mu_j^i$ in Equation (\ref{eq:final1})).
@@ -583,7 +583,7 @@ In general, the residual is almost constant with respect to the component of the
 In the real-world data we used, the motion satisfies this constraint.
 Specifically, the gyroscope was mounted on the MAV such that the vector $[0,0,1]$ in the gyroscope frame was pointed upwards during hovering.
 That is why the residual varies only slightly for certain time sequences with respect to this vector.
-Indeed, in normal operations, a MAV will often have a pose close to its hovering stance in order to stay stable.
+Indeed, a MAV normally operates in near-hover confitions.
 
 If the MAV rotates such that $\vec{u}$ becomes noncollinear with the gravity, the cost function does not exhibit this symmetry anymore.
 In this case, the gyroscope bias is well estimated.
@@ -616,8 +616,7 @@ In this paper, we picked the value of $\lambda$ empirically.
 
 \section{EXPERIMENTS ON REAL DATA}\label{SectionPerformance}
 
-We validate our method against a new dataset containing IMU and camera measurements along with the ground truth.
-Therefore, we are now only relying on fully real world data.
+We validate our method on a real dataset containing IMU and camera measurements from a flying quadrotor along with ground truth.
 
 \subsection{Experimental setup}\label{SubsectionSetup}
 
@@ -626,53 +625,51 @@ This allows us to compare the estimations of the velocity along with the roll an
 
 \begin{figure}
   \centering
-  \begin{subfigure}[t]{\columnwidth}
-    \includegraphics[width=\textwidth]{images/setupTestDroneError.png}
-    \caption{Sketch of the experimental setup}
-  \end{subfigure}
-  \vspace{0.5cm}
+  %% \begin{subfigure}[t]{\columnwidth}
+  %%   \includegraphics[width=\textwidth]{images/setupTestDroneError.png}
+  %%   \caption{Sketch of the experimental setup}
+  %% \end{subfigure}
+  %% \vspace{0.5cm}
 
   \begin{subfigure}[t]{0.489\columnwidth}
   \includegraphics[width=\textwidth]{images/quadrotor_closeup.jpg}
   \caption{A closeup of our quadrotor: 1) down-looking camera,
-2) Odroid U3 quad-core computer, 3) PIXHAWK autopilot}
+2) Odroid U3 quad-core computer, 3) PIXHAWK autopilot.\label{fig:droneCloseup}}
   \end{subfigure}~
   \begin{subfigure}[t]{0.489\columnwidth}
   \includegraphics[width=\textwidth, trim={13.2cm 2cm 0 4cm}, clip]{images/realExperiment.png}
-  \caption{Our flying arena equipped with an OptiTrack motion-capture system (for ground-truth recording)}
+  \caption{Our flying arena equipped with an OptiTrack motion-capture system (for ground-truth recording).\label{fig:droneFly}}
   \end{subfigure}
   %% \begin{subfigure}[t]{0.489\columnwidth}
   %% \includegraphics{images/virtualExperiment.png}
   %% \caption{}
   %% \end{subfigure}
   \caption{Experimental setup for identifying the limitations of the performance.
-    The drone is equipped with an IMU, and the visual measurements are simulated.
+    The drone is equipped with an IMU and a down-looking camera.
     \label{fig:testsetup}}
 \end{figure}
 
 We use the same MAV used in \cite{FaesslerICRA15}, Section 3.4.
 Specifically, our quadrotor relies on the frame of the Parrot AR.Drone 2.01 including their motors, motor controllers, gears, and propellers.
-It is equipped by a PX4FMU autopilot and a PX4IOAR adapter board developed in the PIXHAWK Project \cite{meier2012pixhawk}.
+It is equipped with a PX4FMU autopilot and a PX4IOAR adapter board.
 The PX4FMU includes a 200Hz IMU.
-The MAV is also equipped with a downward-looking MatrixVision mvBlueFOX-MLC200w ($752 \times 480$)-pixel monochrome camera with a 130-degree field-of-view lens.
-
-The drone is flying indoor at low altitude.
-The feature extraction and matching is done with FAST corner algorithm \cite{Rosten2006}.
+The MAV is also equipped with a downward-looking MatrixVision mvBlueFOX-MLC200w ($752 \times 480$-pixel) monochrome camera with a 130-degree field-of-view lens (Fig. \ref{fig:droneCloseup}).
+The MAV flies indoors at low altitude ($1.5$m) (Fig. \ref{fig:droneFly}).
+The feature extraction and matching is done via the FAST corners \cite{Rosten2006}.
 
 \subsection{Results}
 
 We compare the performance on the estimations of the gravity and the initial velocity obtained with three different methods:
 \begin{itemize}
-\item The original closed-form solution (Equation \ref{eq:mat1});
-\item Our modified closed-form solution (Equation \ref{eq:cost});
-\item The loosely-coupled visual-inertial algorithm (MSF) in \cite{LynenIROS13} using pose estimates from the Semi-direct Visual Odometry (SVO) package \cite{Forster2014} (how to combine the sensor fusion in \cite{LynenIROS13} with SVO can be found in \cite{FaesslerICRA15}).
+\item The original closed-form solution \cite{Martinelli2014} (Equation \ref{eq:mat1});
+\item Our modified closed-form solution (this paper) (Equation \ref{eq:cost});
+\item The loosely-coupled visual-inertial algorithm (MSF) in \cite{LynenIROS13} using pose estimates from the Semi-direct Visual Odometry (SVO) package \cite{Forster2014} (how to combine MSF \cite{LynenIROS13} with SVO can be found in \cite{FaesslerICRA15}).
 \end{itemize}
-The reason we included the SVO in the validation is for having a reference to state-of-the-art pose estimation method.
-However, this method requires to be initialized with the knowledge of the absolute scale, whereas our method works without initialization.
+The reason we included SVO+MSF in the validation is to have a reference state-of-the-art pose estimation method.
+However, MSF requires to be initialized with a rough absolute scale, whereas our method works without initialization.
 
-We set the integration duration for the closed-form solution to 2.8 seconds.
-The camera provides 60fps, but we discard most of the frames and consider only one frame every 0.1 seconds.
-Indeed, considering frames that are separated by a time interval shorter than 0.1 seconds does not add significant information to our system.
+We set the integration duration for the closed-form solution to 2.8 seconds, since it is sufficient for the closed-form to provide robust results (see Fig. \ref{fig:optEstimate}).
+The camera provides 60fps, but we discard most of the frames and consider only 10Hz (this is discussed in section \ref{SubsectionConsidered}).
 
 \begin{figure}
    \centering
@@ -683,8 +680,8 @@ Indeed, considering frames that are separated by a time interval shorter than 0.
 As seen in Fig. \ref{fig:valid}, the original closed-form solution and the optimized closed-form solution have similar performance.
 Indeed, for this dataset the gyroscope bias was estimated to $B = [0.0003, 0.009, 0.001]$, which is very low $(||B|| = 0.0091)$.
 
-Moreover, the performance is also similar to the one obtained with a well-initialized SVO.
-We remind the reader that unlike SVO, the closed-form solution does not require the knowledge of the absolute scale to be provided.
+Moreover, the performance is also similar to the one obtained with a well-initialized MSF.
+We remind the reader that unlike MSF, the closed-form solution does not require the knowledge of the absolute scale to be provided.
 
 
 %In a real applications, a proper online computation of the gyroscope bias can be reused.
@@ -707,12 +704,12 @@ We remind the reader that unlike SVO, the closed-form solution does not require 
 %However, the methods for fusing visual and inertial measurements so far introduced are filter based, hence require an initialization.
 %Providing a reliable state initialization is critical for these algorithms to work correctly.
 
-In this paper, we studied the recent closed-form solution proposed by \cite{Martinelli2014} that performs visual-inertial sensor fusion without requiring an initialization.
-We implemented this method in order to test it with real world data.
+In this paper, we studied the recent closed-form solution proposed by \cite{Martinelli2014} which performs visual-inertial sensor fusion without requiring an initialization.
+We implemented this method in order to test it with real-world data.
 This allowed us to identify its performance limitations and bring modifications to overcome them.
 
 We investigated the impact of biased inertial measurements.
-Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, we showed that its low impact on the system makes it hard to estimate.
+Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, we showed that the accelerometer bias does not significantly worsen the performance.
 
 One major performance limitation of this method was due to the impact of biased gyroscope measurements.
 In other words, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise (and expensive) gyroscope.
@@ -725,12 +722,11 @@ We then introduced a simple method that automatically estimates this bias.
 %% By adding this new method for the bias estimation to the original method we obtain results which are equivalent to the ones in absence of bias.
 %% Compared to the original method, the new method is now robust to the gyroscope bias, and also provides the gyroscope bias.
 
-We validated this method by comparing its performance against the original method and the SVO described in \cite{FaesslerICRA15} which is the-state-of-the-art approach for pose estimation on MAV.
+We validated this method by comparing its performance against state-of-the-art pose estimation approach for MAV.
 
-For future work, we see this optimized closed-form solution being implemented on a MAV to provide accurate state initialization.
+For future work, we see this optimized closed-form solution being used on a MAV to provide accurate state initialization.
 This would allow aggressive take-off maneuvers, such as hand throwing the MAV in the air, as already demonstrated in \cite{Faessler2015} with a range sensor.
-With our technique however, we could get rid of the altimeter sensor.
-The drone could therefore perform any motion right after the throw instead of having a required hovering stage to compute the absolute scale.
+With our technique, we could get rid of the range sensor.
 
 \bibliographystyle{plain}
 \bibliography{library}

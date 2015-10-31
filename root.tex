@@ -329,6 +329,7 @@ This will allow us to evaluate the impact of the bias on the performance.
 \subsection{Considered data}\label{SubsectionConsidered}
 
 The setup is similar to the one we use in the experiments on real data described in Section \ref{SubsectionSetup}.
+Specifically, the ground truth pose of the MAV is obtained with a motion-capture system.
 However, unlike Section \ref{SectionPerformance}, we simulate the camera measurements by creating artificial 3D-landmarks, and re-projecting these landmarks into the camera views ($\mu_j^i$ in Equation (\ref{eq:final1})).
 Simulating the camera measurements allows us to compare our estimations of the distances to the features ($\lambda_j^i$ in Equation (\ref{eq:final1})) with the ground truth.
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
@@ -383,10 +384,9 @@ Also, note that the gravity is robustly estimated (around 5\% error), whereas th
 
 Since the gravity is well estimated with the original closed-form, it comes without surprise that constraining its magnitude does not improve the performance much.
 That is why the curves representing the performance with and without using the gravity refinement (\ref{eq:mat2}) are so close.
-%% The distance to the features are slightly improved (around 1\% error decrease) at the expense of worsening the estimation of the speed (around 20\% error increase).
+We therefore ease this constraint for the following sections.
 
-%% In the following sections, we will introduce modifications to improve over these results.
-In the following sections, we will study the impact of biased inertial measurements on the performance of the closed-form solution without using the gravity refinement.
+%% In Section \ref{secAccBiasStudy} and \ref{secGyroBiasStudy}, we will study the impact of biased inertial measurements on the performance of the closed-form solution.
 
 \subsection{Impact of accelerometer bias on the performance}
 In order to visualize the impact of the accelerometer bias on the performance,

@@ -490,12 +490,15 @@ we define the following cost function:
 \noindent with:
 \begin{itemize}
 \item $B$ the gyroscope bias;
-\item $\Xi$ and $S$ computed with respect to $B$.
+\item $\Xi$ and $S$ computed by replacing the angular velocity provided by the gyroscope $\omega$ by $\omega - B$.
 \end{itemize}
 
 By minimizing this cost function, we recover the gyroscope bias $B$ and the unknown vector $X$.
 %which has accounted for the gyroscope bias $B$.
-We can initialize the optimization process with $B = 0_3$ since the bias is usually rather small. Fig. \ref{fig:gBiasEstimate} displays the three components of the bias estimated by this minimization.
+Since our cost function requires an initialization and is non-convex (see Fig. \label{fig:cost}),
+the optimization process can be stuck in local minima.
+However, We can initialize the optimization process with $B = 0_3$ since the bias is usually rather small.
+Fig. \ref{fig:gBiasEstimate} displays the three components of the bias estimated by this minimization.
 
 \begin{figure}
   \centering
@@ -573,8 +576,11 @@ We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
 \end{figure}
 
 As we can see in Fig. \ref{fig:cost}, the cost function admits a symmetry with respect to $B_z$.
+This symmetry replicates the minima of the true gyroscope bias along $B_z$.
+The optimization process can therefore diverge from the true gyroscope bias.
+In the next section, we present a method to use a priori knowledge to guide the optimization process.
 
-\subsection{Removing the symmetry in the cost function}
+\subsection{Removing the symmetry in the cost function \label{sec:symmetry}}
 
 The symmetry in the cost function is induced by the strong weight of the gravity in the Equation (\ref{eq:final1}).
 In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when $\vec{u}$ is collinear with the gravity throughout the motion.

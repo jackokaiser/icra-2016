@@ -597,8 +597,10 @@ Another way to artificially get rid of this symmetry is to tweak the cost functi
 Specifically, we can add a regularization term that penalizes high estimations of the gyroscope bias:
 
 \begin{equation}
-cost(B) = ||\Xi X - S||^2 + \lambda ||B||
+cost(B) = ||\Xi X - S||^2 + \lambda (\vec{u} \cdot B)
 \end{equation}
+
+\noindent with $\vec{u}$ the direction collinear with the gravity throughout the motion.
 
 The coefficient $\lambda$ is the weight given to how much we want the bias to be small.
 For small values of $\lambda$, our cost function is similar to the previous one and the bias can grow arbitrarily high.

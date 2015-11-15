@@ -584,38 +584,35 @@ In the next section, we present a method to use a priori knowledge to guide the 
 
 The symmetry in the cost function is induced by the strong weight of the gravity in the Equation (\ref{eq:final1}).
 In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when $\vec{u}$ is collinear with the gravity throughout the motion.
-In the real-world data we used, the motion satisfies this constraint.
-Specifically, the gyroscope was mounted on the MAV such that the vector $[0,0,1]$ in the gyroscope frame was pointed upwards during hovering.
-That is why the residual varies only slightly for certain time sequences with respect to this vector.
-Indeed, a MAV normally operates in near-hover confitions.
+Since a MAV normally operates in near-hover confitions, $\vec{u}$ is approximated to the vector pointing upwards in the gyroscope frame when the MAV is standing.
 
 If the MAV rotates such that $\vec{u}$ becomes noncollinear with the gravity, the cost function does not exhibit this symmetry anymore.
 In this case, the gyroscope bias is well estimated.
 
 A simple solution to avoid having that symmetry in our system would be to enforce that there is no such $\vec{u}$ by forcing our MAV to perform rotations while it is operating.
 Another way to artificially get rid of this symmetry is to tweak the cost function.
-Specifically, we can add a regularization term that penalizes high estimations of the gyroscope bias:
+Specifically, we can add a regularization term that penalizes high estimations of this gyroscope bias component:
 
 \begin{equation}
-cost(B) = ||\Xi X - S||^2 + \lambda (\vec{u} \cdot B)
+cost(B) = ||\Xi X - S||^2 + \lambda (\vec{u} \cdot B)^2,
 \end{equation}
 
-\noindent with $\vec{u}$ the direction collinear with the gravity throughout the motion.
+\noindent with:
+\begin{itemize}
+\item $\vec{u}$ the direction collinear with the gravity throughout the motion;
+\item $\lambda$ the coefficient given to how much we want to penalize this bias component.
+\end{itemize}
 
-The coefficient $\lambda$ is the weight given to how much we want the bias to be small.
 For small values of $\lambda$, our cost function is similar to the previous one and the bias can grow arbitrarily high.
-For high values of $\lambda$, the estimations provided by the optimized closed-form solution are similar to the ones provided by the standard closed-form solution.
-Indeed, high values of $\lambda$ force the estimation of the bias to $0_3$.
-
-Note that, instead of forcing the gyroscope bias to be close to $0_3$, we can easily force it to be close to any value.
-Therefore, if we have the knowledge of an approximately-known gyroscope bias, we can use it to provide a better estimation of the gyroscope bias.
+Note that, instead of forcing this gyroscope bias component to be close to $0$, we can easily force it to be close to any value.
+Therefore, we can use the a priori knowledge of a gyroscope bias approximation:
 
 \[
-cost(B) = ||\Xi X - S||^2 + \lambda ||B - B^{approx}||,
+cost(B) = ||\Xi X - S||^2 +  \lambda (\vec{u} \cdot (B - B^{approx} ))^2,
 \]
 
 \noindent with $B^{approx}$ being the known approximate gyroscope bias.
-This methods allow us to reuse previously-computed gyroscope bias since it is known to slowly vary over time.
+This methods allows us to reuse previously-computed gyroscope bias since it is known to slowly vary over time.
 
 Selecting a reliable and safe value for the regularization parameter $\lambda$ is complicated.
 In this paper, we picked the value of $\lambda$ empirically.
@@ -688,7 +685,7 @@ As seen in Fig. \ref{fig:valid}, the performance obtained by our method is simil
 We remind the reader that unlike MSF, the closed-form solution does not require the knowledge of the absolute scale to be provided.
 
 Moreover, the original closed-form solution and the optimized closed-form solution have similar performance.
-Indeed, for this dataset the gyroscope bias was estimated to $B = [0.0003, 0.009, 0.001]$, which is very low $(||B|| = 0.0091)$.
+Indeed, for this dataset the gyroscope bias was estimated to $B = [0.0003, 0.009, 0.001]$, which is very small $(||B|| = 0.0091)$.
 To prove the robustness of our method compared to the original closed-form,
 we corrupt the gyroscope measurements with an artificial bias in Fig. \ref{fig:validBias}.
 
@@ -696,18 +693,18 @@ we corrupt the gyroscope measurements with an artificial bias in Fig. \ref{fig:v
   \centering
   \begin{subfigure}[b]{0.489\columnwidth}
     \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.05.tex}}
-    \caption{Gyro corrupted with $|bias|=0.05$.}
+    \caption{$|bias|=0.05$.}
   \end{subfigure}
   \begin{subfigure}[b]{0.489\columnwidth}
     \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.1.tex}}
-    \caption{Gyro corrupted with $|bias|=0.1$.}
+    \caption{$|bias|=0.1$.}
   \end{subfigure}
   \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014}.
     The gyroscope measurements are corrupted with an artifial bias.
     The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.\label{fig:validBias}}
 \end{figure}
 
-
+As seen in Fig. \ref{fig:validBias}, our method is robust against gyroscope bias whereas the original closed-form is not.
 
 %In a real applications, a proper online computation of the gyroscope bias can be reused.
 %% Since the gyroscope bias varies slowly over time, we can reuse its knowledge.

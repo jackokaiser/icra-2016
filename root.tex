@@ -684,10 +684,29 @@ The camera provides 60fps, but we discard most of the frames and consider only 1
    \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{FaesslerICRA15}. The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.\label{fig:valid}}
 \end{figure}
 
-As seen in Fig. \ref{fig:valid}, the original closed-form solution and the optimized closed-form solution have similar performance.
-Indeed, for this dataset the gyroscope bias was estimated to $B = [0.0003, 0.009, 0.001]$, which is very low $(||B|| = 0.0091)$.
-Moreover, the performance is also similar to the one obtained with a well-initialized MSF.
+As seen in Fig. \ref{fig:valid}, the performance obtained by our method is similar than the performance obtained by a well-initialized MSF.
 We remind the reader that unlike MSF, the closed-form solution does not require the knowledge of the absolute scale to be provided.
+
+Moreover, the original closed-form solution and the optimized closed-form solution have similar performance.
+Indeed, for this dataset the gyroscope bias was estimated to $B = [0.0003, 0.009, 0.001]$, which is very low $(||B|| = 0.0091)$.
+To prove the robustness of our method compared to the original closed-form,
+we corrupt the gyroscope measurements with an artificial bias in Fig. \ref{fig:validBias}.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.489\columnwidth}
+    \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.05.tex}}
+    \caption{Gyro corrupted with $|bias|=0.05$.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.489\columnwidth}
+    \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.1.tex}}
+    \caption{Gyro corrupted with $|bias|=0.1$.}
+  \end{subfigure}
+  \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014}.
+    The gyroscope measurements are corrupted with an artifial bias.
+    The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.\label{fig:validBias}}
+\end{figure}
+
 
 
 %In a real applications, a proper online computation of the gyroscope bias can be reused.

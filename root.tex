@@ -676,9 +676,22 @@ We set the integration duration for the closed-form solution to 2.8 seconds, sin
 The camera provides 60fps, but we discard most of the frames and consider only 10Hz (this is discussed in section \ref{SubsectionConsidered}).
 
 \begin{figure}
-   \centering
-   \resizebox{0.7\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3opt-KF.tex}}
-   \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{FaesslerICRA15}. The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.\label{fig:valid}}
+  \centering
+  \begin{subfigure}[b]{0.7\columnwidth}
+   \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3opt-KF.tex}}
+    \caption{No artificial bias.\label{fig:valid}}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.489\columnwidth}
+    \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.05.tex}}
+    \caption{Artificial $|bias|=0.05$.\label{fig:validBias1}}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.489\columnwidth}
+    \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.1.tex}}
+    \caption{Artificial $|bias|=0.1$.\label{fig:validBias2}}
+  \end{subfigure}
+  \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{FaesslerICRA15}.
+    The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.}
+
 \end{figure}
 
 As seen in Fig. \ref{fig:valid}, the performance obtained by our method is similar than the performance obtained by a well-initialized MSF.
@@ -687,24 +700,8 @@ We remind the reader that unlike MSF, the closed-form solution does not require 
 Moreover, the original closed-form solution and the optimized closed-form solution have similar performance.
 Indeed, for this dataset the gyroscope bias was estimated to $B = [0.0003, 0.009, 0.001]$, which is very small $(||B|| = 0.0091)$.
 To prove the robustness of our method compared to the original closed-form,
-we corrupt the gyroscope measurements with an artificial bias in Fig. \ref{fig:validBias}.
-
-\begin{figure}
-  \centering
-  \begin{subfigure}[b]{0.489\columnwidth}
-    \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.05.tex}}
-    \caption{$|bias|=0.05$.}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.489\columnwidth}
-    \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.1.tex}}
-    \caption{$|bias|=0.1$.}
-  \end{subfigure}
-  \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014}.
-    The gyroscope measurements are corrupted with an artifial bias.
-    The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.\label{fig:validBias}}
-\end{figure}
-
-As seen in Fig. \ref{fig:validBias}, our method is robust against gyroscope bias whereas the original closed-form is not.
+we corrupt the gyroscope measurements with an artificial bias in Fig. \ref{fig:validBias1} and Fig. \ref{fig:validBias2}.
+As seen in these figures, our method is robust against gyroscope bias whereas the original closed-form is not.
 
 %In a real applications, a proper online computation of the gyroscope bias can be reused.
 %% Since the gyroscope bias varies slowly over time, we can reuse its knowledge.

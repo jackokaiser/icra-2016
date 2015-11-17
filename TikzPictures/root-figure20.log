@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  15 NOV 2015 16:28
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  17 NOV 2015 11:58
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -843,10 +843,6 @@ isable this.
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 )
-Underfull \hbox (badness 1859) in paragraph at lines 617--619
-\OT1/ptm/m/n/10 bias. This meth-ods al-low us to reuse previously-
- []
-
 The command '\includegraphics [width=\textwidth ]{images/quadrotor_closeup.jpg}
 ' has been optimized away. Use '/tikz/external/optimize=false' to disable this.
 
@@ -854,12 +850,12 @@ The command '\includegraphics [width=\textwidth , trim={13.2cm 2cm 0 4cm}, clip
 ]{images/realExperiment.png}' has been optimized away. Use '/tikz/external/opti
 mize=false' to disable this.
 
-Underfull \hbox (badness 2726) in paragraph at lines 647--647
+Underfull \hbox (badness 2726) in paragraph at lines 644--644
 \OT1/ptm/m/n/9 with an Op-ti-Track motion-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 673--674
+Underfull \hbox (badness 10000) in paragraph at lines 670--671
 []\OT1/ptm/m/n/10 The loosely-coupled visual-inertial al-go-rithm
  []
 
@@ -869,25 +865,16 @@ isable this.
 ) (./graph/results2.8s-CF3-CF3Opt-Bias0.05.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
-)
-Underfull \hbox (badness 10000) in paragraph at lines 699--699
-[]\OT1/ptm/m/n/9 (a) |Gyro cor-rupted with
- []
-
-(./graph/results2.8s-CF3-CF3Opt-Bias0.1.tex
+) (./graph/results2.8s-CF3-CF3Opt-Bias0.1.tex
 \openout5 = `TikzPictures/root-figure20.dpth'.
 
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
 Missing character: There is no ; in font nullfont!
-[7
+[6
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
-Underfull \hbox (badness 10000) in paragraph at lines 703--703
-[]\OT1/ptm/m/n/9 (b) |Gyro cor-rupted with
- []
-
 No file TikzPictures/root-figure20.bbl.
 
 ** Conference Paper **

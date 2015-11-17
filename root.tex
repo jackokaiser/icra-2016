@@ -132,9 +132,9 @@ By nature, a closed-form solution is deterministic and, thus, does not require a
 %% It is assumed that the camera is calibrated and the transformation between the IMU and the camera is known.
 %% This is a fair assumption for industrial drones to come pre-calibrated.
 
-The method introduced in \cite{Martinelli2012}\cite{Martinelli2014} was only described in theory and demonstrated in simulations.
-In this paper, we implement this method in order to test it with real world data.
-This allow us to identify its limitations and bring modifications to overcome them.
+The method introduced in \cite{Martinelli2012}\cite{Martinelli2014} was only described in theory and demonstrated with Monte-Carlo simulations.
+In this paper, we perform simulations with plausible MAV motions and synthetic noisy sensor data.
+This allow us to identify limitations of the method and bring modifications to overcome them.
 Specifically, we investigate the impact of biased inertial measurements.
 Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, here we show that a large bias on the accelerometer does not significantly worsen the performance.
 One major limitation of \cite{Martinelli2014} is the impact of biased gyroscope measurements.
@@ -303,7 +303,7 @@ We have the extra constraint $|G| = g$. We can express this constraint in matrix
 \noindent with $\Pi \equiv [I_3, 0_3, ..., 0_3]$. We can therefore recover the initial velocity, the roll and pitch angles, and the distances to the point features
 by finding the vector $X$ that satisfies (\ref{eq:mat1}) and (\ref{eq:mat2}).
 
-In the next sections, we will evaluate the performance of this method on real-world data.
+In the next sections, we will evaluate the performance of this method on simulated noisy sensor data.
 This will allow us to identify its weaknesses and bring modifications to overcome them.
 
 %% The system therefore becomes:
@@ -322,24 +322,23 @@ This will allow us to identify its weaknesses and bring modifications to overcom
 \section{LIMITATIONS OF \cite{Martinelli2014}}\label{SectionBottlenecks}
 
 The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014}.
-This is obtained by running the closed-form solution on a combination of both real and synthetic data.
+This is obtained by running the closed-form solution on plausible MAV motions with synthetic noisy sensor data.
+
 In particular, we will add an artificial bias to the real measurements delivered by the inertial sensors (both the accelerometers and the gyroscopes).
 This will allow us to evaluate the impact of the bias on the performance.
 
-\subsection{Considered data}\label{SubsectionConsidered}
+\subsection{Simulation setup}\label{SubsectionConsidered}
 
-The setup is similar to the one we use in the experiments on real data described in Section \ref{SubsectionSetup}.
-Specifically, the ground truth pose of the MAV is obtained with a motion-capture system.
-However, unlike Section \ref{SectionPerformance}, we simulate the camera measurements by creating artificial 3D-landmarks, and re-projecting these landmarks into the camera views ($\mu_j^i$ in Equation (\ref{eq:final1})).
-Simulating the camera measurements allows us to compare our estimations of the distances to the features ($\lambda_j^i$ in Equation (\ref{eq:final1})) with the ground truth.
+We simulate the motion of a MAV executing a circular trajectory of about $1$m radius.
+
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
-
-Inertial data were recorded from a quadrotor MAV while executing a circular trajectory of about $1$m radius (see Fig. \ref{fig:trajectory}).
-
 We define the relative error as the euclidean distance between the estimation and the ground truth,
 normalized by the ground truth.
 
-We set the simulated 3D-landmarks about $3$m away from the MAV and the drone flies at a speed of around $1$m/s.
+Synthetic gyroscope and accelerometer data are affected by a statistical error of $0.5$ deg/s and $0.5$ cm/s\textsuperscript{2}, respectively.
+We will corrupt these measurements with a synthetic bias.
+
+We set $7$ simulated 3D point-features about $3$m away from the MAV, which flies at a speed of around $1$m/s.
 We found that setting the frame rate of the simulated camera at 10Hz provides a sufficient pixel disparity with the following setup.
 In practice, increasing the frame rate above 30Hz decreases the pixel disparity and introduces numerical instability for this setup.
 The theoritical cases in which our system admits singularities are provided in \cite{Martinelli2012}\cite{Martinelli2014}.
@@ -349,38 +348,32 @@ When observing 7 features, solving the closed-form solution is equivalent to inv
 
 The method we use to solve the overconstrained linear system $\Xi X = S$ is a Singular Value Decomposition (SVD) since it yields numerically robust solutions.
 
-In section \ref{SectionBottlenecks}, we will present the results obtained with the original closed-form solution on real IMU data with simulated camera measurements.
+In the next section, we will present the results obtained with the original closed-form solution on the simulated data mentioned, with different sensor bias settings.
 Our goal is to identify its performance limitations and introduce modifications to overcome them.
 
 
 %% The case of a biased gyroscope is addressed in chapter \ref{ch:gyro}.
 %% Indeed, the main contribution of this report is the simple method introduced in Section \ref{sec:computeBias} to compute the gyroscope bias with the closed-form solution, which happened to be a major performance bottleneck.
 
-\subsection{Original closed-form solution performance}
+\subsection{Original closed-form solution performance without bias}
 
 The original closed-form solution described in Equation (\ref{eq:mat1}) will be used as a basis for our work.
 Moreover, we can also use the knowledge of the gravity magnitude to refine our results (Equation (\ref{eq:mat2})).
 In this case, we are minimizing a linear objective function with a quadratic constraint.
 In Fig. \ref{fig:original}, we display the performance of the original Closed-Form (CF) solution in estimating speed, gravity in the local frame, and distances to the features with and without this additional constraint.
 
-
-\begin{figure}
-  \centering
-  \resizebox{0.7\columnwidth}{!}{\input{graph/droneMotion14.6for5s}}
-    \caption{Motion performed by the drone during 5 seconds.\label{fig:trajectory}}
-\end{figure}
-
 \begin{figure}
   \centering
     \resizebox{0.7\columnwidth}{!}{\input{graph/originalCF}}
-    \caption{Original closed-form solution estimations with and without using the knowledge of the gravity (\ref{eq:mat2}). We are observing 12 features  over a variable duration of integration.\label{fig:original}}
+    \caption{Original closed-form solution estimations with and without using the knowledge of the gravity (\ref{eq:mat2}). We are observing 7 features  over a variable duration of integration.\label{fig:original}}
 \end{figure}
-
 
 Note how the evaluations get better as we increase the integration time.
 Indeed, our equations come from an extended triangulation \cite{Martinelli2012}.
 Therefore, it requires a significant difference in the measurements over time to robustly estimate the state.
-Also, note that the gravity is robustly estimated (around 5\% error), whereas the speed and the distance to the features is more erroneous (above 10\% error).
+
+Without sensor bias, the original closed-form robustly estimate all the properties (below $0.05\%$ error) after $2$ seconds of integration.
+Note that a robust estimation of the gravity requires a shorter duration of integration than the speed and the distance to the features.
 
 Since the gravity is well estimated with the original closed-form, it comes without surprise that constraining its magnitude does not improve the performance much.
 That is why the curves representing the performance with and without using the gravity refinement (\ref{eq:mat2}) are so close.
@@ -390,7 +383,7 @@ We therefore ease this constraint for the following sections.
 
 \subsection{Impact of accelerometer bias on the performance}
 In order to visualize the impact of the accelerometer bias on the performance,
-we corrupt the accelerometer measurements provided by the IMU by an artificial bias (Fig. \ref{fig:biasAccCF}).
+we corrupt the accelerometer measurements by an artificial bias (Fig. \ref{fig:biasAccCF}).
 Despite a high accelerometer bias, the closed-form solution still provides robust results.
 As seen in Fig. \ref{fig:biasAccCF}, neither the estimation of the gravity, the velocity or the lambdas is impacted by the accelerometer bias.
 In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
@@ -430,7 +423,7 @@ We would have expected the accelerometer bias to have a greater impact on the so
 
 \subsection{Impact of gyroscope bias on the performance}
 To visualize the impact of the gyroscope bias on the performance,
-we corrupt the gyroscope measurements provided by the IMU by an artificial bias (Fig. \ref{fig:biasGyroCF}).
+we corrupt the gyroscope measurements by an artificial bias (Fig. \ref{fig:biasGyroCF}).
 As seen in Fig. \ref{fig:biasGyroCF}, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise---and expensive---gyroscope.
 
 %Our experiments have shown that the presence of gyroscope bias significantly damages the results of the closed-form solution.
@@ -498,19 +491,7 @@ By minimizing this cost function, we recover the gyroscope bias $B$ and the unkn
 Since our cost function requires an initialization and is non-convex (see Fig. \label{fig:cost}),
 the optimization process can be stuck in local minima.
 However, We can initialize the optimization process with $B = 0_3$ since the bias is usually rather small.
-Fig. \ref{fig:gBiasEstimate} displays the three components of the bias estimated by this minimization.
 
-\begin{figure}
-  \centering
-  \resizebox{0.7\columnwidth}{!}{\input{graph/biasEstimation12Ft}}
-  \caption{Gyroscope bias estimation from nonlinear minimization of the residual. We are observing 12 features  over a variable duration of integration. \label{fig:gBiasEstimate}}
-\end{figure}
-
-\begin{figure}
-   \centering
-   \resizebox{0.7\columnwidth}{!}{\input{graph/CF3vsOpt12Ft}}
-                \caption{Estimation error of the original closed-form solution against the optimized closed-form solution.  We are observing 12 features  over a variable duration of integration. \label{fig:optEstimate}}
-\end{figure}
 
 
 \begin{figure}
@@ -540,16 +521,22 @@ Fig. \ref{fig:gBiasEstimate} displays the three components of the bias estimated
         \caption{Impact of the gyroscope bias on the performance of the optimized closed-form solution. We are observing 7 features  over a variable duration of integration. \label{fig:biasGyroOpt}}
 \end{figure}
 
-%% This technique is similar to the one used in \cite{Abbeel2005}, where the author minimizes the residual of a Kalman filter in order to recover the noise matrix for the sensors.
+\begin{figure}
+  \centering
+  \resizebox{0.7\columnwidth}{!}{\input{graph/finals/gyroEval0.1}}
+  \caption{Gyroscope bias estimation from nonlinear minimization of the residual.
+    We are observing 7 features over a variable duration of integration.
+    The true bias is $B=-[0.0584, 0.0751, 0.0308]$ with magnitude $|B|=0.1$.\label{fig:gBiasEstimate}}
+\end{figure}
 
-The optimized closed-form solution provides better results than the standard closed-form solution. Fig. \ref{fig:optEstimate} shows an improvement in precision of around $13\%$ for the distance to the features, and around $30\%$ for the speed after 4 seconds of integration.
+%% This technique is similar to the one used in \cite{Abbeel2005}, where the author minimizes the residual of a Kalman filter in order to recover the noise matrix for the sensors.
 
 %% Moreover, the optimized closed-form solution requires a shorter integration duration to provide good quality results.
 %% Specifically, after 2 seconds of integration (around 7 frames) the provided estimations are already robust.
 %% The non-optimized closed-form solution requires 3 seconds of integration before converging to acceptable estimations.
 
 
-Moreover, this method is robust even for high values of the gyroscope bias.
+This method can robustly estimate high values of the gyroscope bias \ref{fig:gBiasEstimate}.
 Fig. \ref{fig:biasGyroOpt} displays the performance of the proposed method in estimating speed, gravity in the local frame, and distances to the features in presence of the same artificial gyroscope bias from Fig. \ref{fig:biasGyroCF}.
 
 As seen in Fig. \ref{fig:biasGyroOpt}, after a certain integration duration, the estimations agree no matter how high the bias is.
@@ -557,7 +544,7 @@ In other words, given that the integration duration is long enough, this method 
 %% This method can therefore fully compensate for high values of the gyroscope bias.
 %% Moreover, the values on which these evaluations agree are equals to the ones for the curve that has a gyroscope bias set to $0_3$.
 
-However, for very short time of integration ($<2.25$ seconds), the proposed method can fail by providing a gyroscope bias much larger than the correct one.
+However, for very short time of integration ($<1$ seconds), the proposed method can fail by providing a gyroscope bias much larger than the correct one.
 To understand this misestimation, in Fig. \ref{fig:cost} we plot the residual with respect to the bias, which is the cost function we are minimizing.
 We highlight a misestimation of the gyroscope bias by setting the duration of integration to 2 seconds while observing 7 features.
 We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
@@ -673,7 +660,7 @@ We compare the performance on the estimations of the gravity and the initial vel
 The reason we included SVO+MSF in the validation is to have a reference state-of-the-art pose estimation method.
 However, MSF requires to be initialized with a rough absolute scale, whereas our method works without initialization.
 
-We set the integration duration for the closed-form solution to 2.8 seconds, since it is sufficient for the closed-form to provide robust results (see Fig. \ref{fig:optEstimate}).
+We set the integration duration for the closed-form solution to 2.8 seconds, since it is sufficient for the closed-form to provide robust results (see Fig. \ref{fig:gBiasEstimate}).
 The camera provides 60fps, but we discard most of the frames and consider only 10Hz (this is discussed in section \ref{SubsectionConsidered}).
 
 \begin{figure}

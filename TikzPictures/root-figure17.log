@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  17 NOV 2015 11:58
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  17 NOV 2015 14:47
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -788,10 +788,7 @@ Overfull \hbox (12.75816pt too wide) detected at line 288
  []$[][]  $ 
  []
 
-(./graph/droneMotion14.6for5s.tex
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-) (./graph/originalCF.tex
+(./graph/originalCF.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./graph/accBiasLegend.tex
@@ -818,12 +815,6 @@ isable this.
 ) (./graph/gyroBiasLambda.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
-) (./graph/biasEstimation12Ft.tex
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-) (./graph/CF3vsOpt12Ft.tex
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
 ) (./graph/gyroBiasLegend.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
@@ -836,25 +827,16 @@ isable this.
 ) (./graph/opt7ftLambda.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
+) (./graph/finals/gyroEval0.1.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
 ) (./graph/costXZ.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./graph/costYZ.tex
-\openout5 = `TikzPictures/root-figure17.dpth'.
-
-LaTeX Font Info:    Calculating math sizes for size <16> on input line 2647.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11.84009> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2647.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9.6001> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2647.
-LaTeX Font Info:    Calculating math sizes for size <24> on input line 2647.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.76013> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2647.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.40015> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2647.
-[5
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+)
 The command '\includegraphics [width=\textwidth ]{images/quadrotor_closeup.jpg}
 ' has been optimized away. Use '/tikz/external/optimize=false' to disable this.
 
@@ -862,12 +844,12 @@ The command '\includegraphics [width=\textwidth , trim={13.2cm 2cm 0 4cm}, clip
 ]{images/realExperiment.png}' has been optimized away. Use '/tikz/external/opti
 mize=false' to disable this.
 
-Underfull \hbox (badness 2726) in paragraph at lines 644--644
+Underfull \hbox (badness 2726) in paragraph at lines 632--632
 \OT1/ptm/m/n/9 with an Op-ti-Track motion-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 670--671
+Underfull \hbox (badness 10000) in paragraph at lines 658--659
 []\OT1/ptm/m/n/10 The loosely-coupled visual-inertial al-go-rithm
  []
 
@@ -875,9 +857,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 670--671
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./graph/results2.8s-CF3-CF3Opt-Bias0.05.tex
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-) (./graph/results2.8s-CF3-CF3Opt-Bias0.1.tex
+\openout5 = `TikzPictures/root-figure17.dpth'.
+
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
+[6
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./graph/results2.8s-CF3-
+CF3Opt-Bias0.1.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 )
@@ -895,22 +884,20 @@ Before submitting the final camera ready copy, remember to:
 
  ) 
 Here is how much of TeX's memory you used:
- 21073 strings out of 493304
- 581724 string characters out of 6139871
- 2980398 words of memory out of 5000000
- 24043 multiletter control sequences out of 15000+600000
- 69994 words of font info for 152 fonts, out of 8000000 for 9000
+ 20896 strings out of 493304
+ 502614 string characters out of 6139871
+ 818902 words of memory out of 5000000
+ 23881 multiletter control sequences out of 15000+600000
+ 51059 words of font info for 110 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 64i,16n,81p,79692b,2319s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,24n,81p,2682b,2184s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
-w/times/utmri8a.pfb>
-Output written on TikzPictures/root-figure17.pdf (1 page, 116452 bytes).
+f-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on TikzPictures/root-figure17.pdf (1 page, 26255 bytes).
 PDF statistics:
- 28 PDF objects out of 1000 (max. 8388607)
- 20 compressed objects within 1 object stream
+ 20 PDF objects out of 1000 (max. 8388607)
+ 14 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

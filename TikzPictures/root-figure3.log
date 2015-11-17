@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  17 NOV 2015 11:58
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  17 NOV 2015 14:47
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -788,34 +788,112 @@ Overfull \hbox (12.75816pt too wide) detected at line 288
  []$[][]  $ 
  []
 
-(./graph/droneMotion14.6for5s.tex
-A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
-isable this.
-) (./graph/originalCF.tex
+(./graph/originalCF.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./graph/accBiasLegend.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./graph/accBiasGravity.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/accBiasSpeed.tex
 \openout5 = `TikzPictures/root-figure3.dpth'.
 
+[4
 
-! Package xcolor Error: Undefined color `mycolor1'.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./graph/accBiasLambda.te
+x
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/gyroBiasLegend.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/gyroBiasGravity.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/gyroBiasSpeed.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/gyroBiasLambda.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/gyroBiasLegend.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/opt7ftGravity.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/opt7ftSpeed.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/opt7ftLambda.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/finals/gyroEval0.1.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/costXZ.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/costYZ.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+)
+The command '\includegraphics [width=\textwidth ]{images/quadrotor_closeup.jpg}
+' has been optimized away. Use '/tikz/external/optimize=false' to disable this.
 
-See the xcolor package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.278 \end{axis}
-                 
+The command '\includegraphics [width=\textwidth , trim={13.2cm 2cm 0 4cm}, clip
+]{images/realExperiment.png}' has been optimized away. Use '/tikz/external/opti
+mize=false' to disable this.
+
+Underfull \hbox (badness 2726) in paragraph at lines 632--632
+\OT1/ptm/m/n/9 with an Op-ti-Track motion-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 658--659
+[]\OT1/ptm/m/n/10 The loosely-coupled visual-inertial al-go-rithm
+ []
+
+(./graph/results2.8s-CF3-CF3opt-KF.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/results2.8s-CF3-CF3Opt-Bias0.05.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+) (./graph/results2.8s-CF3-CF3Opt-Bias0.1.tex
+A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
+isable this.
+)
+No file TikzPictures/root-figure3.bbl.
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the US letter (8.5in X 11in) paper size.
+
+ ) 
 Here is how much of TeX's memory you used:
- 20774 strings out of 493304
- 495904 string characters out of 6139871
- 650642 words of memory out of 5000000
- 23811 multiletter control sequences out of 15000+600000
- 43782 words of font info for 97 fonts, out of 8000000 for 9000
+ 20875 strings out of 493304
+ 497916 string characters out of 6139871
+ 825684 words of memory out of 5000000
+ 23861 multiletter control sequences out of 15000+600000
+ 49981 words of font info for 109 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 64i,16n,81p,1296b,1966s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,16n,81p,2642b,1966s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on TikzPictures/root-figure3.pdf (1 page, 21899 bytes).
+PDF statistics:
+ 20 PDF objects out of 1000 (max. 8388607)
+ 14 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-!  ==> Fatal error occurred, no output PDF file produced!

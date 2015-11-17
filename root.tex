@@ -584,14 +584,14 @@ In the next section, we present a method to use a priori knowledge to guide the 
 
 The symmetry in the cost function is induced by the strong weight of the gravity in the Equation (\ref{eq:final1}).
 In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when $\vec{u}$ is collinear with the gravity throughout the motion.
-Since a MAV normally operates in near-hover confitions, $\vec{u}$ is approximated to the vector pointing upwards in the gyroscope frame when the MAV is standing.
+Since a MAV normally operates in near-hover confitions, $\vec{u}$ is approximated to the vector pointing upward in the gyroscope frame when the MAV is hovering.
 
 If the MAV rotates such that $\vec{u}$ becomes noncollinear with the gravity, the cost function does not exhibit this symmetry anymore.
 In this case, the gyroscope bias is well estimated.
 
 A simple solution to avoid having that symmetry in our system would be to enforce that there is no such $\vec{u}$ by forcing our MAV to perform rotations while it is operating.
 Another way to artificially get rid of this symmetry is to tweak the cost function.
-Specifically, we can add a regularization term that penalizes high estimations of this gyroscope bias component:
+Specifically, we can add a regularization term that penalizes high estimations of the component of the gyroscope bias along $\vec{u}$:
 
 \begin{equation}
 cost(B) = ||\Xi X - S||^2 + \lambda (\vec{u} \cdot B)^2,

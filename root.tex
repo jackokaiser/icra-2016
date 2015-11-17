@@ -614,8 +614,9 @@ cost(B) = ||\Xi X - S||^2 +  \lambda (\vec{u} \cdot (B - B^{approx} ))^2,
 \noindent with $B^{approx}$ being the known approximate gyroscope bias.
 This methods allows us to reuse previously-computed gyroscope bias since it is known to slowly vary over time.
 
-Selecting a reliable and safe value for the regularization parameter $\lambda$ is complicated.
-In this paper, we picked the value of $\lambda$ empirically.
+%% ***TODO HERE:****
+The value of $\lambda$ should be set with respect to the variation of the gyroscope bias.
+We can obtain this variation with previously-computed gyroscope bias.
 
 \section{EXPERIMENTS ON REAL DATA}\label{SectionPerformance}
 

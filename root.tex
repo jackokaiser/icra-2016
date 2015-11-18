@@ -132,7 +132,7 @@ By nature, a closed-form solution is deterministic and, thus, does not require a
 %% It is assumed that the camera is calibrated and the transformation between the IMU and the camera is known.
 %% This is a fair assumption for industrial drones to come pre-calibrated.
 
-The method introduced in \cite{Martinelli2012}\cite{Martinelli2014} was only described in theory and demonstrated with Monte-Carlo simulations.
+The method introduced in \cite{Martinelli2012}\cite{Martinelli2014} was only described in theory and demonstrated with simulations on generic Gaussian motions, not plausible for a MAV.
 In this paper, we perform simulations with plausible MAV motions and synthetic noisy sensor data.
 This allow us to identify limitations of the method and bring modifications to overcome them.
 Specifically, we investigate the impact of biased inertial measurements.
@@ -355,7 +355,7 @@ Our goal is to identify its performance limitations and introduce modifications 
 %% The case of a biased gyroscope is addressed in chapter \ref{ch:gyro}.
 %% Indeed, the main contribution of this report is the simple method introduced in Section \ref{sec:computeBias} to compute the gyroscope bias with the closed-form solution, which happened to be a major performance bottleneck.
 
-\subsection{Original closed-form solution performance without bias}
+\subsection{Performance without bias}
 
 The original closed-form solution described in Equation (\ref{eq:mat1}) will be used as a basis for our work.
 Moreover, we can also use the knowledge of the gravity magnitude to refine our results (Equation (\ref{eq:mat2})).
@@ -372,11 +372,11 @@ Note how the evaluations get better as we increase the integration time.
 Indeed, our equations come from an extended triangulation \cite{Martinelli2012}.
 Therefore, it requires a significant difference in the measurements over time to robustly estimate the state.
 
-Without sensor bias, the original closed-form robustly estimate all the properties (below $0.05\%$ error) after $2$ seconds of integration.
-Note that a robust estimation of the gravity requires a shorter duration of integration than the speed and the distance to the features.
 
-Since the gravity is well estimated with the original closed-form, it comes without surprise that constraining its magnitude does not improve the performance much.
-That is why the curves representing the performance with and without using the gravity refinement (\ref{eq:mat2}) are so close.
+Without sensor bias, the original closed-form robustly estimates all the properties (below $0.1\%$ error) after $2$ seconds of integration.
+
+Note that a robust estimation of the gravity requires a shorter duration of integration than the speed and the distance to the features.
+Since the gravity is well estimated with the original closed-form solution, constraining its magnitude does not improve the performance much.
 We therefore ease this constraint for the following sections.
 
 %% In Section \ref{secAccBiasStudy} and \ref{secGyroBiasStudy}, we will study the impact of biased inertial measurements on the performance of the closed-form solution.
@@ -424,7 +424,6 @@ We would have expected the accelerometer bias to have a greater impact on the so
 \subsection{Impact of gyroscope bias on the performance}
 To visualize the impact of the gyroscope bias on the performance,
 we corrupt the gyroscope measurements by an artificial bias (Fig. \ref{fig:biasGyroCF}).
-As seen in Fig. \ref{fig:biasGyroCF}, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise---and expensive---gyroscope.
 
 %Our experiments have shown that the presence of gyroscope bias significantly damages the results of the closed-form solution.
 
@@ -456,6 +455,10 @@ As seen in Fig. \ref{fig:biasGyroCF}, the performance becomes very poor in prese
 \end{figure}
 
 
+As seen in Fig. \ref{fig:biasGyroCF}, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise---and expensive---gyroscope.
+
+Note that, in \cite{Martinelli2014}, the author evaluates the performance of the closed-form solution with a simulated gyroscope bias of magnitude $0.5deg/s \approx 0.0087 rad/s$.
+In Fig. \ref{fig:biasGyroCF}, this bias would yield a curve between the green and the blue ones, with relative error below $1\%$.
 
 
 \section{ESTIMATING THE GYROSCOPE BIAS}\label{SectionCalibration}
@@ -536,7 +539,7 @@ However, We can initialize the optimization process with $B = 0_3$ since the bia
 %% The non-optimized closed-form solution requires 3 seconds of integration before converging to acceptable estimations.
 
 
-This method can robustly estimate high values of the gyroscope bias \ref{fig:gBiasEstimate}.
+This method can robustly estimate high values of the gyroscope bias (see Fig. \ref{fig:gBiasEstimate}).
 Fig. \ref{fig:biasGyroOpt} displays the performance of the proposed method in estimating speed, gravity in the local frame, and distances to the features in presence of the same artificial gyroscope bias from Fig. \ref{fig:biasGyroCF}.
 
 As seen in Fig. \ref{fig:biasGyroOpt}, after a certain integration duration, the estimations agree no matter how high the bias is.
@@ -546,7 +549,7 @@ In other words, given that the integration duration is long enough, this method 
 
 However, for very short time of integration ($<1$ seconds), the proposed method can fail by providing a gyroscope bias much larger than the correct one.
 To understand this misestimation, in Fig. \ref{fig:cost} we plot the residual with respect to the bias, which is the cost function we are minimizing.
-We highlight a misestimation of the gyroscope bias by setting the duration of integration to 2 seconds while observing 7 features.
+We highlight a misestimation of the gyroscope bias by setting the duration of integration to 1 seconds while observing 7 features.
 We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
 
 \begin{figure}
@@ -559,7 +562,7 @@ We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
                 \resizebox{\columnwidth}{!}{\input{graph/costYZ}}
                 \caption{Residual with respect to $B_y$ and $B_z$}
         \end{subfigure}
-        \caption{Cost function (residual) with respect to the gyroscope bias for a small amount of available measurements (integration of 2 seconds while observing 7 features)\label{fig:cost}}
+        \caption{Cost function (residual) with respect to the gyroscope bias for a small amount of available measurements (integration of 1 seconds while observing 7 features)\label{fig:cost}}
 \end{figure}
 
 As we can see in Fig. \ref{fig:cost}, the cost function admits a symmetry with respect to $B_z$.
@@ -671,14 +674,15 @@ The camera provides 60fps, but we discard most of the frames and consider only 1
   \end{subfigure}
   \begin{subfigure}[b]{0.489\columnwidth}
     \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.05.tex}}
-    \caption{Artificial $|bias|=0.05$.\label{fig:validBias1}}
+    \caption{Artificial bias of magnitude $0.05 rad/s$.\label{fig:validBias1}}
   \end{subfigure}
   \begin{subfigure}[b]{0.489\columnwidth}
     \resizebox{\columnwidth}{!}{\input{graph/results2.8s-CF3-CF3Opt-Bias0.1.tex}}
-    \caption{Artificial $|bias|=0.1$.\label{fig:validBias2}}
+    \caption{Artificial bias of magnitude $0.1 rad/s$.\label{fig:validBias2}}
   \end{subfigure}
   \caption{Estimation error of the optimized closed-form solution against the original closed-form solution \cite{Martinelli2014} and SVO \cite{FaesslerICRA15}.
-    The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.}
+    The duration of integration is set to 2.8 seconds, and 10 point features are observed throughout the whole operation.
+    In Fig. \ref{fig:validBias1} and Fig. \ref{fig:validBias1}, we corrupted the gyroscope measurements with an artifical bias.}
 
 \end{figure}
 
@@ -688,7 +692,7 @@ We remind the reader that unlike MSF, the closed-form solution does not require 
 Moreover, the original closed-form solution and the optimized closed-form solution have similar performance.
 Indeed, for this dataset the gyroscope bias was estimated to $B = [0.0003, 0.009, 0.001]$, which is very small $(||B|| = 0.0091)$.
 To prove the robustness of our method compared to the original closed-form,
-we corrupt the gyroscope measurements with an artificial bias in Fig. \ref{fig:validBias1} and Fig. \ref{fig:validBias2}.
+we corrupt the gyroscope measurements provided by the dataset with an artificial bias in Fig. \ref{fig:validBias1} and Fig. \ref{fig:validBias2}.
 As seen in these figures, our method is robust against gyroscope bias whereas the original closed-form is not.
 
 %In a real applications, a proper online computation of the gyroscope bias can be reused.

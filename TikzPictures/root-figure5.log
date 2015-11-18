@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  17 NOV 2015 14:47
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  18 NOV 2015 19:39
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -888,7 +888,7 @@ Before submitting the final camera ready copy, remember to:
 Here is how much of TeX's memory you used:
  20503 strings out of 493304
  480657 string characters out of 6139871
- 820120 words of memory out of 5000000
+ 820121 words of memory out of 5000000
  23489 multiletter control sequences out of 15000+600000
  48146 words of font info for 106 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -896,7 +896,7 @@ Here is how much of TeX's memory you used:
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on TikzPictures/root-figure5.pdf (1 page, 16854 bytes).
+Output written on TikzPictures/root-figure5.pdf (1 page, 16856 bytes).
 PDF statistics:
  20 PDF objects out of 1000 (max. 8388607)
  14 compressed objects within 1 object stream

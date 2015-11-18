@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  17 NOV 2015 14:47
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  18 NOV 2015 19:39
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -892,11 +892,11 @@ Here is how much of TeX's memory you used:
  23889 multiletter control sequences out of 15000+600000
  49981 words of font info for 109 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 64i,24n,81p,2752b,2178s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,24n,81p,2752b,2179s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on TikzPictures/root-figure16.pdf (1 page, 27939 bytes).
+Output written on TikzPictures/root-figure16.pdf (1 page, 27946 bytes).
 PDF statistics:
  20 PDF objects out of 1000 (max. 8388607)
  14 compressed objects within 1 object stream

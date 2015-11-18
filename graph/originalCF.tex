@@ -5,7 +5,6 @@
 %  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
 %where you can also make suggestions and rate matlab2tikz.
 %
-\definecolor{mycolor1}{rgb}{1.00000,0.00000,1.00000}%
 %
 \begin{tikzpicture}
 
@@ -28,13 +27,13 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 \addlegendentry{Lambda (Original CF)}
 \addlegendimage{line legend,red}
 \addlegendentry{Speed (Original CF)}
-\addlegendimage{line legend,color=mycolor1}
+\addlegendimage{line legend,color=violet}
 \addlegendentry{Gravity (Original CF)}
 \addlegendimage{line legend,blue, dashed} % or mark=none?
 \addlegendentry{Lambda (Refined CF)}
 \addlegendimage{line legend,red, dashed}
 \addlegendentry{Speed (Refined CF)}
-\addlegendimage{line legend,color=mycolor1, dashed}
+\addlegendimage{line legend,color=violet, dashed}
 \addlegendentry{Gravity (Refined CF)}
 \addplot [color=blue,solid]
   table[row sep=crcr]{%
@@ -85,7 +84,6 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 4.9	0.0111634045711973\\
 5	0.0110156371361694\\
 };
-\addlegendentry{lambda};
 
 \addplot [color=red,solid]
   table[row sep=crcr]{%
@@ -136,9 +134,8 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 4.9	0.0138179103318856\\
 5	0.0136531794141864\\
 };
-\addlegendentry{speed};
 
-\addplot [color=mycolor1,solid]
+\addplot [color=violet,solid]
   table[row sep=crcr]{%
 0.5	0.45256728845443\\
 0.6	0.438989841419345\\
@@ -187,9 +184,8 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 4.9	0.00154925755573667\\
 5	0.00156464565619423\\
 };
-\addlegendentry{gravity};
 
-\addplot [color=blue,dashed,forget plot]
+\addplot [color=blue,dashed]
   table[row sep=crcr]{%
 0.5	0.869558160556846\\
 0.6	0.742870076857983\\
@@ -238,7 +234,7 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 4.9	0.0107913870764718\\
 5	0.0106083777057321\\
 };
-\addplot [color=red,dashed,forget plot]
+\addplot [color=red,dashed]
   table[row sep=crcr]{%
 0.5	0.917809966701291\\
 0.6	0.804024608842086\\
@@ -287,7 +283,7 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 4.9	0.0206288306616696\\
 5	0.020756984562107\\
 };
-\addplot [color=mycolor1,dashed,forget plot]
+\addplot [color=violet,dashed]
   table[row sep=crcr]{%
 0.5	0.38842359991127\\
 0.6	0.337319237011632\\
@@ -337,4 +333,4 @@ legend style={legend cell align=left,align=left,draw=white!15!black}
 5	0.00144231219292143\\
 };
 \end{axis}
-\end{tikzpicture}%
+\end{tikzpicture}

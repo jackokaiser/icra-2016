@@ -539,7 +539,7 @@ However, by running extensive simulations we found that the cost function is con
 %% The non-optimized closed-form solution requires 3 seconds of integration before converging to acceptable estimations.
 
 
-As seen in Fig. \ref{fig:gBiasEstimate}, this method can robustly estimate high values of the gyroscope bias.
+As seen in Fig. \ref{fig:gBiasEstimate}, this method can robustly estimate high values of the gyroscope bias (relative error of final bias estimate is below $2\%$).
 Fig. \ref{fig:biasGyroOpt} displays the performance of the proposed method in estimating speed, gravity in the local frame, and distances to the features in presence of the same artificial gyroscope bias from Fig. \ref{fig:biasGyroCF}.
 
 As seen in Fig. \ref{fig:biasGyroOpt}, after a certain integration duration, the estimations agree no matter how high the bias is.

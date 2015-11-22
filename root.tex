@@ -376,20 +376,13 @@ Therefore, it requires a significant difference in the measurements over time to
 Without sensor bias, the original closed-form robustly estimates all the properties (below $0.1\%$ error) after $2$ seconds of integration.
 
 Note that a robust estimation of the gravity requires a shorter duration of integration than the speed and the distance to the features.
-Since the gravity is well estimated with the original closed-form solution, constraining its magnitude does not improve the performance much.
-We therefore ease this constraint for the following sections.
-
-%% In Section \ref{secAccBiasStudy} and \ref{secGyroBiasStudy}, we will study the impact of biased inertial measurements on the performance of the closed-form solution.
-
-%To explain this behaviour we ran many simulations by also considering trajectories that are not plausible for a MAV and by also changing the magnitude of the gravity. We found the following conclusions. When the rotations are small (i.e., the rotational speed is smaller than $10~deg~s^{-1}$), the effect of a bias is negligible even if its value is larger than the inertial acceleration. This is easily explained by remarking that, in the case of negligible rotations, a bias on the accelerometer acts as the gravity. Hence, its impact depends on the ratio between its magnitude and the magnitude of the gravity. Since a large bias is always two orders of magnitude smaller than the gravity, in the case of negligible rotations, the effect of an accelerometer bias is negligible no matter how the inertial acceleration is (provided that it does not vanish, otherwise the absolute scale becomes unobservable even with an unbiased accelerometer). By running simulations we remarked that, if the magnitude of the bias is equal to the magnitude of the inertial acceleration, the error becomes larger than $10\%$ if the rotational speed exceeds $\simeq 40~deg~s^{-1}$.
-%If the rotations are important, the effect of a bias on the accelerometer is negligible when it magnitude is smaller than both the gravity and the inertial acceleration. Note that for a MAV that accomplishes a loop of radius $1m$ and speed $2~m~s^{-1}$, the inertial acceleration is $1~m~s^{-2}$. Additionally, its rotational speed is $1~rad~s^{-1}\simeq 57~deg~s^{-1}$.
-%
-%
-%In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
-%However, the estimation of the accelerometer bias with that method is not robust since our system is only slightly affected by it\footnote{There is also another reason that explains why this alternative method fails in determining the bias. This is due to the special motion of the MAV, that accomplishes significant rotations only around a single axis. In \cite{Martinelli2014} property 12, it is proven that rotations must occur around at least two independent axes to determine this bias.}.
+In general, we found that the gravity is well estimated with the original closed-form solution due to its strong weight in the equations (see section \ref{sec:biasAcc}).
+Therefore, constraining its magnitude does not improve the performance much.
+In the following sections, we remove this constraint.
 
 
-\subsection{Impact of accelerometer bias on the performance}
+
+\subsection{Impact of accelerometer bias on the performance \label{sec:biasAcc}}
 In order to visualize the impact of the accelerometer bias on the performance,
 we corrupt the accelerometer measurements by a bias (Fig. \ref{fig:biasAccCF}).
 Despite a high accelerometer bias, the closed-form solution still provides robust results.
@@ -536,7 +529,7 @@ However, by running extensive simulations we found that the cost function is con
   \resizebox{0.7\columnwidth}{!}{\input{graph/finals/gyroEval0.1}}
   \caption{Gyroscope bias estimation from nonlinear minimization of the residual.
     We are observing 7 features over a variable duration of integration.
-    The true bias is $B=[-0.0170, -0.0695, 0.0698]$ with magnitude $|B|=0.1$.\label{fig:gBiasEstimate}}
+    The true bias is $B=[-0.0170, -0.0695, 0.0698]$ with magnitude $||B||=0.1$ and the final bias estimate is $[-0.0183, -0.0697, 0.0708]$.\label{fig:gBiasEstimate}}
 \end{figure}
 
 %% This technique is similar to the one used in \cite{Abbeel2005}, where the author minimizes the residual of a Kalman filter in order to recover the noise matrix for the sensors.
@@ -546,7 +539,7 @@ However, by running extensive simulations we found that the cost function is con
 %% The non-optimized closed-form solution requires 3 seconds of integration before converging to acceptable estimations.
 
 
-This method can robustly estimate high values of the gyroscope bias (see Fig. \ref{fig:gBiasEstimate}).
+As seen in Fig. \ref{fig:gBiasEstimate}, this method can robustly estimate high values of the gyroscope bias.
 Fig. \ref{fig:biasGyroOpt} displays the performance of the proposed method in estimating speed, gravity in the local frame, and distances to the features in presence of the same artificial gyroscope bias from Fig. \ref{fig:biasGyroCF}.
 
 As seen in Fig. \ref{fig:biasGyroOpt}, after a certain integration duration, the estimations agree no matter how high the bias is.

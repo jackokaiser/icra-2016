@@ -80,7 +80,7 @@ Simultaneous State Initialization and Gyroscope Bias Calibration in Visual Inert
  \thanks{*This work was supported by the French National Research
 Agency ANR through the project VIMAD}% <-this % stops a space
  \thanks{$^{1}$ INRIA Rhone Alpes, Grenoble, France. Email: jacko.kaiser@gmail.com, agostino.martinelli@ieee.org}%
- \thanks{$^{2}$ Robotics and Perception Group, University of Zurich, Switzerland. Email: fforster,sdavideg@ifi.uzh.ch}%
+ \thanks{$^{2}$ Robotics and Perception Group, University of Zurich, Switzerland. Email: ffontana,sdavideg@ifi.uzh.ch}%
 }
 
 
@@ -134,7 +134,7 @@ By nature, a closed-form solution is deterministic and, thus, does not require a
 
 The method introduced in \cite{Martinelli2012}\cite{Martinelli2014} was only described in theory and demonstrated with simulations on generic Gaussian motions, not plausible for a MAV.
 In this paper, we perform simulations with plausible MAV motions and synthetic noisy sensor data.
-This allow us to identify limitations of the method and bring modifications to overcome them.
+This allows us to identify limitations of the method and bring modifications to overcome them.
 Specifically, we investigate the impact of biased inertial measurements.
 Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, here we show that a large bias on the accelerometer does not significantly worsen the performance.
 One major limitation of \cite{Martinelli2014} is the impact of biased gyroscope measurements.
@@ -155,7 +155,7 @@ Compared to \cite{Martinelli2014}, the new method is now robust to the gyroscope
 The problem of fusing visual and inertial data has been extensively investigated in the past.
 However, most of the proposed methods require a state initialization.
 Because of the system nonlinearities, lack of precise initialization can irreparably damage the entire estimation process.
-In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been addressed by using optimization-based approaches \cite{Leute2014}\cite{Forster2015}\cite{mourikis2008dual}\cite{lupton2012visual}\cite{huang2011observability}\cite{mourikis2007multi}. These methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
+In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been successfully addressed by enforcing observability constraints \cite{Hesch2014,Huang2015} and by using optimization-based approaches \cite{Leute2014}\cite{Forster2015}\cite{mourikis2008dual}\cite{lupton2012visual}\cite{huang2011observability}\cite{mourikis2007multi}\cite{Indelman2013}. These optimization methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
 We are therefore interested in a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
 
 In computer vision, several deterministic solutions have been introduced.
@@ -321,10 +321,11 @@ This will allow us to identify its weaknesses and bring modifications to overcom
 
 \section{LIMITATIONS OF \cite{Martinelli2014}}\label{SectionBottlenecks}
 
-The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014}.
-This is obtained by running the closed-form solution on plausible MAV motions with synthetic noisy sensor data.
-
-In particular, we will consider the case of biased inertial measurements (both the accelerometers and the gyroscopes).
+The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014} when it is adopted in a real scenario. In particular, special attention will be devoted to the case of a MAV equipped with low-cost camera and IMU sensors. For this reason, we perform simulations that significantly differ from the ones performed in \cite{Martinelli2014} (section $5.2$). Specifically, they differ because of the following two reasons:
+\begin{itemize}
+\item the simulated motion is the one of a MAV;
+\item the values of the biases are significantly larger than the ones in \cite{Martinelli2014}.
+\end{itemize}
 This will allow us to evaluate the impact of the bias on the performance.
 
 \subsection{Simulation setup}\label{SubsectionConsidered}
@@ -335,10 +336,9 @@ We measure our error on the absolute scale by computing the mean error over all 
 We define the relative error as the euclidean distance between the estimation and the ground truth,
 normalized by the ground truth.
 
-Synthetic gyroscope and accelerometer data are affected by a statistical error of $0.5$ deg/s and $0.5$ cm/s\textsuperscript{2}, respectively.
-We will corrupt these measurements with a synthetic bias.
+Synthetic gyroscope and accelerometer data are affected by a statistical error of $0.5$ deg/s and $0.5$ cm/s\textsuperscript{2}, respectively and they are also corrupted by a bias.
 
-We set $7$ simulated 3D point-features about $3$m away from the MAV, which flies at a speed of around $1$m/s.
+We set $7$ simulated 3D point-features about $3$m away from the MAV, which flies at a speed of around $2~m~s^{-1}$.
 We found that setting the frame rate of the simulated camera at 10Hz provides a sufficient pixel disparity with the following setup.
 In practice, increasing the frame rate above 30Hz decreases the pixel disparity and introduces numerical instability for this setup.
 The theoritical cases in which our system admits singularities are provided in \cite{Martinelli2012}\cite{Martinelli2014}.
@@ -381,16 +381,24 @@ We therefore ease this constraint for the following sections.
 
 %% In Section \ref{secAccBiasStudy} and \ref{secGyroBiasStudy}, we will study the impact of biased inertial measurements on the performance of the closed-form solution.
 
+%To explain this behaviour we ran many simulations by also considering trajectories that are not plausible for a MAV and by also changing the magnitude of the gravity. We found the following conclusions. When the rotations are small (i.e., the rotational speed is smaller than $10~deg~s^{-1}$), the effect of a bias is negligible even if its value is larger than the inertial acceleration. This is easily explained by remarking that, in the case of negligible rotations, a bias on the accelerometer acts as the gravity. Hence, its impact depends on the ratio between its magnitude and the magnitude of the gravity. Since a large bias is always two orders of magnitude smaller than the gravity, in the case of negligible rotations, the effect of an accelerometer bias is negligible no matter how the inertial acceleration is (provided that it does not vanish, otherwise the absolute scale becomes unobservable even with an unbiased accelerometer). By running simulations we remarked that, if the magnitude of the bias is equal to the magnitude of the inertial acceleration, the error becomes larger than $10\%$ if the rotational speed exceeds $\simeq 40~deg~s^{-1}$.
+%If the rotations are important, the effect of a bias on the accelerometer is negligible when it magnitude is smaller than both the gravity and the inertial acceleration. Note that for a MAV that accomplishes a loop of radius $1m$ and speed $2~m~s^{-1}$, the inertial acceleration is $1~m~s^{-2}$. Additionally, its rotational speed is $1~rad~s^{-1}\simeq 57~deg~s^{-1}$.
+%
+%
+%In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
+%However, the estimation of the accelerometer bias with that method is not robust since our system is only slightly affected by it\footnote{There is also another reason that explains why this alternative method fails in determining the bias. This is due to the special motion of the MAV, that accomplishes significant rotations only around a single axis. In \cite{Martinelli2014} property 12, it is proven that rotations must occur around at least two independent axes to determine this bias.}.
+
+
 \subsection{Impact of accelerometer bias on the performance}
 In order to visualize the impact of the accelerometer bias on the performance,
-we corrupt the accelerometer measurements by an artificial bias (Fig. \ref{fig:biasAccCF}).
+we corrupt the accelerometer measurements by a bias (Fig. \ref{fig:biasAccCF}).
 Despite a high accelerometer bias, the closed-form solution still provides robust results.
 As seen in Fig. \ref{fig:biasAccCF}, neither the estimation of the gravity, the velocity or the lambdas is impacted by the accelerometer bias.
-In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
-However, the estimation of the accelerometer bias with that method is not robust since our system is only slightly affected by it.
-This is a counterintuitive result. Since our equations contain an integration of the acceleration, we also perform an integration of the accelerometer bias.
-We would have expected the accelerometer bias to have a greater impact on the solutions yielded by the system.
+To explain this behaviour we ran many simulations by also considering trajectories that are not plausible for a MAV and by also changing the magnitude of the gravity. We found the following conclusions. When the rotations are small, the effect of a bias is negligible even if its value is larger than the inertial acceleration. This is easily explained by remarking that, in the case of negligible rotations, a bias on the accelerometer acts as the gravity. Hence, its impact depends on the ratio between its magnitude and the magnitude of the gravity.
+If the rotations are important, the effect of a bias on the accelerometer is negligible when its magnitude is smaller than both the gravity and the inertial acceleration. Note that, for a MAV that accomplishes a loop of radius $1m$ and speed $2~m~s^{-1}$, the inertial acceleration is $4~m~s^{-2}$.
 
+In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
+However, the estimation of the accelerometer bias with that method is not robust since our system is only slightly affected by it\footnote{Additionally, in \cite{Martinelli2014} property 12, we prove that rotations must occur around at least two independent axes to determine the bias. In general, for a motion of a few seconds, a MAV accomplishes rotations around a single axis.}.
 
 \begin{figure}
   \centering
@@ -458,25 +466,24 @@ we corrupt the gyroscope measurements by an artificial bias (Fig. \ref{fig:biasG
 As seen in Fig. \ref{fig:biasGyroCF}, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise---and expensive---gyroscope.
 
 Note that, in \cite{Martinelli2014}, the author evaluates the performance of the closed-form solution with a simulated gyroscope bias of magnitude $0.5deg/s \approx 0.0087 rad/s$.
-In Fig. \ref{fig:biasGyroCF}, this bias would yield a curve between the green and the blue ones, with relative error below $1\%$.
+In Fig. \ref{fig:biasGyroCF}, this bias would yield a curve between the green and the blue ones, with relative error below $10\%$.
 
 
 \section{ESTIMATING THE GYROSCOPE BIAS}\label{SectionCalibration}
 
 Previous work has shown that the gyroscope bias is an observable mode when using an IMU and a camera, which means that it can be estimated \cite{Martinelli2012}.
+In this section, we propose an optimization approach to estimate the gyroscope bias using the closed-form solution.
 
-Optimally, we would add the gyroscope bias in our unknown vector $X$ and determine $X$ by simply inverting the system $\Xi X = S$ as in the standard closed-form solution.
-However, we cannot express the gyroscope bias linearly with this system.
+%
+%Optimally, we would add the gyroscope bias in our unknown vector $X$ and determine $X$ by simply inverting the system $\Xi X = S$ as in the standard closed-form solution.
+%However, we cannot express the gyroscope bias linearly with this system.
 
-In this section, we propose a different approach to estimate the gyroscope bias using the closed-form solution.
 
 \subsection{Nonlinear minimization of the residual}
 
 Since our system of equations (\ref{eq:final1}) is overconstrained,
 inverting it is equivalent to finding the vector $X$ that minimizes the residual $||\Xi X - S||^2$.
-
-Since we cannot express the gyroscope bias linearly,
-we define the following cost function:
+We define the following cost function:
 
 \begin{equation}
   \label{eq:cost}
@@ -491,9 +498,9 @@ we define the following cost function:
 
 By minimizing this cost function, we recover the gyroscope bias $B$ and the unknown vector $X$.
 %which has accounted for the gyroscope bias $B$.
-Since our cost function requires an initialization and is non-convex (see Fig. \label{fig:cost}),
+Since our cost function requires an initialization and is non-convex (see Fig. \ref{fig:cost}),
 the optimization process can be stuck in local minima.
-However, We can initialize the optimization process with $B = 0_3$ since the bias is usually rather small.
+However, by running extensive simulations we found that the cost function is convex around the true value of the bias. Hence, we can initialize the optimization process with $B = 0_3$ since the bias is usually rather small.
 
 
 
@@ -547,7 +554,7 @@ In other words, given that the integration duration is long enough, this method 
 %% This method can therefore fully compensate for high values of the gyroscope bias.
 %% Moreover, the values on which these evaluations agree are equals to the ones for the curve that has a gyroscope bias set to $0_3$.
 
-However, for very short time of integration ($<1$ seconds), the proposed method can fail by providing a gyroscope bias much larger than the correct one.
+However, for very short time of integration ($<1$ seconds), the cost function loses its local convexity and the proposed method can fail by providing a gyroscope bias much larger than the correct one.
 To understand this misestimation, in Fig. \ref{fig:cost} we plot the residual with respect to the bias, which is the cost function we are minimizing.
 We highlight a misestimation of the gyroscope bias by setting the duration of integration to 1 seconds while observing 7 features.
 We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
@@ -565,7 +572,7 @@ We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.
         \caption{Cost function (residual) with respect to the gyroscope bias for a small amount of available measurements (integration of 1 seconds while observing 7 features)\label{fig:cost}}
 \end{figure}
 
-As we can see in Fig. \ref{fig:cost}, the cost function admits a symmetry with respect to $B_z$.
+As we can see in Fig. \ref{fig:cost}, the cost function admits a symmetry with respect to $B_z$ (and consequently it is not convex).
 This symmetry replicates the minima of the true gyroscope bias along $B_z$.
 The optimization process can therefore diverge from the true gyroscope bias.
 In the next section, we present a method to use a priori knowledge to guide the optimization process.
@@ -605,7 +612,7 @@ cost(B) = ||\Xi X - S||^2 +  \lambda (\vec{u} \cdot (B - B^{approx} ))^2,
 This methods allows us to reuse previously-computed gyroscope bias since it is known to slowly vary over time.
 
 %% ***TODO HERE:****
-The value of $\lambda$ should be set with respect to the variation of the gyroscope bias.
+The value of $\lambda$ should be set starting from the knowledge about the range of change of the gyroscope bias.
 We can obtain this variation with previously-computed gyroscope bias.
 
 \section{EXPERIMENTS ON REAL DATA}\label{SectionPerformance}

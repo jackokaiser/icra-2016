@@ -180,7 +180,7 @@ Recently, a closed-form solution has been introduced in \cite{Martinelli2012}.
 From integrating inertial and visual measurements over a short time-interval, this solution provides the absolute scale, roll and pitch angles, initial velocity, and distance to 3D features.
 Specifically, all the physical quantities are obtained by simply inverting a linear system.
 The solution of the linear system can be refined with a quadratic equation assuming the knowledge of the gravity magnitude.
-This closed-form was improved in \cite{Li2013} to work with unknown camera-IMU calibration;
+This closed-form was improved in \cite{DongSi2012} to work with unknown camera-IMU calibration;
 however, since in this case the problem cannot be solved by simply inverting a linear system, a method to determine the six parameters that characterize the camera-IMU transformation was proposed.
 As a result, this method is independent of external camera-IMU calibration, hence, suitable for power-on-and-go systems.
 
@@ -542,7 +542,7 @@ However, by running extensive simulations we found that the cost function is con
 As seen in Fig. \ref{fig:gBiasEstimate}, this method can robustly estimate high values of the gyroscope bias (relative error of final bias estimate is below $2\%$).
 Fig. \ref{fig:biasGyroOpt} displays the performance of the proposed method in estimating speed, gravity in the local frame, and distances to the features in presence of the same artificial gyroscope bias from Fig. \ref{fig:biasGyroCF}.
 
-As seen in Fig. \ref{fig:biasGyroOpt}, after a certain integration duration, the estimations agree no matter how high the bias is.
+As seen in Fig. \ref{fig:biasGyroOpt}, after $1s$ of integration duration, the estimations agree no matter how high the bias is.
 In other words, given that the integration duration is long enough, this method is unaffected by the gyroscope bias.
 %% This method can therefore fully compensate for high values of the gyroscope bias.
 %% Moreover, the values on which these evaluations agree are equals to the ones for the curve that has a gyroscope bias set to $0_3$.
@@ -644,7 +644,7 @@ This allows us to compare the estimations of the velocity along with the roll an
 \end{figure}
 
 We use the same MAV used in \cite{FaesslerICRA15}, Section 3.4.
-Specifically, our quadrotor relies on the frame of the Parrot AR.Drone 2.01 including their motors, motor controllers, gears, and propellers.
+Specifically, our quadrotor relies on the frame of the Parrot AR.Drone 2.0 including their motors, motor controllers, gears, and propellers.
 It is equipped with a PX4FMU autopilot and a PX4IOAR adapter board.
 The PX4FMU includes a 200Hz IMU.
 The MAV is also equipped with a downward-looking MatrixVision mvBlueFOX-MLC200w ($752 \times 480$-pixel) monochrome camera with a 130-degree field-of-view lens (Fig. \ref{fig:droneCloseup}).

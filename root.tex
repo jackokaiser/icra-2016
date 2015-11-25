@@ -544,6 +544,9 @@ Fig. \ref{fig:biasGyroOpt} displays the performance of the proposed method in es
 
 As seen in Fig. \ref{fig:biasGyroOpt}, after $1s$ of integration duration, the estimations agree no matter how high the bias is.
 In other words, given that the integration duration is long enough, this method is unaffected by the gyroscope bias.
+Using Levenberg-Marquardt algorithm, the optimization process reaches its optimal value after around $4$ iterations and $20$ evaluations of the cost function.
+Evaluating the cost function is equivalent to solving the linear system described in Equation (\ref{eq:mat1}).
+
 %% This method can therefore fully compensate for high values of the gyroscope bias.
 %% Moreover, the values on which these evaluations agree are equals to the ones for the curve that has a gyroscope bias set to $0_3$.
 

@@ -132,7 +132,7 @@ By nature, a closed-form solution is deterministic and, thus, does not require a
 %% It is assumed that the camera is calibrated and the transformation between the IMU and the camera is known.
 %% This is a fair assumption for industrial drones to come pre-calibrated.
 
-The method introduced in \cite{Martinelli2012}\cite{Martinelli2014} was only described in theory and demonstrated with simulations on generic Gaussian motions, not plausible for a MAV.
+The method introduced in \cite{Martinelli2012}\cite{Martinelli2014} was only described in theory and demonstrated with simulations on generic Gaussian motions, not plausible for an MAV.
 In this paper, we perform simulations with plausible MAV motions and synthetic noisy sensor data.
 This allows us to identify limitations of the method and bring modifications to overcome them.
 Specifically, we investigate the impact of biased inertial measurements.
@@ -173,7 +173,7 @@ For these applications, it is crucial to take the inertial measurements into con
 
 %, therefore no assumptions can be made about its properties.
 
-A procedure to quickly re-initialize a MAV after a failure was presented in \cite{Faessler2015}.
+A procedure to quickly re-initialize an MAV after a failure was presented in \cite{Faessler2015}.
 However, this method requires an altimeter to initialize the scale.
 
 Recently, a closed-form solution has been introduced in \cite{Martinelli2012}.
@@ -321,16 +321,16 @@ This will allow us to identify its weaknesses and bring modifications to overcom
 
 \section{LIMITATIONS OF \cite{Martinelli2014}}\label{SectionBottlenecks}
 
-The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014} when it is adopted in a real scenario. In particular, special attention will be devoted to the case of a MAV equipped with low-cost camera and IMU sensors. For this reason, we perform simulations that significantly differ from the ones performed in \cite{Martinelli2014} (section $5.2$). Specifically, they differ because of the following two reasons:
+The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014} when it is adopted in a real scenario. In particular, special attention will be devoted to the case of an MAV equipped with low-cost camera and IMU sensors. For this reason, we perform simulations that significantly differ from the ones performed in \cite{Martinelli2014} (section $5.2$). Specifically, they differ because of the following two reasons:
 \begin{itemize}
-\item the simulated motion is the one of a MAV;
+\item the simulated motion is the one of an MAV;
 \item the values of the biases are significantly larger than the ones in \cite{Martinelli2014}.
 \end{itemize}
 This will allow us to evaluate the impact of the bias on the performance.
 
 \subsection{Simulation setup}\label{SubsectionConsidered}
 
-We simulate the motion of a MAV executing a circular trajectory of about $1$m radius.
+We simulate the motion of an MAV executing a circular trajectory of about $1$m radius.
 
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
 We define the relative error as the euclidean distance between the estimation and the ground truth,
@@ -387,11 +387,11 @@ In order to visualize the impact of the accelerometer bias on the performance,
 we corrupt the accelerometer measurements by a bias (Fig. \ref{fig:biasAccCF}).
 Despite a high accelerometer bias, the closed-form solution still provides robust results.
 As seen in Fig. \ref{fig:biasAccCF}, neither the estimation of the gravity, the velocity or the lambdas is impacted by the accelerometer bias.
-To explain this behaviour we ran many simulations by also considering trajectories that are not plausible for a MAV and by also changing the magnitude of the gravity. We found the following conclusions. When the rotations are small, the effect of a bias is negligible even if its value is larger than the inertial acceleration. This is easily explained by remarking that, in the case of negligible rotations, a bias on the accelerometer acts as the gravity. Hence, its impact depends on the ratio between its magnitude and the magnitude of the gravity.
-If the rotations are important, the effect of a bias on the accelerometer is negligible when its magnitude is smaller than both the gravity and the inertial acceleration. Note that, for a MAV that accomplishes a loop of radius $1m$ and speed $2~m~s^{-1}$, the inertial acceleration is $4~m~s^{-2}$.
+To explain this behaviour we ran many simulations by also considering trajectories that are not plausible for an MAV and by also changing the magnitude of the gravity. We found the following conclusions. When the rotations are small, the effect of a bias is negligible even if its value is larger than the inertial acceleration. This is easily explained by remarking that, in the case of negligible rotations, a bias on the accelerometer acts as the gravity. Hence, its impact depends on the ratio between its magnitude and the magnitude of the gravity.
+If the rotations are important, the effect of a bias on the accelerometer is negligible when its magnitude is smaller than both the gravity and the inertial acceleration. Note that, for an MAV that accomplishes a loop of radius $1m$ and speed $2~m~s^{-1}$, the inertial acceleration is $4~m~s^{-2}$.
 
 In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
-However, the estimation of the accelerometer bias with that method is not robust since our system is only slightly affected by it\footnote{Additionally, in \cite{Martinelli2014} property 12, we prove that rotations must occur around at least two independent axes to determine the bias. In general, for a motion of a few seconds, a MAV accomplishes rotations around a single axis.}.
+However, the estimation of the accelerometer bias with that method is not robust since our system is only slightly affected by it\footnote{Additionally, in \cite{Martinelli2014} property 12, we prove that rotations must occur around at least two independent axes to determine the bias. In general, for a motion of a few seconds, an MAV accomplishes rotations around a single axis.}.
 
 \begin{figure}
   \centering
@@ -574,7 +574,7 @@ In the next section, we present a method to use a priori knowledge to guide the 
 
 The symmetry in the cost function is induced by the strong weight of the gravity in the Equation (\ref{eq:final1}).
 In general, the residual is almost constant with respect to the component of the gyroscope bias along the direction $\vec{u}$ when $\vec{u}$ is collinear with the gravity throughout the motion.
-Since a MAV normally operates in near-hover confitions, $\vec{u}$ is approximated to the vector pointing upward in the gyroscope frame when the MAV is hovering.
+Since an MAV normally operates in near-hover confitions, $\vec{u}$ is approximated to the vector pointing upward in the gyroscope frame when the MAV is hovering.
 
 If the MAV rotates such that $\vec{u}$ becomes noncollinear with the gravity, the cost function does not exhibit this symmetry anymore.
 In this case, the gyroscope bias is well estimated.
@@ -614,7 +614,7 @@ We validate our method on a real dataset containing IMU and camera measurements 
 
 \subsection{Experimental setup}\label{SubsectionSetup}
 
-For our evaluation, we consider a MAV flying in a room equipped with a motion-capture system.
+For our evaluation, we consider an MAV flying in a room equipped with a motion-capture system.
 This allows us to compare the estimations of the velocity along with the roll and pitch angles against ground truth.
 
 \begin{figure}
@@ -710,7 +710,7 @@ As seen in these figures, our method is robust against gyroscope bias whereas th
 
 \section{CONCLUSION}\label{SectionConclusion}
 
-%For a MAV, limiting the number of on-board sensor is important to save power consumption and processing power.
+%For an MAV, limiting the number of on-board sensor is important to save power consumption and processing power.
 %A popular choice of sensors is a camera coupled with an IMU for their complementary.
 %However, the methods for fusing visual and inertial measurements so far introduced are filter based, hence require an initialization.
 %Providing a reliable state initialization is critical for these algorithms to work correctly.
@@ -724,7 +724,7 @@ One major performance limitation of this method was due to the impact of biased 
 In other words, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise (and expensive) gyroscope.
 We then introduced a simple method that automatically estimates this bias.
 We validated this method by comparing its performance against state-of-the-art pose estimation approach for MAV.
-For future work, we see this optimized closed-form solution being used on a MAV to provide accurate state initialization.
+For future work, we see this optimized closed-form solution being used on an MAV to provide accurate state initialization.
 This would allow aggressive take-off maneuvers, such as hand throwing the MAV in the air, as already demonstrated in \cite{Faessler2015} with a range sensor.
 With our technique, we could get rid of the range sensor.
 

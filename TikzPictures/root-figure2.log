@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.5)  22 NOV 2015 18:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.20)  11 JAN 2016 21:54
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -621,6 +621,203 @@ arks.code.tex
 File: tikzlibraryplotmarks.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
 (/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
 File: pgflibraryplotmarks.code.tex 2010/10/15 v2.10 (rcs-revision 1.12)
+))) (/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2013/11/25 v2.8a programmable bibliographies (PK/JW/AB)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex1.sty
+Package: biblatex1 2013/11/25 v2.8a programmable bibliographies (bibtex) (PK/JW
+/AB)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
+(/usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
+Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
+\et@xins=\count139
+)
+\etb@tempcnta=\count140
+) (/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count141
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+)) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+\c@tabx@nest=\count142
+\c@listtotal=\count143
+\c@listcount=\count144
+\c@liststart=\count145
+\c@liststop=\count146
+\c@citecount=\count147
+\c@citetotal=\count148
+\c@multicitecount=\count149
+\c@multicitetotal=\count150
+\c@instcount=\count151
+\c@maxnames=\count152
+\c@minnames=\count153
+\c@maxitems=\count154
+\c@minitems=\count155
+\c@citecounter=\count156
+\c@savedcitecounter=\count157
+\c@uniquelist=\count158
+\c@uniquename=\count159
+\c@refsection=\count160
+\c@refsegment=\count161
+\c@maxextrayear=\count162
+\c@maxextraalpha=\count163
+\c@abbrvpenalty=\count164
+\c@highnamepenalty=\count165
+\c@lownamepenalty=\count166
+\c@maxparens=\count167
+\c@parenlevel=\count168
+\blx@tempcnta=\count169
+\blx@tempcntb=\count170
+\blx@tempcntc=\count171
+\blx@maxsection=\count172
+\blx@maxsegment=\count173
+\blx@notetype=\count174
+\blx@parenlevel@text=\count175
+\blx@parenlevel@foot=\count176
+\labelnumberwidth=\skip53
+\labelalphawidth=\skip54
+\shorthandwidth=\skip55
+\biblabelsep=\skip56
+\bibitemsep=\skip57
+\bibnamesep=\skip58
+\bibinitsep=\skip59
+\bibparsep=\skip60
+\bibhang=\skip61
+\blx@auxin=\read2
+\blx@auxout=\write4
+\c@mincomprange=\count177
+\c@maxcomprange=\count178
+\c@mincompwidth=\count179
+\c@labelname=\count180
+\c@savedlabelname=\count181
+\c@author=\count182
+\c@savedauthor=\count183
+\c@shortauthor=\count184
+\c@savedshortauthor=\count185
+\c@editor=\count186
+\c@savededitor=\count187
+\c@editora=\count188
+\c@savededitora=\count189
+\c@editorb=\count190
+\c@savededitorb=\count191
+\c@editorc=\count192
+\c@savededitorc=\count193
+\c@shorteditor=\count194
+\c@savedshorteditor=\count195
+\c@bookauthor=\count196
+\c@savedbookauthor=\count197
+\c@translator=\count198
+\c@savedtranslator=\count199
+\c@annotator=\count200
+\c@savedannotator=\count201
+\c@commentator=\count202
+\c@savedcommentator=\count203
+\c@introduction=\count204
+\c@savedintroduction=\count205
+\c@foreword=\count206
+\c@savedforeword=\count207
+\c@afterword=\count208
+\c@savedafterword=\count209
+\c@holder=\count210
+\c@savedholder=\count211
+\c@namea=\count212
+\c@savednamea=\count213
+\c@nameb=\count214
+\c@savednameb=\count215
+\c@namec=\count216
+\c@savednamec=\count217
+\c@institution=\count218
+\c@savedinstitution=\count219
+\c@language=\count220
+\c@savedlanguage=\count221
+\c@location=\count222
+\c@savedlocation=\count223
+\c@organization=\count224
+\c@savedorganization=\count225
+\c@origlocation=\count226
+\c@savedoriglocation=\count227
+\c@origpublisher=\count228
+\c@savedorigpublisher=\count229
+\c@pageref=\count230
+\c@savedpageref=\count231
+\c@publisher=\count232
+\c@savedpublisher=\count233
+Normal \count register pool exhausted, switching to extended pool.
+\c@lista=\count277
+\c@savedlista=\count278
+\c@listb=\count279
+\c@savedlistb=\count280
+\c@listc=\count281
+\c@savedlistc=\count282
+\c@listd=\count283
+\c@savedlistd=\count284
+\c@liste=\count285
+\c@savedliste=\count286
+\c@listf=\count287
+\c@savedlistf=\count288
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2013/11/25 v2.8a biblatex compatibility (PK/JW/AB)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 
+\c@textcitecount=\count289
+\c@textcitetotal=\count290
+\c@textcitemaxnames=\count291
+\c@biburlnumpenalty=\count292
+\c@biburlucpenalty=\count293
+\c@biburllcpenalty=\count294
+\c@smartand=\count295
+)
+Package biblatex Info: Trying to load bibliography style 'ieee'...
+Package biblatex Info: ... file 'ieee.bbx' found.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-ieee/ieee.bbx
+File: ieee.bbx 2013/10/25 v1.1j biblatex bibliography style
+Package biblatex Info: Trying to load bibliography style 'numeric-comp'...
+Package biblatex Info: ... file 'numeric-comp.bbx' found.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric-comp.bbx
+File: numeric-comp.bbx 2013/11/25 v2.8a biblatex bibliography style (PK/JW/AB)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2013/11/25 v2.8a biblatex bibliography style (PK/JW/AB)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2013/11/25 v2.8a biblatex bibliography style (PK/JW/AB)
+\c@bbx:relatedcount=\count296
+\c@bbx:relatedtotal=\count297
+))))
+Package biblatex Info: Trying to load citation style 'numeric-comp'...
+Package biblatex Info: ... file 'numeric-comp.cbx' found.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
+File: numeric-comp.cbx 2013/11/25 v2.8a biblatex citation style (PK/JW/AB)
+\c@cbx@tempcnta=\count298
+\c@cbx@tempcntb=\count299
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
 )))
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.ex
 ternal.code.tex
@@ -628,24 +825,31 @@ ternal.code.tex
 e.tex
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzexternalshar
 ed.code.tex
-\tikzexternal@outfile=\write4
+\tikzexternal@outfile=\write5
 )))
 No auxiliary output files.
 
-\w@pgfexternal@auxout=\write5
+\w@pgfexternal@auxout=\write6
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2013/11/25 v2.8a biblatex localization (PK/JW/AB)
+)
+\@quotelevel=\count300
+\@quotereset=\count301
 No file TikzPictures/root-figure2.aux.
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -682,16 +886,16 @@ LaTeX Font Info:    ... okay on input line 87.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count139
+\scratchcounter=\count302
 \scratchdimen=\dimen199
 \scratchbox=\box42
-\nofMPsegments=\count140
-\nofMParguments=\count141
+\nofMPsegments=\count303
+\nofMParguments=\count304
 \everyMPshowfont=\toks41
-\MPscratchCnt=\count142
+\MPscratchCnt=\count305
 \MPscratchDim=\dimen200
-\MPnumerator=\count143
-\makeMPintoPDFobject=\count144
+\MPnumerator=\count306
+\makeMPintoPDFobject=\count307
 \everyMPtoPDFconversion=\toks42
 )
 Package caption Info: Begin \AtBeginDocument code.
@@ -700,35 +904,44 @@ ABD: EveryShipout initializing macros
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.9}).
 
-LaTeX Font Info:    Calculating math sizes for size <11> on input line 91.
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 91
+Package biblatex Info: Input encoding 'latin1' detected.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'latin1'.
+
+Package biblatex Warning: Data encoding is 'latin1'.
+(biblatex)                Use backend=bibtex8 or backend=biber.
+
+Package biblatex Info: Reference section=0 on input line 90.
+Package biblatex Info: Reference segment=0 on input line 90.
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 94.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 94
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 91
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 94
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 91
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 94
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 91
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 94
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8.14006> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 91.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6.60007> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 91.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 91.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 94.
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--91
+Underfull \hbox (badness 10000) in paragraph at lines 94--94
 [][][]$[]$ \OT1/ptm/m/n/8 IN-RIA Rhone Alpes, Greno-ble, France. Email:
  []
 
@@ -736,20 +949,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 91--91
 Underfull \vbox (badness 1845) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 200.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 203.
 The command '\includegraphics [width=0.7\columnwidth , trim={0 2cm 0 0}, clip]{
 images/closedFormExplained}' has been optimized away. Use '/tikz/external/optim
 ize=false' to disable this.
 
-LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 28
-8.
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 29
+1.
 
 
-LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 28
-8.
+LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 29
+1.
 
 
-Overfull \hbox (12.75816pt too wide) detected at line 288
+Overfull \hbox (12.75816pt too wide) detected at line 291
  []$[][]  $ 
  []
 
@@ -760,9 +973,12 @@ isable this.
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./graph/accBiasGravity.tex
-\openout5 = `TikzPictures/root-figure2.dpth'.
+\openout6 = `TikzPictures/root-figure2.dpth'.
 
 [4
+
+
+
 
 {/home/jacques/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./graph/accBia
 sSpeed.tex
@@ -799,15 +1015,15 @@ isable this.
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 )
-Underfull \hbox (badness 1688) in paragraph at lines 532--532
+Underfull \hbox (badness 1688) in paragraph at lines 535--535
 \OT1/ptm/m/n/10 tures over a vari-able du-ra-tion of in-te-gra-tion. The
  []
 
 
-Underfull \hbox (badness 1558) in paragraph at lines 532--532
+Underfull \hbox (badness 2460) in paragraph at lines 535--535
 \OT1/ptm/m/n/10 ni-tude $\OMS/ztmcm/m/n/10 jj\OML/ztmcm/m/it/10 B\OMS/ztmcm/m/n
 /10 jj \OT1/ztmcm/m/n/10 = 0\OML/ztmcm/m/it/10 :\OT1/ztmcm/m/n/10 1$ \OT1/ptm/m
-/n/10 and the fi-nal es-ti-mated bias is
+/n/10 and the fi-nal bias es-ti-mate is
  []
 
 (./graph/costXZ.tex
@@ -824,12 +1040,12 @@ The command '\includegraphics [width=\textwidth , trim={13.2cm 2cm 0 4cm}, clip
 ]{images/realExperiment.png}' has been optimized away. Use '/tikz/external/opti
 mize=false' to disable this.
 
-Underfull \hbox (badness 2726) in paragraph at lines 635--635
+Underfull \hbox (badness 2726) in paragraph at lines 637--637
 \OT1/ptm/m/n/9 with an Op-ti-Track motion-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 661--662
+Underfull \hbox (badness 10000) in paragraph at lines 663--664
 []\OT1/ptm/m/n/10 The loosely-coupled visual-inertial al-go-rithm
  []
 
@@ -843,7 +1059,9 @@ isable this.
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 )
-No file TikzPictures/root-figure2.bbl.
+
+LaTeX Warning: Empty bibliography on input line 730.
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -855,15 +1073,18 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the US letter (8.5in X 11in) paper size.
 
+Package logreq Info: Writing requests to 'TikzPictures/root-figure2.run.xml'.
+\openout1 = `TikzPictures/root-figure2.run.xml'.
+
  ) 
 Here is how much of TeX's memory you used:
- 20532 strings out of 495032
- 491788 string characters out of 6181719
- 815186 words of memory out of 5000000
- 23296 multiletter control sequences out of 15000+600000
+ 25418 strings out of 494980
+ 575537 string characters out of 6179357
+ 974658 words of memory out of 5000000
+ 28138 multiletter control sequences out of 15000+600000
  49981 words of font info for 109 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 64i,16n,81p,2642b,1966s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,16n,81p,2642b,1969s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></home/jacques/texmf/fon
 ts/type1/urw/times/utmr8a.pfb>

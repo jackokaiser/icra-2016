@@ -34,6 +34,8 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{pgfplots}
+\usepackage[backend=bibtex,bibstyle=ieee,citestyle=numeric-comp]{biblatex}
+\bibliography{library}
 
 %% \setlength{\belowdisplayskip}{1.5pt} \setlength{\belowdisplayshortskip}{1.5pt}
 \setlength{\abovedisplayskip}{1.7pt} \setlength{\abovedisplayshortskip}{1.7pt}
@@ -61,6 +63,7 @@
 \def\addlegendimage{\csname pgfplots@addlegendimage\endcsname}
 \def\addlegendentry{\csname pgfplots@addlegendentry\endcsname}
 
+\renewcommand*{\bibfont}{\fontsize{7.999}{9}\selectfont}
 
 \newcommand{\rot}[2]{\ensuremath{C_{\,#1}^{\,#2}}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
@@ -126,13 +129,13 @@ The initialization of these methods is critical.
 Due to nonlinearities of the system, a poor initialization can result into converging towards local minima and  providing faulty states with high confidence.
 %% Indeed, another shortcoming of filters is that they can silently fail.
 
-In this paper, we demonstrate the efficiency of a recent closed-form solution introduced in \cite{Martinelli2012}\cite{Martinelli2014}, which fuses visual and inertial data to obtain the structure of the environment at the global scale along with the attitude and the speed of the robot.
+In this paper, we demonstrate the efficiency of a recent closed-form solution introduced in \cite{Martinelli2012, Martinelli2014}, which fuses visual and inertial data to obtain the structure of the environment at the global scale along with the attitude and the speed of the robot.
 By nature, a closed-form solution is deterministic and, thus, does not require any initialization.
 
 %% It is assumed that the camera is calibrated and the transformation between the IMU and the camera is known.
 %% This is a fair assumption for industrial drones to come pre-calibrated.
 
-The method introduced in \cite{Martinelli2012}\cite{Martinelli2014} was only described in theory and demonstrated with simulations on generic Gaussian motions, not plausible for an MAV.
+The method introduced in \cite{Martinelli2012, Martinelli2014} was only described in theory and demonstrated with simulations on generic Gaussian motions, not plausible for an MAV.
 In this paper, we perform simulations with plausible MAV motions and synthetic noisy sensor data.
 This allows us to identify limitations of the method and bring modifications to overcome them.
 Specifically, we investigate the impact of biased inertial measurements.
@@ -155,12 +158,12 @@ Compared to \cite{Martinelli2014}, the new method is now robust to the gyroscope
 The problem of fusing visual and inertial data has been extensively investigated in the past.
 However, most of the proposed methods require a state initialization.
 Because of the system nonlinearities, lack of precise initialization can irreparably damage the entire estimation process.
-In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007}\cite{Li2013}\cite{Huang2009}\cite{Bibuli2007}\cite{Forster2014}. Recently, this sensor fusion problem has been successfully addressed by enforcing observability constraints \cite{Hesch2014,Huang2015} and by using optimization-based approaches \cite{Leute2014}\cite{Forster2015}\cite{mourikis2008dual}\cite{lupton2012visual}\cite{huang2011observability}\cite{mourikis2007multi}\cite{Indelman2013}. These optimization methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
+In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007, Li2013, Huang2009, Bibuli2007, Forster2014}. Recently, this sensor fusion problem has been successfully addressed by enforcing observability constraints \cite{Hesch2014, Huang2015} and by using optimization-based approaches \cite{Leute2014, Forster2015, mourikis2008dual, lupton2012visual, huang2011observability, mourikis2007multi, Indelman2013}. These optimization methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
 We are therefore interested in a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
 
 In computer vision, several deterministic solutions have been introduced.
 These techniques, known as {\it Structure from Motion}, can recover the relative rotation and translation up to an unknown scale factor between two camera poses \cite{Hartley2004}.
-Such methods are currently used in state-of-the-art visual navigation methods for MAVs to initialize maps \cite{Weiss2012}\cite{Forster2014}\cite{FaesslerICRA15}.
+Such methods are currently used in state-of-the-art visual navigation methods for MAVs to initialize maps \cite{Weiss2012, Forster2014, FaesslerICRA15}.
 However, the knowledge of the absolute scale, and, at least, of the absolute roll and pitch angles, is essential for many applications ranging from autonomous navigation in GPS-denied environments to 3D reconstruction and augmented reality.
 For these applications, it is crucial to take the inertial measurements into consideration to compute these values deterministically.
 
@@ -341,7 +344,7 @@ Synthetic gyroscope and accelerometer data are affected by a statistical error o
 We set $7$ simulated 3D point-features about $3$m away from the MAV, which flies at a speed of around $2~m~s^{-1}$.
 We found that setting the frame rate of the simulated camera at 10Hz provides a sufficient pixel disparity with the following setup.
 In practice, increasing the frame rate above 30Hz decreases the pixel disparity and introduces numerical instability for this setup.
-The theoritical cases in which our system admits singularities are provided in \cite{Martinelli2012}\cite{Martinelli2014}.
+The theoritical cases in which our system admits singularities are provided in \cite{Martinelli2012, Martinelli2014}.
 Reducing the number of considered frames also reduces the size of the matrices and, thus, speeds up the computations.
 As an example, over a time interval of 3 seconds, we obtain $31$ distinct frames.
 When observing 7 features, solving the closed-form solution is equivalent to inverting a linear system of $3\times 30\times 7 = 630$ equations and $6+7\times 31=223$ unknowns (see section \ref{SectionCFS}).
@@ -649,7 +652,7 @@ The PX4FMU includes a 200Hz IMU.
 The MAV is also equipped with a downward-looking MatrixVision mvBlueFOX-MLC200w ($752 \times 480$-pixel) monochrome camera with a 130-degree field-of-view lens (Fig. \ref{fig:droneCloseup}).
 The data are recorded using an Odroid-U3 single-board computer.
 The MAV flies indoors at low altitude ($1.5$m) (Fig. \ref{fig:droneFly}).
-The feature extraction and matching is done via the FAST corners \cite{Rosten2005}\cite{Rosten2006}.
+The feature extraction and matching is done via the FAST corners \cite{Rosten2005, Rosten2006}.
 
 \subsection{Results}
 
@@ -724,7 +727,6 @@ For future work, we see this optimized closed-form solution being used on an MAV
 This would allow aggressive take-off maneuvers, such as hand throwing the MAV in the air, as already demonstrated in \cite{Faessler2015} with a range sensor.
 With our technique, we could get rid of the range sensor.
 
-\bibliographystyle{IEEEtran}
-\bibliography{library}
+\printbibliography
 
 \end{document}

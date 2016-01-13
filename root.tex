@@ -137,13 +137,18 @@ By nature, a closed-form solution is deterministic and, thus, does not require a
 
 The method introduced in \cite{Martinelli2012, Martinelli2014} was only described in theory and demonstrated with simulations on generic Gaussian motions, not plausible for an MAV.
 In this paper, we perform simulations with plausible MAV motions and synthetic noisy sensor data.
+Our simulations are therefore closer to the real dynamics of an MAV.
 This allows us to identify limitations of the method and bring modifications to overcome them.
 Specifically, we investigate the impact of biased inertial measurements.
 Although the case of biased accelerometer was originally studied in \cite{Martinelli2014}, here we show that a large bias on the accelerometer does not significantly worsen the performance.
 One major limitation of \cite{Martinelli2014} is the impact of biased gyroscope measurements.
 In other words, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method can only be successfully used with a very precise - and expensive - gyroscope.
 Here, we introduce a simple method that automatically estimates this bias. By adding this new method for the bias estimation to the original method \cite{Martinelli2014}, we obtain results that are equivalent to the ones in absence of bias.
+This method is suitable for dynamic take off and on-the-fly re-initialisation since it does not require a calibration step with the MAV sitting stationary.
 Compared to \cite{Martinelli2014}, the new method is now robust to the gyroscope bias and automatically calibrates the gyroscope.
+
+
+
 %% Specifically, this method can accurately estimate the initial speed, the gravity, the distance to the features and the gyroscope bias for very short time of integration (around 2 seconds) and low amount of observed point features (around 5).
 
 
@@ -333,7 +338,7 @@ This will allow us to evaluate the impact of the bias on the performance.
 
 \subsection{Simulation setup}\label{SubsectionConsidered}
 
-We simulate the motion of an MAV executing a circular trajectory of about $1$m radius.
+We simulate an MAV as a point particle executing a circular trajectory of about $1$m radius.
 
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
 We define the relative error as the euclidean distance between the estimation and the ground truth,

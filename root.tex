@@ -554,7 +554,7 @@ In other words, given that the integration duration is long enough, this method 
 Using Levenberg-Marquardt algorithm, the optimization process reaches its optimal value after around $4$ iterations and $20$ evaluations of the cost function.
 Evaluating the cost function is equivalent to solving the linear system described in Equation (\ref{eq:mat1}).
 
-\noindent For very short time of integration ($<1$ seconds), the cost function loses its local convexity and the proposed method can fail by providing a gyroscope bias much larger than the correct one.
+\noindent For very short time of integration ($<1$ second), the cost function loses its local convexity and the proposed method can fail by providing a gyroscope bias much larger than the correct one.
 To understand this misestimation, in Fig. \ref{fig:cost} we plot the residual with respect to the bias, which is the cost function we are minimizing.
 We highlight a misestimation of the gyroscope bias by setting the duration of integration to 1 second while observing 7 features.
 We refer to the components of the gyroscope bias by $B = [B_x, B_y, B_z]$.

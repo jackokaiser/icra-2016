@@ -35,7 +35,7 @@
 \usepackage{subcaption}
 \usepackage{pgfplots}
 \usepackage[backend=bibtex,bibstyle=ieee,citestyle=numeric-comp]{biblatex}
-\bibliography{library}
+\bibliography{IEEEabrv,library}
 
 %% \setlength{\belowdisplayskip}{1.5pt} \setlength{\belowdisplayshortskip}{1.5pt}
 \setlength{\abovedisplayskip}{1.7pt} \setlength{\abovedisplayshortskip}{1.7pt}
@@ -63,7 +63,7 @@
 \def\addlegendimage{\csname pgfplots@addlegendimage\endcsname}
 \def\addlegendentry{\csname pgfplots@addlegendentry\endcsname}
 
-\renewcommand*{\bibfont}{\fontsize{7.999}{9}\selectfont}
+\renewcommand*{\bibfont}{\fontsize{7.99}{9}\selectfont}
 
 \newcommand{\rot}[2]{\ensuremath{C_{\,#1}^{\,#2}}}
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
@@ -92,9 +92,8 @@
 % Make room for more info lines in the \author command
 \author{Jacques Kaiser$^{1}$, Agostino Martinelli$^{1}$, Flavio Fontana$^{2}$ and Davide Scaramuzza$^{2}$%
 \thanks{Manuscript received: August, 31, 2015; Revised September, 29, 2015; Accepted January, 8, 2016.}%Use only for final RAL version
-\thanks{This paper was recommended for publication by Editor Antonio Bicchi upon evaluation of the Associate Editor and Reviewers' comments. *This work was supported by the French National Research
-Agency ANR through the project VIMAD.}%Use only for final RAL version
-\thanks{$^{1}$ INRIA Rhone Alpes, Grenoble, France. {\tt\small jacko.kaiser@gmail.com, agostino.martinelli@ieee.org}}%
+\thanks{This paper was recommended for publication by Editor Antonio Bicchi upon evaluation of the Associate Editor and Reviewers' comments. *This work was supported by the French National Research Agency ANR through the project VIMAD.}%Use only for final RAL version
+\thanks{$^{1}$ INRIA Rhone Alpes, Grenoble, France. {\tt\small jacko.kaiser@gmail.com}, {\tt\small agostino.martinelli@ieee.org}}%
 \thanks{$^{2}$ Robotics and Perception Group, University of Zurich, Switzerland. {\tt\small ffontana,sdavideg@ifi.uzh.ch}}%
 \thanks{Digital Object Identifier (DOI): see top of this page.}
 }
@@ -140,7 +139,6 @@ Therefore, a common setup is to combine a monocular camera with an inertial meas
 On top of being cheap, these sensors have very interesting complementarities.
 Additionally, they can operate in indoor environments, where Global Positioning System (GPS) signals are shadowed.
 An open question is how to optimally fuse the information provided by these sensors.
-
 Currently, most sensor-fusion algorithms are either filter-based or iterative. That is, given a current state and measurements, they return an updated state.
 While working well in practice, these algorithms need to be provided with an initial state.
 The initialization of these methods is critical.
@@ -181,7 +179,7 @@ Compared to \cite{Martinelli2014}, the new method is now robust to the gyroscope
 The problem of fusing visual and inertial data has been extensively investigated in the past.
 However, most of the proposed methods require a state initialization.
 Because of the system nonlinearities, lack of precise initialization can irreparably damage the entire estimation process.
-In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007, Li2013, Huang2009, Bibuli2007, Forster2014}. Recently, this sensor fusion problem has been successfully addressed by enforcing observability constraints \cite{Hesch2014, Huang2015} and by using optimization-based approaches \cite{Leute2014, Forster2015, mourikis2008dual, lupton2012visual, huang2011observability, mourikis2007multi, Indelman2013}. These optimization methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
+In literature, this initialization is often guessed or assumed to be known \cite{Armesto2007, Li2013, Huang2009, Forster2014}. Recently, this sensor fusion problem has been successfully addressed by enforcing observability constraints \cite{Hesch2014, Huang2015} and by using optimization-based approaches \cite{Leute2014, Forster2015, mourikis2008dual, lupton2012visual, huang2011observability, mourikis2007multi, Indelman2013}. These optimization methods outperform filter-based algorithms in terms of accuracy due to their capability of relinearizing past states. On the other hand, the optimization process can be affected by the presence of local minima.
 We are therefore interested in a deterministic solution that analytically expresses the state in terms of the measurements provided by the sensors during a short time-interval.
 
 In computer vision, several deterministic solutions have been introduced.
@@ -201,7 +199,6 @@ For these applications, it is crucial to take the inertial measurements into con
 
 A procedure to quickly re-initialize an MAV after a failure was presented in \cite{Faessler2015}.
 However, this method requires an altimeter to initialize the scale.
-
 Recently, a closed-form solution has been introduced in \cite{Martinelli2012}.
 From integrating inertial and visual measurements over a short time-interval, this solution provides the absolute scale, roll and pitch angles, initial velocity, and distance to 3D features.
 Specifically, all the physical quantities are obtained by simply inverting a linear system.
@@ -223,8 +220,7 @@ Finally, we provide the conclusions in section \ref{SectionConclusion}.
 
 \section{CLOSED-FORM SOLUTION}\label{SectionCFS}
 
-In this section, we provide the basic equations that characterize the closed-form solution proposed in  \cite{Martinelli2014}. We also provide the main features of this solution\footnote{Note that in this paper we do not provide a new derivation of this solution for which the reader is addressed to \cite{Martinelli2014}, section 3.}.
-
+In this section, we provide the basic equations that characterize the closed-form solution proposed in \cite{Martinelli2014}\footnote{Note that in this paper we do not provide a new derivation of this solution for which the reader is addressed to \cite{Martinelli2014}, section 3.}.
 Let us refer to a short interval of time (e.g., of the order of $3$ seconds). We assume that during this interval of time the camera observes simultaneously $N$ point-features and we denote by $t_1,~t_2,\cdots,t_{n_i}$ the times of this interval at which the camera provides an image of these points. Without loss of generality, we can assume that $t_1=0$.
 The following equation holds (see \cite{Martinelli2014} for its derivation):
 
@@ -247,7 +243,7 @@ In a real application, we would work in the IMU frame and have some additional c
 accounting for the camera-IMU transformation.
 We do not express these constant calibration terms explicitly here for clarity reasons.
 
-The unknowns of Equation \ref{eq:final1} are the scalars $\lambda_j^i$ and the vectors $V$ and $G$.
+The unknowns of Equation (\ref{eq:final1}) are the scalars $\lambda_j^i$ and the vectors $V$ and $G$.
 Note that the knowledge of $G$ is equivalent to the knowledge of the roll and pitch angles.
 The vectors $\mu_j^i$ are fully determined by visual and gyroscope measurements \footnote{The gyroscope measurements in the interval $[t_1, ~t_j]$ are needed to express the bearing at time $t_j$ in the frame at time $t_1$},
 and the vectors $S_j$ are determined by accelerometer and gyroscope measurements.
@@ -255,7 +251,7 @@ and the vectors $S_j$ are determined by accelerometer and gyroscope measurements
 \begin{figure}
   \centering
   \includegraphics[width=0.7\columnwidth, trim={0 2cm 0 0}, clip]{images/closedFormExplained}
-  \caption{Visual representation of Equation \ref{eq:final1}.
+  \caption{Visual representation of Equation (\ref{eq:final1}).
   The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
 \end{figure}
 
@@ -265,13 +261,11 @@ Indeed, note that, when the first frame is taken at $t_1 = 0$,
 Equation (\ref{eq:final1}) is always satisfied; thus does not provide information.
 We can write our system using matrix formulation.
 Solving the system is equivalent to inverting a matrix of $3(n_i-1)N$ rows and $6+Nn_i$ columns.
-
 In \cite{Martinelli2014}, the author proceeded to one more step before expressing the underlying linear system.
-For a given frame $j$, the equation of the first point feature $i=1$ is subtracted from all other point feature equations $1<i \leq N$ (Equation (7)).
+For a given frame $j$, the equation of the first point feature $i=1$ is subtracted from all other point feature equations $1<i \leq N$ (Equation (7) in \cite{Martinelli2014}).
 This additional step, very useful to detect system singularities, has the effect to corrupt all measurements with the first measurement,
 hence worsening the performance of the closed-form solution. Therefore,
 in this paper we discard this additional step.
-
 The linear system in Equation (\ref{eq:final1}) can be written in the following compact form:
 
 \begin{equation}
@@ -319,7 +313,7 @@ This is due to the additional step that, as we explained in the previous paragra
 
 The sensor information is completely contained in the above linear system. Additionally, in \cite{Martinelli2014}, the author added a quadratic equation assuming the gravitational acceleration is a priori known.
 Let us denote the gravitational magnitude by $g$.
-We have the extra constraint $|G| = g$. We can express this constraint in matrix formulation:
+We have the extra constraint $|G| = g$ that we can express in matrix formulation:
 
 \begin{equation}
 \label{eq:mat2}
@@ -349,21 +343,19 @@ This will allow us to identify its weaknesses and bring modifications to overcom
 
 The goal of this section is to find out the limitations of the solution proposed in \cite{Martinelli2014} when it is adopted in a real scenario. In particular, special attention will be devoted to the case of an MAV equipped with low-cost camera and IMU sensors. For this reason, we perform simulations that significantly differ from the ones performed in \cite{Martinelli2014} (section $5.2$). Specifically, they differ because of the following two reasons:
 \begin{itemize}
-\item the simulated motion is the one of an MAV;
-\item the values of the biases are significantly larger than the ones in \cite{Martinelli2014}.
+\item The simulated motion is the one of an MAV;
+\item The values of the biases are significantly larger than the ones in \cite{Martinelli2014}.
 \end{itemize}
 This will allow us to evaluate the impact of the bias on the performance.
 
 \subsection{Simulation setup}\label{SubsectionConsidered}
 
 We simulate an MAV as a point particle executing a circular trajectory of about $1$m radius.
-
 We measure our error on the absolute scale by computing the mean error over all estimated distances to point features $\lambda_j^i$.
 We define the relative error as the euclidean distance between the estimation and the ground truth,
 normalized by the ground truth.
 
 Synthetic gyroscope and accelerometer data are affected by a statistical error of $0.5$ deg/s and $0.5$ cm/s\textsuperscript{2}, respectively and they are also corrupted by a constant bias.
-
 We set $7$ simulated 3D point-features about $3$m away from the MAV, which flies at a speed of around $2~m~s^{-1}$.
 We found that setting the frame rate of the simulated camera at 10Hz provides a sufficient pixel disparity with the following setup.
 In practice, increasing the frame rate above 30Hz decreases the pixel disparity and introduces numerical instability for this setup.
@@ -400,7 +392,6 @@ Therefore, it requires a significant difference in the measurements over time to
 
 
 Without sensor bias, the original closed-form robustly estimates all the properties (below $0.1\%$ error) after $2$ seconds of integration.
-
 Note that a robust estimation of the gravity requires a shorter duration of integration than the speed and the distance to the features.
 In general, we found that the gravity is well estimated with the original closed-form solution due to its strong weight in the equations (see section \ref{sec:biasAcc}).
 Therefore, constraining its magnitude does not improve the performance much.
@@ -414,7 +405,7 @@ we corrupt the accelerometer measurements by a bias (Fig. \ref{fig:biasAccCF}).
 Despite a high accelerometer bias, the closed-form solution still provides robust results.
 As seen in Fig. \ref{fig:biasAccCF}, neither the estimation of the gravity, the velocity or the lambdas is impacted by the accelerometer bias.
 To explain this behavior we ran many simulations by also considering trajectories that are not plausible for an MAV and by also changing the magnitude of the gravity. We found the following conclusions. When the rotations are small, the effect of a bias is negligible even if its value is larger than the inertial acceleration. This is easily explained by remarking that, in the case of negligible rotations, a bias on the accelerometer acts as the gravity. Hence, its impact depends on the ratio between its magnitude and the magnitude of the gravity.
-If the rotations are important, the effect of a bias on the accelerometer is negligible when its magnitude is smaller than both the gravity and the inertial acceleration. Note that, for an MAV that accomplishes a loop of radius $1m$ and speed $2~m~s^{-1}$, the inertial acceleration is $4~m~s^{-2}$.
+If the rotations are important, the effect of a bias on the accelerometer is negligible when its magnitude is smaller than both the gravity and the inertial acceleration. Note that, for an MAV that accomplishes a loop of radius $1$m and speed $2$m s$^{-1}$, the inertial acceleration is $4$m s$^{-2}$.
 
 In \cite{Martinelli2014}, the author provides an alternative formulation of the closed-form solution including the accelerometer bias as an observable unknown of the system.
 However, the estimation of the accelerometer bias with that method is not robust since our system is only slightly affected by it\footnote{Additionally, in \cite{Martinelli2014} property 12, we prove that rotations must occur around at least two independent axes to determine the bias. In general, for a motion of a few seconds, an MAV accomplishes rotations around a single axis.}.
@@ -481,11 +472,10 @@ we corrupt the gyroscope measurements by an artificial bias (Fig. \ref{fig:biasG
         \caption{Impact of the gyroscope bias on the performance of the closed-form solution. We are observing 7 features over a variable duration of integration. \label{fig:biasGyroCF}}
 \end{figure}
 
-
 As seen in Fig. \ref{fig:biasGyroCF}, the performance becomes very poor in presence of a bias on the gyroscope and, in practice, the overall method could only be successfully used with a very precise---and expensive---gyroscope.
-
 Note that, in \cite{Martinelli2014}, the author evaluates the performance of the closed-form solution with a simulated gyroscope bias of magnitude $0.5deg/s \approx 0.0087 rad/s$.
 In Fig. \ref{fig:biasGyroCF}, this bias would yield a curve between the green and the blue ones, with relative error below $10\%$.
+
 
 
 \section{ESTIMATING THE GYROSCOPE BIAS}\label{SectionCalibration}
@@ -523,7 +513,7 @@ However, by running extensive simulations we found that the cost function is con
 
 
 
-\begin{figure}
+\begin{figure}[!ht]
   \centering
         \hspace{0.2\columnwidth}%
         \begin{subfigure}[b]{0.3\columnwidth}
@@ -550,7 +540,7 @@ However, by running extensive simulations we found that the cost function is con
         \caption{Impact of the gyroscope bias on the performance of the optimized closed-form solution. We are observing 7 features  over a variable duration of integration. \label{fig:biasGyroOpt}}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!ht]
   \centering
   \resizebox{0.7\columnwidth}{!}{\input{graph/finals/gyroEval0.1}}
   \caption{Gyroscope bias estimation from nonlinear minimization of the residual.
@@ -681,9 +671,9 @@ The feature extraction and matching is done via the FAST corners \cite{Rosten200
 
 We compare the performance on the estimations of the gravity and velocity obtained with three methods:
 \begin{itemize}
-\item The original closed-form solution \cite{Martinelli2014} (Equation \ref{eq:mat1});
-\item Our modified closed-form solution (this paper) (Equation \ref{eq:cost});
-\item The loosely-coupled visual-inertial algorithm (MSF) in \cite{LynenIROS13} using pose estimates from the Semi-direct Visual Odometry (SVO) package \cite{Forster2014} (how to combine MSF \cite{LynenIROS13} with SVO can be found in \cite{FaesslerICRA15}).
+\item The original closed-form solution \cite{Martinelli2014} (Eq. (\ref{eq:mat1}));
+\item Our modified closed-form solution (Eq. (\ref{eq:cost}));
+\item The loosely-coupled visual-inertial algorithm (MSF) \cite{LynenIROS13} using pose estimates from the Semi-direct Visual Odometry (SVO) package \cite{Forster2014} (how to combine MSF with SVO can be found in \cite{FaesslerICRA15}).
 \end{itemize}
 The reason we included SVO+MSF in the validation is to have a reference state-of-the-art pose estimation method.
 However, MSF requires to be initialized with a rough absolute scale, whereas our method works without initialization.

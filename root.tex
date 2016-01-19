@@ -4,12 +4,12 @@
 %2345678901234567890123456789012345678901234567890123456789012345678901234567890
 %        1         2         3         4         5         6         7         8
 
-\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+\documentclass[letterpaper, 10 pt, journal, twoside]{IEEEtran}  % Comment this line out if you need a4paper
 
 %\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
 
 \IEEEoverridecommandlockouts % This command is only needed if you want to use the \thanks command
-\overrideIEEEmargins                                      % Needed to meet printer requirements.
+%% \overrideIEEEmargins                                      % Needed to meet printer requirements.
 
 % See the \addtolength command later in the file to balance the column lengths
 % on the last page of the document
@@ -73,18 +73,32 @@
 \pgfplotsset{compat=newest}
 \pgfplotsset{plot coordinates/math parser=false}
 
-\title{\LARGE \bf
-Simultaneous State Initialization and Gyroscope Bias Calibration in Visual Inertial aided Navigation
+\title{Simultaneous State Initialization and Gyroscope Bias Calibration in Visual Inertial aided Navigation} %Use for final RAL version
+
+
+
+
+%% \author{Jacques Kaiser$^{1}$, Agostino Martinelli$^{1}$, Flavio Fontana$^{2}$ and Davide Scaramuzza$^{2}$% <-this % stops a space
+%%  \thanks{*This work was supported by the French National Research
+%% Agency ANR through the project VIMAD}% <-this % stops a space
+%%  \thanks{$^{1}$ INRIA Rhone Alpes, Grenoble, France. Email: jacko.kaiser@gmail.com, agostino.martinelli@ieee.org}%
+%%  \thanks{$^{2}$ Robotics and Perception Group, University of Zurich, Switzerland. Email: ffontana,sdavideg@ifi.uzh.ch}%
+%% }
+
+% Paper headers
+\markboth{IEEE Robotics and Automation Letters. Preprint Version. Accepted January, 2016}{Kaiser \MakeLowercase{\textit{et al.}}: State Initialization and Gyro Bias Calibration}
+
+
+% Make room for more info lines in the \author command
+\author{Jacques Kaiser$^{1}$, Agostino Martinelli$^{1}$, Flavio Fontana$^{2}$ and Davide Scaramuzza$^{2}$%
+\thanks{Manuscript received: August, 31, 2015; Revised September, 29, 2015; Accepted January, 8, 2016.}%Use only for final RAL version
+\thanks{This paper was recommended for publication by Editor Antonio Bicchi upon evaluation of the Associate Editor and Reviewers' comments. *This work was supported by the French National Research
+Agency ANR through the project VIMAD.}%Use only for final RAL version
+\thanks{$^{1}$ INRIA Rhone Alpes, Grenoble, France. {\tt\small jacko.kaiser@gmail.com, agostino.martinelli@ieee.org}}%
+\thanks{$^{2}$ Robotics and Perception Group, University of Zurich, Switzerland. {\tt\small ffontana,sdavideg@ifi.uzh.ch}}%
+\thanks{Digital Object Identifier (DOI): see top of this page.}
 }
-
-
-
-\author{Jacques Kaiser$^{1}$, Agostino Martinelli$^{1}$, Flavio Fontana$^{2}$ and Davide Scaramuzza$^{2}$% <-this % stops a space
- \thanks{*This work was supported by the French National Research
-Agency ANR through the project VIMAD}% <-this % stops a space
- \thanks{$^{1}$ INRIA Rhone Alpes, Grenoble, France. Email: jacko.kaiser@gmail.com, agostino.martinelli@ieee.org}%
- \thanks{$^{2}$ Robotics and Perception Group, University of Zurich, Switzerland. Email: ffontana,sdavideg@ifi.uzh.ch}%
-}
+% Use only for final RAL version
 
 
 \begin{document}
@@ -92,8 +106,9 @@ Agency ANR through the project VIMAD}% <-this % stops a space
 
 
 \maketitle
-\thispagestyle{empty}
-\pagestyle{empty}
+%% \thispagestyle{empty}
+%% \pagestyle{empty}
+
 
 
 
@@ -108,15 +123,18 @@ Compared to the original method, the new approach now models the gyroscope bias 
 The performance of the proposed approach is successfully demonstrated on real data from a quadrotor MAV.
 \end{abstract}
 
+\begin{IEEEkeywords}
+  Sensor Fusion, Localization, Visual-Based Navigation
+\end{IEEEkeywords}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{INTRODUCTION}
 
-
-
-
-Autonomous mobile robots navigating in unknown environments have an intrinsic need to perform localization and mapping using only on-board sensors.
+% Drop letter for first word of the Introduction
+% Here we have the typical use of a "T" for an initial drop letter
+% and "HIS" in caps to complete the first word.
+\IEEEPARstart{A}{utonomous} mobile robots navigating in unknown environments have an intrinsic need to perform localization and mapping using only on-board sensors.
 Concerning Micro Aerial Vehicles (MAV), a critical issue is to limit the number of on-board sensors to reduce weight and power consumption.
 Therefore, a common setup is to combine a monocular camera with an inertial measurements unit (IMU).
 On top of being cheap, these sensors have very interesting complementarities.

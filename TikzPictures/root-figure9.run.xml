@@ -83,6 +83,7 @@
       <file>TikzPictures/root-figure9-blx.bib</file>
     </requires>
     <requires type="editable">
+      <file>IEEEabrv.bib</file>
       <file>library.bib</file>
     </requires>
     <requires type="static">

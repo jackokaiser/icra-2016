@@ -37,10 +37,10 @@
 \bibliography{IEEEabrv,library}
 
 %% \setlength{\belowdisplayskip}{1.5pt} \setlength{\belowdisplayshortskip}{1.5pt}
-\setlength{\abovedisplayskip}{1.7pt} \setlength{\abovedisplayshortskip}{1.7pt}
-\setlength{\textfloatsep}{8pt plus 1.0pt minus 2.0pt}
-\setlength{\floatsep}{8pt plus 1.0pt minus 2.0pt}
-\setlength{\intextsep}{8pt plus 1.0pt minus 2.0pt}
+%% \setlength{\abovedisplayskip}{1.7pt} \setlength{\abovedisplayshortskip}{1.7pt}
+%% \setlength{\textfloatsep}{8pt plus 1.0pt minus 2.0pt}
+%% \setlength{\floatsep}{8pt plus 1.0pt minus 2.0pt}
+%% \setlength{\intextsep}{8pt plus 1.0pt minus 2.0pt}
 
 \usepgfplotslibrary{external}
 \tikzexternalize[prefix=TikzPictures/]
@@ -512,7 +512,7 @@ However, by running extensive simulations we found that the cost function is con
 
 
 
-\begin{figure}[!ht]
+\begin{figure}
   \centering
         \hspace{0.2\columnwidth}%
         \begin{subfigure}[b]{0.3\columnwidth}
@@ -539,7 +539,7 @@ However, by running extensive simulations we found that the cost function is con
         \caption{Impact of the gyroscope bias on the performance of the optimized closed-form solution. We are observing 7 features  over a variable duration of integration. \label{fig:biasGyroOpt}}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}
   \centering
   \resizebox{0.7\columnwidth}{!}{\input{graph/finals/gyroEval0.1}}
   \caption{Gyroscope bias estimation from nonlinear minimization of the residual.

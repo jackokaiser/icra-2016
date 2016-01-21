@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.20)  20 JAN 2016 22:49
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  21 JAN 2016 10:07
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -121,8 +121,8 @@ Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
-) (/etc/texmf/tex/latex/config/graphics.cfg
-File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+) (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
@@ -298,7 +298,7 @@ File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
 File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
 )) (/usr/share/texmf/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
-(/etc/texmf/tex/latex/config/color.cfg
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -735,8 +735,8 @@ File: biblatex.def
 )
 Package biblatex Info: Trying to load bibliography style 'ieee'...
 Package biblatex Info: ... file 'ieee.bbx' found.
-(/home/jacques/texmf/tex/latex/biblatex-ieee/ieee.bbx
-File: ieee.bbx 2015/03/12 v1.1k biblatex bibliography style
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-ieee/ieee.bbx
+File: ieee.bbx 2013/10/25 v1.1j biblatex bibliography style
 Package biblatex Info: Trying to load bibliography style 'numeric-comp'...
 Package biblatex Info: ... file 'numeric-comp.bbx' found.
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric-comp.bbx
@@ -820,7 +820,45 @@ LaTeX Font Info:    ... okay on input line 103.
 \MPnumerator=\count306
 \makeMPintoPDFobject=\count307
 \everyMPtoPDFconversion=\toks41
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+)) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 ABD: EveryShipout initializing macros
@@ -847,19 +885,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 107--107
  jacko.kaiser
  []
 
-The command '\includegraphics [width=0.9\columnwidth , trim={0 2cm 0 0}, clip]{
-images/closedFormExplained}' has been optimized away. Use '/tikz/external/optim
-ize=false' to disable this.
+(./closedFormExplained.pdf_tex
+The command '\includegraphics [width=\unitlength ]{closedFormExplained.pdf}' ha
+s been optimized away. Use '/tikz/external/optimize=false' to disable this.
+)
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 31
-2.
+4.
 
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 31
-2.
+4.
 
 
-Overfull \hbox (13.58041pt too wide) detected at line 312
+Overfull \hbox (13.58041pt too wide) detected at line 314
  []$[][]  $ 
  []
 
@@ -890,7 +929,11 @@ isable this.
 ) (./graph/gyroBiasLambda.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
-) (./graph/gyroBiasLegend.tex
+)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+(./graph/gyroBiasLegend.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./graph/opt7ftGravity.tex
@@ -916,7 +959,7 @@ The command '\includegraphics [width=\textwidth ]{images/quadrotor_closeup.jpg}
 ' has been optimized away. Use '/tikz/external/optimize=false' to disable this.
 
 
-Underfull \hbox (badness 4156) in paragraph at lines 653--655
+Underfull \hbox (badness 4156) in paragraph at lines 658--660
 \OT1/ptm/m/sc/10 mized away be-cause it
  []
 
@@ -924,12 +967,12 @@ The command '\includegraphics [width=\textwidth , trim={13.2cm 2cm 0 4cm}, clip
 ]{images/realExperiment.png}' has been optimized away. Use '/tikz/external/opti
 mize=false' to disable this.
 
-Underfull \hbox (badness 4156) in paragraph at lines 658--659
+Underfull \hbox (badness 4156) in paragraph at lines 663--664
 \OT1/ptm/m/sc/10 mized away be-cause it
  []
 
 
-Underfull \hbox (badness 1354) in paragraph at lines 670--678
+Underfull \hbox (badness 1354) in paragraph at lines 675--683
 \OT1/ptm/m/n/10 i-cally, our quadro-tor re-lies on the frame of the Par-rot
  []
 
@@ -951,29 +994,30 @@ Missing character: There is no ; in font nullfont!
 
 
 
-{/home/jacques/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
 
-LaTeX Warning: Empty bibliography on input line 751.
+LaTeX Warning: Empty bibliography on input line 764.
 
 Package logreq Info: Writing requests to 'TikzPictures/root-figure18.run.xml'.
 \openout1 = `TikzPictures/root-figure18.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25130 strings out of 494980
- 577167 string characters out of 6179357
- 958914 words of memory out of 5000000
- 27873 multiletter control sequences out of 15000+600000
+ 25491 strings out of 493304
+ 583826 string characters out of 6139871
+ 972085 words of memory out of 5000000
+ 28432 multiletter control sequences out of 15000+600000
  33869 words of font info for 81 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 957 hyphenation exceptions out of 8191
  64i,24n,81p,2673b,2185s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/jacques/texmf/fonts/type
-1/urw/times/utmr8a.pfb>
-Output written on TikzPictures/root-figure18.pdf (1 page, 35629 bytes).
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/urw/times/utmr8a.pfb>
+Output written on TikzPictures/root-figure18.pdf (1 page, 34051 bytes).
 PDF statistics:
- 22 PDF objects out of 1000 (max. 8388607)
+ 24 PDF objects out of 1000 (max. 8388607)
+ 17 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

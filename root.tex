@@ -552,9 +552,10 @@ However, by running extensive simulations we found that the cost function is con
         \caption{Impact of the gyroscope bias on the performance of the optimized closed-form solution. We are observing 7 features  over a variable duration of integration. \label{fig:biasGyroOpt}}
 \end{figure}
 
+%% \tikzset{external/export next=false}
 \begin{figure}
   \centering
-  \resizebox{0.8\columnwidth}{!}{\input{graph/finals/gyroEval0.1}}
+  \resizebox{\columnwidth}{!}{\input{graph/finals/gyroEval0.1}}
   \caption{Gyroscope bias estimation from nonlinear minimization of the residual.
     We are observing 7 features over a variable duration of integration.
     The true bias is $B=[-0.0170, -0.0695, 0.0698]$ with magnitude $||B||=0.1$ and the final bias estimate is $[-0.0183, -0.0697, 0.0708]$.\label{fig:gBiasEstimate}}
@@ -757,7 +758,7 @@ For future work, we see this optimized closed-form solution being used on an MAV
 This would allow aggressive take-off maneuvers, such as hand throwing the MAV in the air, as already demonstrated in \cite{Faessler2015} with a range sensor.
 With our technique, we could get rid of the range sensor.
 
-\pagebreak
+%% \pagebreak
 
 \balance
 \printbibliography

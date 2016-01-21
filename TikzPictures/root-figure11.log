@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.12.20)  20 JAN 2016 22:48
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.8.19)  21 JAN 2016 10:07
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -121,8 +121,8 @@ Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
-) (/etc/texmf/tex/latex/config/graphics.cfg
-File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+) (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
@@ -136,6 +136,9 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 ))
 \Gin@req@height=\dimen126
 \Gin@req@width=\dimen127
+) (/usr/share/texlive/texmf-dist/tex/latex/preprint/balance.sty
+Package: balance 1999/02/23 4.3 (PWD)
+\oldvsize=\dimen128
 ) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip44
@@ -145,10 +148,10 @@ Package: amstext 2000/06/29 v2.01
 (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks16
-\ex@=\dimen128
+\ex@=\dimen129
 )) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
-\pmbraise@=\dimen129
+\pmbraise@=\dimen130
 ) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
 )
@@ -164,7 +167,7 @@ LaTeX Info: Redefining \dots on input line 381.
 LaTeX Info: Redefining \cdots on input line 466.
 \Mathstrutbox@=\box28
 \strutbox@=\box29
-\big@size=\dimen130
+\big@size=\dimen131
 LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \macc@depth=\count100
@@ -177,12 +180,12 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \column@=\count105
 \maxfields@=\count106
 \andhelp@=\toks18
-\eqnshift@=\dimen131
-\alignsep@=\dimen132
-\tagshift@=\dimen133
-\tagwidth@=\dimen134
-\totwidth@=\dimen135
-\lineht@=\dimen136
+\eqnshift@=\dimen132
+\alignsep@=\dimen133
+\tagshift@=\dimen134
+\tagwidth@=\dimen135
+\totwidth@=\dimen136
+\lineht@=\dimen137
 \@envbody=\toks19
 \multlinegap=\skip45
 \multlinetaggap=\skip46
@@ -191,8 +194,8 @@ LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
-\col@sep=\dimen137
-\extrarowheight=\dimen138
+\col@sep=\dimen138
+\extrarowheight=\dimen139
 \NC@list=\toks21
 \extratabsurround=\skip47
 \backup@length=\skip48
@@ -209,13 +212,13 @@ Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 57.
-\captionmargin=\dimen139
-\captionmargin@=\dimen140
-\captionwidth=\dimen141
-\caption@tempdima=\dimen142
-\caption@indent=\dimen143
-\caption@parindent=\dimen144
-\caption@hangindent=\dimen145
+\captionmargin=\dimen140
+\captionmargin@=\dimen141
+\captionwidth=\dimen142
+\caption@tempdima=\dimen143
+\caption@indent=\dimen144
+\caption@parindent=\dimen145
+\caption@hangindent=\dimen146
 Package caption Info: Unknown document class (or package),
 (caption)             standard defaults will be used.
 )
@@ -265,14 +268,14 @@ Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
 (/usr/share/texmf/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
 \pgfkeys@tmptoks=\toks27
 ))
-\pgf@x=\dimen146
-\pgf@y=\dimen147
-\pgf@xa=\dimen148
-\pgf@ya=\dimen149
-\pgf@xb=\dimen150
-\pgf@yb=\dimen151
-\pgf@xc=\dimen152
-\pgf@yc=\dimen153
+\pgf@x=\dimen147
+\pgf@y=\dimen148
+\pgf@xa=\dimen149
+\pgf@ya=\dimen150
+\pgf@xb=\dimen151
+\pgf@yb=\dimen152
+\pgf@xc=\dimen153
+\pgf@yc=\dimen154
 \w@pgf@writea=\write3
 \r@pgf@reada=\read1
 \c@pgf@counta=\count110
@@ -295,7 +298,7 @@ File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
 File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
 )) (/usr/share/texmf/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
-(/etc/texmf/tex/latex/config/color.cfg
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -314,7 +317,7 @@ Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
 eneric/pgf/math/pgfmathcalc.code.tex (/usr/share/texmf/tex/generic/pgf/math/pgf
 mathutil.code.tex) (/usr/share/texmf/tex/generic/pgf/math/pgfmathparser.code.te
 x
-\pgfmath@dimen=\dimen154
+\pgfmath@dimen=\dimen155
 \pgfmath@count=\count116
 \pgfmath@box=\box31
 \pgfmath@toks=\toks28
@@ -332,28 +335,28 @@ loat.code.tex
 \c@pgfmathroundto@lastzeros=\count117
 )) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
-\pgf@picminx=\dimen155
-\pgf@picmaxx=\dimen156
-\pgf@picminy=\dimen157
-\pgf@picmaxy=\dimen158
-\pgf@pathminx=\dimen159
-\pgf@pathmaxx=\dimen160
-\pgf@pathminy=\dimen161
-\pgf@pathmaxy=\dimen162
-\pgf@xx=\dimen163
-\pgf@xy=\dimen164
-\pgf@yx=\dimen165
-\pgf@yy=\dimen166
-\pgf@zx=\dimen167
-\pgf@zy=\dimen168
+\pgf@picminx=\dimen156
+\pgf@picmaxx=\dimen157
+\pgf@picminy=\dimen158
+\pgf@picmaxy=\dimen159
+\pgf@pathminx=\dimen160
+\pgf@pathmaxx=\dimen161
+\pgf@pathminy=\dimen162
+\pgf@pathmaxy=\dimen163
+\pgf@xx=\dimen164
+\pgf@xy=\dimen165
+\pgf@yx=\dimen166
+\pgf@yy=\dimen167
+\pgf@zx=\dimen168
+\pgf@zy=\dimen169
 ) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
-\pgf@path@lastx=\dimen169
-\pgf@path@lasty=\dimen170
+\pgf@path@lastx=\dimen170
+\pgf@path@lasty=\dimen171
 ) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
-\pgf@shorten@end@additional=\dimen171
-\pgf@shorten@start@additional=\dimen172
+\pgf@shorten@end@additional=\dimen172
+\pgf@shorten@start@additional=\dimen173
 ) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
 \pgfpic=\box32
@@ -362,12 +365,12 @@ File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
 \pgf@picture@serial@count=\count118
 ) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
-\pgflinewidth=\dimen173
+\pgflinewidth=\dimen174
 ) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
 File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
-\pgf@pt@x=\dimen174
-\pgf@pt@y=\dimen175
-\pgf@pt@temp=\dimen176
+\pgf@pt@x=\dimen175
+\pgf@pt@y=\dimen176
+\pgf@pt@temp=\dimen177
 ) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
 ) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
@@ -378,7 +381,7 @@ File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
 File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
 ) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
-\pgf@max=\dimen177
+\pgf@max=\dimen178
 \pgf@sys@shading@range@num=\count119
 ) (/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
@@ -398,16 +401,16 @@ File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
 File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
 ) (/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
-\pgf@nodesepstart=\dimen178
-\pgf@nodesepend=\dimen179
+\pgf@nodesepstart=\dimen179
+\pgf@nodesepend=\dimen180
 ) (/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
 )) (/usr/share/texmf/tex/latex/pgf/utilities/pgffor.sty (/usr/share/texmf/tex/l
 atex/pgf/utilities/pgfkeys.sty (/usr/share/texmf/tex/generic/pgf/utilities/pgfk
 eys.code.tex)) (/usr/share/texmf/tex/generic/pgf/utilities/pgffor.code.tex
 Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
-\pgffor@iter=\dimen180
-\pgffor@skip=\dimen181
+\pgffor@iter=\dimen181
+\pgffor@skip=\dimen182
 \pgffor@stack=\toks31
 \pgffor@toks=\toks32
 )) (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
@@ -415,14 +418,14 @@ Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
 (/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
 \pgf@plot@mark@count=\count120
-\pgfplotmarksize=\dimen182
+\pgfplotmarksize=\dimen183
 )
-\tikz@lastx=\dimen183
-\tikz@lasty=\dimen184
-\tikz@lastxsaved=\dimen185
-\tikz@lastysaved=\dimen186
-\tikzleveldistance=\dimen187
-\tikzsiblingdistance=\dimen188
+\tikz@lastx=\dimen184
+\tikz@lasty=\dimen185
+\tikz@lastxsaved=\dimen186
+\tikz@lastysaved=\dimen187
+\tikzleveldistance=\dimen188
+\tikzsiblingdistance=\dimen189
 \tikz@figbox=\box37
 \tikz@tempbox=\box38
 \tikztreelevel=\count121
@@ -445,7 +448,7 @@ File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
 \t@pgfplots@toka=\toks33
 \t@pgfplots@tokb=\toks34
 \t@pgfplots@tokc=\toks35
-\pgfplots@tmpa=\dimen189
+\pgfplots@tmpa=\dimen190
 \c@pgfplots@coordindex=\count129
 \c@pgfplots@scanlineindex=\count130
 
@@ -476,7 +479,7 @@ gfsupp_pgfmathfloat.code.tex
 gfsupp_pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2012/09/11 v2.10 (rcs-revision 1.17)
 \pgf@plot@mark@count=\count132
-\pgfplotmarksize=\dimen190
+\pgfplotmarksize=\dimen191
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldp
 gfsupp_pgflibraryfpu.code.tex)
@@ -542,14 +545,14 @@ e.tex)
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecor
 ations.code.tex (/usr/share/texmf/tex/generic/pgf/modules/pgfmoduledecorations.
 code.tex
-\pgfdecoratedcompleteddistance=\dimen191
-\pgfdecoratedremainingdistance=\dimen192
-\pgfdecoratedinputsegmentcompleteddistance=\dimen193
-\pgfdecoratedinputsegmentremainingdistance=\dimen194
-\pgf@decorate@distancetomove=\dimen195
+\pgfdecoratedcompleteddistance=\dimen192
+\pgfdecoratedremainingdistance=\dimen193
+\pgfdecoratedinputsegmentcompleteddistance=\dimen194
+\pgfdecoratedinputsegmentremainingdistance=\dimen195
+\pgf@decorate@distancetomove=\dimen196
 \pgf@decorate@repeatstate=\count137
-\pgfdecorationsegmentamplitude=\dimen196
-\pgfdecorationsegmentlength=\dimen197
+\pgfdecorationsegmentamplitude=\dimen197
+\pgfdecorationsegmentlength=\dimen198
 )
 \tikz@lib@dec@box=\box42
 )
@@ -562,12 +565,12 @@ ations.pathreplacing.code.tex
 (/usr/share/texmf/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.p
 athreplacing.code.tex))
 \pgfplots@numplots=\count138
-\pgfplots@xmin@reg=\dimen198
-\pgfplots@xmax@reg=\dimen199
-\pgfplots@ymin@reg=\dimen200
-\pgfplots@ymax@reg=\dimen201
-\pgfplots@zmin@reg=\dimen202
-\pgfplots@zmax@reg=\dimen203
+\pgfplots@xmin@reg=\dimen199
+\pgfplots@xmax@reg=\dimen200
+\pgfplots@ymin@reg=\dimen201
+\pgfplots@ymax@reg=\dimen202
+\pgfplots@zmin@reg=\dimen203
+\pgfplots@zmax@reg=\dimen204
 )
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryplotm
 arks.code.tex
@@ -732,8 +735,8 @@ File: biblatex.def
 )
 Package biblatex Info: Trying to load bibliography style 'ieee'...
 Package biblatex Info: ... file 'ieee.bbx' found.
-(/home/jacques/texmf/tex/latex/biblatex-ieee/ieee.bbx
-File: ieee.bbx 2015/03/12 v1.1k biblatex bibliography style
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-ieee/ieee.bbx
+File: ieee.bbx 2013/10/25 v1.1j biblatex bibliography style
 Package biblatex Info: Trying to load bibliography style 'numeric-comp'...
 Package biblatex Info: ... file 'numeric-comp.bbx' found.
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric-comp.bbx
@@ -807,17 +810,55 @@ LaTeX Font Info:    ... okay on input line 103.
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count302
-\scratchdimen=\dimen204
+\scratchdimen=\dimen205
 \scratchbox=\box43
 \nofMPsegments=\count303
 \nofMParguments=\count304
 \everyMPshowfont=\toks40
 \MPscratchCnt=\count305
-\MPscratchDim=\dimen205
+\MPscratchDim=\dimen206
 \MPnumerator=\count306
 \makeMPintoPDFobject=\count307
 \everyMPtoPDFconversion=\toks41
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+)) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 ABD: EveryShipout initializing macros
@@ -844,19 +885,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 107--107
  jacko.kaiser
  []
 
-The command '\includegraphics [width=0.9\columnwidth , trim={0 2cm 0 0}, clip]{
-images/closedFormExplained}' has been optimized away. Use '/tikz/external/optim
-ize=false' to disable this.
+(./closedFormExplained.pdf_tex
+The command '\includegraphics [width=\unitlength ]{closedFormExplained.pdf}' ha
+s been optimized away. Use '/tikz/external/optimize=false' to disable this.
+)
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 31
-2.
+4.
 
 
 LaTeX Font Warning: Command \footnotesize invalid in math mode on input line 31
-2.
+4.
 
 
-Overfull \hbox (13.58041pt too wide) detected at line 312
+Overfull \hbox (13.58041pt too wide) detected at line 314
  []$[][]  $ 
  []
 
@@ -887,7 +929,11 @@ isable this.
 ) (./graph/gyroBiasLambda.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
-) (./graph/gyroBiasLegend.tex
+)
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+(./graph/gyroBiasLegend.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./graph/opt7ftGravity.tex
@@ -901,8 +947,7 @@ isable this.
 
 
 
-{/home/jacques/.texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./graph/opt7ft
-Lambda.tex
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./graph/opt7ftLambda.tex
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./graph/finals/gyroEval0.1.tex
@@ -919,7 +964,7 @@ The command '\includegraphics [width=\textwidth ]{images/quadrotor_closeup.jpg}
 ' has been optimized away. Use '/tikz/external/optimize=false' to disable this.
 
 
-Underfull \hbox (badness 4156) in paragraph at lines 653--655
+Underfull \hbox (badness 4156) in paragraph at lines 658--660
 \OT1/ptm/m/sc/10 mized away be-cause it
  []
 
@@ -927,12 +972,12 @@ The command '\includegraphics [width=\textwidth , trim={13.2cm 2cm 0 4cm}, clip
 ]{images/realExperiment.png}' has been optimized away. Use '/tikz/external/opti
 mize=false' to disable this.
 
-Underfull \hbox (badness 4156) in paragraph at lines 658--659
+Underfull \hbox (badness 4156) in paragraph at lines 663--664
 \OT1/ptm/m/sc/10 mized away be-cause it
  []
 
 
-Underfull \hbox (badness 1354) in paragraph at lines 670--678
+Underfull \hbox (badness 1354) in paragraph at lines 675--683
 \OT1/ptm/m/n/10 i-cally, our quadro-tor re-lies on the frame of the Par-rot
  []
 
@@ -947,27 +992,28 @@ A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 )
 
-LaTeX Warning: Empty bibliography on input line 751.
+LaTeX Warning: Empty bibliography on input line 764.
 
 Package logreq Info: Writing requests to 'TikzPictures/root-figure11.run.xml'.
 \openout1 = `TikzPictures/root-figure11.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25090 strings out of 494980
- 572167 string characters out of 6179357
- 965307 words of memory out of 5000000
- 27837 multiletter control sequences out of 15000+600000
+ 25469 strings out of 493304
+ 579178 string characters out of 6139871
+ 978840 words of memory out of 5000000
+ 28410 multiletter control sequences out of 15000+600000
  33869 words of font info for 81 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 957 hyphenation exceptions out of 8191
  64i,16n,81p,2642b,1961s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/jacques/texmf/fonts/type
-1/urw/times/utmr8a.pfb>
-Output written on TikzPictures/root-figure11.pdf (1 page, 30907 bytes).
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/urw/times/utmr8a.pfb>
+Output written on TikzPictures/root-figure11.pdf (1 page, 29360 bytes).
 PDF statistics:
- 22 PDF objects out of 1000 (max. 8388607)
+ 24 PDF objects out of 1000 (max. 8388607)
+ 17 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

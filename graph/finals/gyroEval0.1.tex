@@ -8,18 +8,17 @@
 \begin{tikzpicture}
 
 \begin{axis}[%
-width=2.3in,
-height=0.5in,
-at={(0in,2in)},
+width=3.5in,
+height=1.15in,
+at={(0in,3in)},
 scale only axis,
 xmin=0.5,
 xmax=5,
-xlabel={Duration (s)},
-ytick={-0.05,-0.0170,0.05},
-ymin=-0.05,
-ymax=0.05,
-xtick={0.5, 1,..., 4.5, 5},
-ylabel={Bias (rad/s)}
+scaled y ticks={base 10:2},
+ytick={-0.1, -0.08, -0.06, -0.04,-0.02,0,0.02,0.04,0.06,0.08,0.1},
+ymin=-0.1,
+ymax=0.1,
+xmajorticks=false
 ]
 \addplot [color=blue,solid,forget plot]
   table[row sep=crcr]{%
@@ -79,17 +78,17 @@ ylabel={Bias (rad/s)}
 
 
 \begin{axis}[%
-width=2.3in,
-height=0.5in,
-at={(0in,1in)},
+width=3.5in,
+height=1.15in,
+at={(0in,1.5in)},
 scale only axis,
 xmin=0.5,
 xmax=5,
-xlabel={Duration (s)},
-ytick={-0.1,-0.0695,0.},
+scaled y ticks={base 10:2},
+ytick={-0.1, -0.08, -0.06, -0.04,-0.02,0,0.02,0.04,0.06,0.08,0.1},
 ymin=-0.1,
-ymax=0.,
-xtick={0.5, 1,..., 4.5, 5},
+ymax=0.1,
+xmajorticks=false,
 ylabel={Bias (rad/s)}
 ]
 \addplot [color=blue,solid,forget plot]
@@ -145,18 +144,18 @@ ylabel={Bias (rad/s)}
 \end{axis}
 
 \begin{axis}[%
-width=2.3in,
-height=0.5in,
+width=3.5in,
+height=1.15in,
 at={(0in,0in)},
 scale only axis,
 xmin=0.5,
 xmax=5,
 xlabel={Duration (s)},
-ytick={0.,0.0698,0.1},
-ymin=-0.,
+scaled y ticks={base 10:2},
+ytick={-0.1, -0.08, -0.06, -0.04,-0.02,0,0.02,0.04,0.06,0.08,0.1},
+ymin=-0.1,
 ymax=0.1,
-xtick={0.5, 1,..., 4.5, 5},
-ylabel={Bias (rad/s)}
+xtick={0.5, 1,..., 4.5, 5}
 ]
 \addplot [color=blue,solid,forget plot]
   table[row sep=crcr]{%

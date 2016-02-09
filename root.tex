@@ -4,7 +4,7 @@
 %2345678901234567890123456789012345678901234567890123456789012345678901234567890
 %        1         2         3         4         5         6         7         8
 
-\documentclass[letterpaper, 10 pt, conference]{IEEEtran}  % Comment this line out if you need a4paper
+\documentclass[letterpaper, 10pt, conference, final]{ieeeconf}  % Comment this line out if you need a4paper
 
 %\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
 
@@ -29,7 +29,7 @@
 %% \usepackage{mathptmx} % font = times
 %% \usepackage{helvet} % font sf = helvetica
 \usepackage[latin1]{inputenc}
-\usepackage{relsize}
+%% \usepackage{relsize}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -122,9 +122,9 @@ Compared to the original method, the new approach now models the gyroscope bias 
 The performance of the proposed approach is successfully demonstrated on real data from a quadrotor MAV.
 \end{abstract}
 
-\begin{IEEEkeywords}
+\begin{keywords}
   Sensor Fusion, Localization, Visual-Based Navigation
-\end{IEEEkeywords}
+\end{keywords}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -133,7 +133,7 @@ The performance of the proposed approach is successfully demonstrated on real da
 % Drop letter for first word of the Introduction
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{A}{utonomous} mobile robots navigating in unknown environments have an intrinsic need to perform localization and mapping using only on-board sensors.
+\PARstart{A}{utonomous} mobile robots navigating in unknown environments have an intrinsic need to perform localization and mapping using only on-board sensors.
 Concerning Micro Aerial Vehicles (MAV), a critical issue is to limit the number of on-board sensors to reduce weight and power consumption.
 Therefore, a common setup is to combine a monocular camera with an inertial measurements unit (IMU).
 On top of being cheap, these sensors have very interesting complementarities.

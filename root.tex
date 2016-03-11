@@ -4,7 +4,7 @@
 %2345678901234567890123456789012345678901234567890123456789012345678901234567890
 %        1         2         3         4         5         6         7         8
 
-\documentclass[letterpaper, 10pt, conference, final]{ieeeconf}  % Comment this line out if you need a4paper
+\documentclass[letterpaper, 10pt, journal, twoside]{IEEEtran}  % Comment this line out if you need a4paper
 
 %\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
 
@@ -122,9 +122,9 @@ Compared to the original method, the new approach now models the gyroscope bias 
 The performance of the proposed approach is successfully demonstrated on real data from a quadrotor MAV.
 \end{abstract}
 
-\begin{keywords}
+\begin{IEEEkeywords}
   Sensor Fusion, Localization, Visual-Based Navigation
-\end{keywords}
+\end{IEEEkeywords}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -133,7 +133,7 @@ The performance of the proposed approach is successfully demonstrated on real da
 % Drop letter for first word of the Introduction
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\PARstart{A}{utonomous} mobile robots navigating in unknown environments have an intrinsic need to perform localization and mapping using only on-board sensors.
+\IEEEPARstart{A}{utonomous} mobile robots navigating in unknown environments have an intrinsic need to perform localization and mapping using only on-board sensors.
 Concerning Micro Aerial Vehicles (MAV), a critical issue is to limit the number of on-board sensors to reduce weight and power consumption.
 Therefore, a common setup is to combine a monocular camera with an inertial measurements unit (IMU).
 On top of being cheap, these sensors have very interesting complementarities.
@@ -240,6 +240,7 @@ S_j = \lambda_1^i\mu_1^i - V t_j - G \frac{t_j^2}{2} - \lambda^i_j \mu^i_j
 \end{itemize}
 
 
+A visual representation of Equation (\ref{eq:final1}) is provided in \mbox{Fig. \ref{fig:eqRepr}}.
 The local frame refers to a frame of reference common to the IMU and the camera.
 In a real application, we would work in the IMU frame and have some additional constant terms
 accounting for the camera-IMU transformation.
@@ -256,7 +257,7 @@ and the vectors $S_j$ are determined by accelerometer and gyroscope measurements
   \input{closedFormExplained.pdf_tex}
   %% \includegraphics[width=0.9\columnwidth, trim={0 2cm 0 0}, clip]{images/closedFormExplained}
   \caption{Visual representation of Equation (\ref{eq:final1}).
-  The unknowns of the equation are colored in \textcolor{amethyst}{purple}.}
+  The unknowns of the equation are colored in \textcolor{amethyst}{purple}.\label{fig:eqRepr}}
 \end{figure}
 
 Equation (\ref{eq:final1}) provides three scalar equations for each point feature $i=1,...,N$ and each frame starting from the second one $j=2,...n_i$.
